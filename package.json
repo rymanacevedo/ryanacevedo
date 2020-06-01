@@ -1,0 +1,16 @@
+{
+  "name": "ryanacevedo.com",
+  "scripts": {
+    "dev": "vuepress dev docs",
+    "build": "vuepress build docs"
+  },
+  "version": "1.0.0",
+  "main": "index.js",
+  "repository": "https://github.com/rymanacevedo/ryanacevedo",
+  "author": "Ryan Acevedo",
+  "license": "MIT",
+  "private": true,
+  "devDependencies": {
+    "vuepress": "^1.5.0"
+  }
+}
