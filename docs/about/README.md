@@ -2,10 +2,7 @@
 title: About
 Description: This is the starting page
 ---
-[Home](/)
-[About](/about/)
-[Blog](/blog/)
-[Contact](/contact/)
+<Nav />
 
 # About
 
