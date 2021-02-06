@@ -17,5 +17,8 @@
   },
   "resolutions": {
     "watchpack": "1.6.1"
+  },
+  "dependencies": {
+    "tachyons": "4.12.0"
   }
 }

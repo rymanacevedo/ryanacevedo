@@ -6,6 +6,7 @@ module.exports = {
         tsLoaderOptions: {
         },
       },
+      'tachyons'
     ],
-  ]
+  ],
 }
