@@ -1,6 +1,14 @@
 ---
+home: true
+
+features:
+- title: Blog
+  details: This is a blog consisting of articles on various tech topics
+- title: About
+  details: This tells you everything about who I am as a person
 ---
 <Nav />
+<ToggleDarkMode />
 
 
 # Hey, I'm Ryan Acevedo

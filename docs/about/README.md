@@ -3,6 +3,7 @@ title: About
 Description: This is the starting page
 ---
 <Nav />
+<ToggleDarkMode />
 
 # About
 
