@@ -12,7 +12,9 @@ features:
 
 # Hey, I'm Ryan Acevedo
 ## I create,
+websites, personal blogs, and web apps.
 ## I build,
+experiences that go above and beyond that call.
 ## I conquer
 
 I'm a full stack developer based out of Colorful Colorado. Where I've called my home for over 2 years now.
