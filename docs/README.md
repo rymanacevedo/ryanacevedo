@@ -7,7 +7,6 @@ features:
 - title: About
   details: This tells you everything about who I am as a person
 ---
-<Nav />
 <ToggleDarkMode />
 
 

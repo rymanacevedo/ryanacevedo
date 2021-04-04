@@ -1,5 +1,6 @@
 module.exports = {
-  title: "Ryan Acevedo",
+  title: 'Ryan Acevedo',
+  description: 'An awesome portoflio blog',
   themeConfig: {
     nav: [
       {text: 'Home', link: '/'},
