@@ -1,6 +1,6 @@
 <template>
   <div>
-    <button class="absolute right-0 bottom-0 outline z-max">
+    <button @click="toggleSettings" id="settingsBtn" class="absolute right-0 bottom-0 outline z-max">
       <svg
         width="24"
         height="24"
@@ -13,7 +13,7 @@
         />
       </svg>
     </button>
-    <div class="settings absolute right-0 flex flex-column">
+    <div id="settingsContainer" class="settings absolute right-0 flex flex-column">
       <ToggleDarkMode />
       <button>Toggle all cookies</button>
     </div>
@@ -25,6 +25,15 @@ import ToggleDarkMode from './ToggleDarkMode'
 export default {
     components: {
         ToggleDarkMode
+    },
+    methods: {
+        toggleSettings() {
+            const settingsBtn = document.getElementById('settingsBtn');
+            const settingsContainer = document.getElementById('settingsContainer');
+
+            settingsBtn.classList.toggle('toggled');
+            settingsContainer.classList.toggle('open');
+        }
     }
 };
 </script>
