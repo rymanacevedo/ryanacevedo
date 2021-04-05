@@ -30,7 +30,15 @@ export default {
 </script>
 
 <style>
+.toggled {
+    bottom: 180px
+}
+.settings.open {
+    bottom: 0;
+}
+
 .settings {
     bottom: -180px;
 }
+
 </style>
