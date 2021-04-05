@@ -2,7 +2,7 @@
 title: About
 Description: This is the starting page
 ---
-<ToggleDarkMode />
+<WebsiteSettings />
 
 # About
 

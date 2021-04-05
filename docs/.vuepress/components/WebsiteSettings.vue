@@ -1,6 +1,6 @@
 <template>
   <div>
-    <button class="absolute right-0 bottom-0 outline">
+    <button class="absolute right-0 bottom-0 outline z-max">
       <svg
         width="24"
         height="24"
@@ -13,12 +13,24 @@
         />
       </svg>
     </button>
+    <div class="settings absolute right-0 flex flex-column">
+      <ToggleDarkMode />
+      <button>Toggle all cookies</button>
+    </div>
   </div>
 </template>
 
 <script>
-export default {};
+import ToggleDarkMode from './ToggleDarkMode'
+export default {
+    components: {
+        ToggleDarkMode
+    }
+};
 </script>
 
 <style>
+.settings {
+    bottom: -180px;
+}
 </style>
