@@ -1,5 +1,5 @@
 <template>
-  <div class="absolute right-0 ma4">
+  <div class="fixed right-0 ma4">
     <div
       id="settingsContainer"
       class="
@@ -11,7 +11,7 @@
         b--black-10
         bg-
         mv3
-        pa5
+        pa4
         grow
       "
     >
