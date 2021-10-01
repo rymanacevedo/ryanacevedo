@@ -1,5 +1,5 @@
 <template>
-  <div class="fixed right-0 ma4">
+  <div class="fixed bottom-0 right-0 ma4">
     <div
       id="settingsContainer"
       class="
