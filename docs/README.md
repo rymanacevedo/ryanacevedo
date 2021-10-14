@@ -1,6 +1,6 @@
 ---
 home: true
-
+heroImage: /banner.jpg
 features:
 - title: Blog
   details: This is a blog consisting of articles on various tech topics
