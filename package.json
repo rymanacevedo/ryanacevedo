@@ -1,29 +1,4 @@
 {
-<<<<<<< HEAD
-  "name": "ryanacevedo.com",
-  "scripts": {
-    "dev": "vuepress dev docs",
-    "build": "vuepress build docs"
-  },
-  "version": "1.0.0",
-  "main": "index.js",
-  "repository": "https://github.com/rymanacevedo/ryanacevedo",
-  "author": "Ryan Acevedo",
-  "license": "MIT",
-  "private": true,
-  "devDependencies": {
-    "typescript": "^3.9.3",
-    "vuepress": "^1.5.0",
-    "vuepress-plugin-typescript": "^0.3.0"
-  },
-  "resolutions": {
-    "watchpack": "1.6.1"
-  },
-  "dependencies": {
-    "tachyons": "4.12.0"
-  }
-}
-=======
   "name": "ryanacevedo",
   "type": "module",
   "version": "0.0.1",
@@ -43,4 +18,3 @@
     "react-dom": "^18.0.0"
   }
 }
->>>>>>> fdc9178 (initial commit)
