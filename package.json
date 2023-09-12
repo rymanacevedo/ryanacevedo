@@ -1,4 +1,5 @@
 {
+<<<<<<< HEAD
   "name": "ryanacevedo.com",
   "scripts": {
     "dev": "vuepress dev docs",
@@ -22,3 +23,19 @@
     "tachyons": "4.12.0"
   }
 }
+=======
+  "name": "ryanacevedo",
+  "type": "module",
+  "version": "0.0.1",
+  "scripts": {
+    "dev": "astro dev",
+    "start": "astro dev",
+    "build": "astro build",
+    "preview": "astro preview",
+    "astro": "astro"
+  },
+  "dependencies": {
+    "astro": "^3.0.12"
+  }
+}
+>>>>>>> fdc9178 (initial commit)
