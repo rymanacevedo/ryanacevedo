@@ -12,29 +12,29 @@ import Hero from '../components/Hero.astro';
 				title="About"
 				tagline="Thanks for stopping by. Read below to learn more about myself and my background."
 			>
-				<!-- <img
+				<img
 					width="1553"
 					height="873"
-					src="/assets/at-work.jpg"
-					alt="Jeanine White at work with a colleague"
-				/> -->
+					src="/assets/ryan-acevedo-beanie.jpeg"
+					alt="Ryan Acevedo on an air balloon smile with a beanie on"
+				/>
 			</Hero>
 
 			<section>
 				<h2 class="section-title">Background</h2>
 				<div class="content">
 					<p>
-						I'm a web developer, teacher, and chess player. I've been building websites since over 7 years.
+						I'm a web developer, teacher, and chess player. I've been building websites for over 7 years.
 					</p>
 					<p>
-						I use HTML, CSS, JavaScript and Typescript. Though, constantly keeping up with the latest, with my focus on React, Remix, Bun, Astro, and Svelte.
+						I use HTML, CSS, JavaScript and Typescript. I am constantly keeping up with the latest, with my focus on React, Remix, Bun, Astro, and Svelte.
 					</p>
 				</div>
 			</section>
 			<section>
 				<h2 class="section-title">Skills</h2>
 				<div class="content">
-					<ul>
+					<ul class="skills">
 						<li>React</li>
 						<li>Remix</li>
 						<li>Typescript</li>
@@ -56,6 +56,12 @@ import Hero from '../components/Hero.astro';
 		display: flex;
 		flex-direction: column;
 		gap: 3.5rem;
+	}
+
+	.skills {
+		display: flex;
+		flex-direction: row;
+		gap: 2rem;
 	}
 
 	img {
