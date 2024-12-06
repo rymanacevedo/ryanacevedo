@@ -2,34 +2,34 @@
 title: Platform One
 publishDate: 2020-03-02 00:00:00
 img: /assets/p1.dso.mil.png
-img_alt: Iridescent ripples of a bright blue and pink liquid
+img_alt: Platform One homepage with Yoda logo saying waterfall only you can prevent
 description: |
-  We designed a whodunnit-style game to introduce Markdown formatting. Suspense — suspicion — syntax!
+  Developed scalable Angular and Vue.js applications, implemented interactive data visualizations with D3.js, and collaborated with DevOps teams to deploy secure solutions in classified environments while mentoring engineers and improving team productivity.
 tags:
-  - Design
-  - Dev
-  - User Testing
+  - DevSecOps
+  - Fullstack
+  - TDD
+  - Docker
 ---
+At Platform One, I played a critical role in developing scalable and secure software solutions for Department of Defense (DoD) projects, focusing on frontend development, interactive visualizations, and DevOps integration. Leveraging modern frameworks and methodologies, I delivered applications optimized for performance, usability, and compliance with stringent security standards.
 
-## Level-two heading
+## Project EOS
 
-> Tell me and I forget. Teach me and I remember. Involve me and I learn.
+- **Frontend Development**: Engineered scalable and responsive Angular applications for Project EOS, ensuring a seamless user experience across classified and unclassified environments.
+- **Real-time Data Handling**: Utilized RxJS for reactive data streams, significantly improving the efficiency of real-time user interactions and form submissions.
+- **Security and Compliance**: Collaborated with DevOps teams to deploy applications on Platform One, adhering to strict security requirements, including automated scans and Certification to Operate (CtO) processes.
+- **Mentorship and Best Practices**: Conducted training sessions for team members on Angular, RxJS, and Test-Driven Development (TDD), accelerating onboarding and improving code quality across the team.
+- **Testing and Quality Assurance**: Implemented TDD practices using Jest, increasing test coverage and reducing frontend bugs by 50%, ensuring high-quality and reliable application delivery.
 
-Lorem ipsum dolor sit amet, <a href="https://astro.build/">Astro</a> makes people happy. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Proin nibh nisl condimentum id venenatis a condimentum vitae. Dapibus ultrices in iaculis nunc. Arcu odio ut sem nulla pharetra diam sit amet. Diam quis enim lobortis scelerisque fermentum dui faucibus in ornare.
+## Project Battle Drill
 
-Arcu dui vivamus arcu felis bibendum ut tristique et egestas. Eget gravida cum sociis natoque penatibus. Cras fermentum odio eu feugiat pretium nibh. Proin nibh nisl condimentum id venenatis. Porta nibh venenatis cras sed felis eget velit. Id diam vel quam elementum pulvinar etiam non.
+- **Data Visualization**: Designed and developed interactive data visualizations using D3.js to provide real-time insights into military operations, enhancing decision-making for DoD clients.
+- **User-Centered Design**: Worked closely with DoD clients to gather requirements and deliver solutions that met operational needs, improving user adoption and satisfaction.
+- **Frontend Documentation**: Managed component documentation with Storybook, standardizing UI elements for scalability and reusability across multiple teams.
+- **Performance Optimization**: Improved application responsiveness by optimizing frontend performance, reducing load times, and ensuring smooth user interactions even in resource-constrained environments.
 
-### Level-three heading
+## Key Contributions
 
-Ultrices tincidunt arcu non sodales neque sodales ut. Sed enim ut sem viverra aliquet eget sit amet. Lacus luctus accumsan tortor posuere ac ut consequat semper viverra. Viverra accumsan in nisl nisi scelerisque eu ultrices. In massa tempor nec feugiat nisl pretium fusce.
-
-### Level-three heading
-
-Sed pulvinar porttitor mi in ultricies. Etiam non dolor gravida eros pulvinar pellentesque et dictum ex. Proin eu ornare ligula, sed condimentum dui. Vivamus tincidunt tellus mi, sed semper ipsum pharetra a. Suspendisse sollicitudin at sapien nec volutpat. Etiam justo urna, laoreet ac lacus sed, ultricies facilisis dolor. Integer posuere, metus vel viverra gravida, risus elit ornare magna, id feugiat erat risus ullamcorper libero. Proin vitae diam auctor, laoreet lorem vitae, varius tellus.
-
-Aenean pretium purus augue, ut bibendum erat convallis quis. Cras condimentum quis velit ac mollis. Suspendisse non purus fringilla, venenatis nisl porta, finibus odio. Curabitur aliquet metus faucibus libero interdum euismod. Morbi sed magna nisl. Morbi odio nibh, facilisis vel sapien eu, tempus tincidunt erat. Nullam erat velit, sagittis at purus quis, tristique scelerisque tortor. Pellentesque lacinia tortor id est aliquam viverra. Vestibulum et diam ac ipsum mollis fringilla.
-
-#### Level-four heading
-
-- We noted this
-- And also this other point
+- **DevOps Collaboration**: Partnered with Platform One teams to ensure seamless application deployment in classified environments, meeting high-security standards with tools like GitLab CI/CD.
+- **Extreme Programming (XP)**: Adopted XP methodologies to enhance collaboration and iterative development, resulting in faster delivery of high-quality features.
+- **Feature Rollouts**: Implemented feature flagging to enable controlled rollouts and A/B testing, ensuring a seamless user experience during application updates.
