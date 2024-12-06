@@ -11,14 +11,29 @@ tags:
   - Web Dev
 ---
 
-At National Park College, I played a pivotal role in transforming the college's web presence by developing and optimizing client-facing web components using Vue.js integrated with the OUCampus CMS. My work delivered robust solutions such as a faculty directory, blog post features, and a wellness tracking system for HR, streamlining workflows and enhancing user experiences for both internal teams and students.
+At National Park College, I transformed the institution's web presence by developing innovative web solutions, optimizing frontend performance, and improving accessibility and SEO. My work enhanced workflows for internal teams and students while modernizing the website for greater usability and engagement.
 
-I spearheaded a complete frontend performance overhaul, leveraging tools like Webpack and Grunt to reduce client-side load times by 1400%, significantly improving the site’s responsiveness and usability. The refactoring of the CSS architecture using BEM methodologies, coupled with optimization through Tachyons CSS, reduced CSS file size from 1MB to 30KB, achieving a 97% improvement in efficiency.
+## Key Projects and Contributions
 
-To enhance accessibility and search engine visibility, I conducted a comprehensive Lighthouse audit, addressing over 4,200 accessibility issues and elevating the site’s performance rating from a D to an A. These improvements were complemented by optimizing search functionality with Funnelback, which increased search speeds by 90% and made critical resources more accessible for students.
+- **Fullstack Development**:
+    - Built and customized client-facing web components using Vue.js integrated with OUCampus CMS, delivering solutions such as a faculty directory, blog post feature, and wellness tracking system for HR.
+    - Collaborated with faculty and HR departments to design intuitive, responsive interfaces, streamlining internal and student-facing workflows.
 
-I also implemented automation and standardization across web assets using Style Dictionary, introducing tokenization that allowed instant website updates, reducing changes from days to seconds. This approach enabled faster and more consistent branding updates across the site.
+- **Frontend Performance Optimization**:
+    - Spearheaded a complete frontend overhaul using Webpack and Grunt, reducing client-side load times by 1400%, significantly improving the user experience.
+    - Refactored CSS architecture using BEM methodologies and optimized with Tachyons CSS, reducing CSS size from 1MB to 30KB, achieving a 97% improvement.
 
-By integrating A/B testing workflows with Google Analytics and Google Optimize, I tailored web content based on user behavior, significantly increasing engagement and conversion rates. These efforts aligned with my focus on delivering responsive, user-centered design solutions that catered to diverse stakeholder needs, from students to faculty and administrative teams.
+- **Accessibility and SEO Enhancements**:
+    - Conducted a comprehensive Lighthouse audit, improving the site’s performance from a D rating to an A rating.
+    - Resolved over 4,200 accessibility issues, ensuring compliance with modern web standards.
+    - Optimized search functionality with Funnelback, increasing search speeds by 90% and making critical resources more accessible for students.
 
-In collaboration with faculty and HR, I designed intuitive and responsive interfaces, modernizing workflows and improving the efficiency of internal and student-facing tools. My contributions ensured that National Park College’s website was not only visually appealing but also optimized for performance, accessibility, and user engagement, aligning with the institution's commitment to providing a superior educational environment.
+- **Automation and Tokenization**:
+    - Designed and standardized all web assets using Style Dictionary, implementing tokenization that allowed website updates in seconds rather than days.
+    - Introduced automated workflows for consistent and rapid deployment of web changes.
+
+- **User Engagement and Analytics**:
+    - Developed A/B testing workflows using Google Analytics and Google Optimize to tailor content delivery based on user behavior, significantly increasing engagement and conversion rates.
+    - Enhanced user engagement by integrating social media features and third-party APIs to extend functionality and improve client interaction.
+
+My contributions at National Park College ensured a high-performing, accessible, and user-friendly web experience that supported the institution's mission to deliver excellence in education and service.
