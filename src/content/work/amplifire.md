@@ -2,21 +2,22 @@
 title: Amplifire
 publishDate: 2019-10-02 00:00:00
 img: /assets/amplifire.png
-img_alt: Soft pink and baby blue water ripples together in a subtle texture.
+img_alt: Showcasing login screen of amplifire.
 description: |
-  We developed brand positioning and design assets for the launch
-  of a new colored water product.
+  Modernized legacy systems, improved UI/UX design with React and Chakra UI, and implemented test-driven development while optimizing API performance and frontend security for 200,000+ users.
 tags:
-  - Design
-  - Branding
+  - UI/UX
+  - React
+  - Frontend
+  - DevOps
 ---
 
-Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur posuere commodo venenatis. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Nam non ligula vel metus efficitur hendrerit. In hac habitasse platea dictumst. Praesent et mauris ut mi dapibus semper. Curabitur tortor justo, efficitur sit amet pretium cursus, porta eget odio. Cras ac venenatis dolor. Donec laoreet posuere malesuada. Curabitur nec mi tempor, placerat leo sit amet, tincidunt est. Quisque pellentesque venenatis magna, eget tristique nibh pulvinar in. Vestibulum vitae volutpat arcu. Aenean ut malesuada odio, sit amet pellentesque odio. Suspendisse nunc elit, blandit nec hendrerit non, aliquet at magna. Donec id leo ut nulla sagittis sodales.
+At Amplifire, I led the modernization of a massive legacy Java application, migrating over 1 million lines of code to a modern React framework using Remix and React Router. This transition utilized both server-side rendering (SSR) and client-side rendering (CSR) techniques, reducing load times by 90% for over 200,000 users. My work significantly enhanced the platform's performance, usability, and scalability.
 
-Integer vitae nibh elit. Suspendisse eget urna eu neque bibendum pharetra. Sed interdum lectus sem, in pulvinar magna dignissim vel. Quisque maximus at urna nec laoreet. Suspendisse potenti. Vestibulum rhoncus sem ut mi pellentesque, in vestibulum erat blandit. Aliquam sodales dui ac maximus consectetur. Duis quis est vehicula, imperdiet nisl nec, fermentum erat. Duis tortor diam, pharetra eu euismod in, vehicula non eros. Curabitur facilisis dui at erat ultrices gravida. In at nunc ultricies, pulvinar mi vel, sagittis mauris. Praesent pharetra posuere purus ac imperdiet. Nulla facilisi.
+I was instrumental in designing and implementing responsive user interfaces using the Chakra UI design system. This effort reduced design inconsistencies by 50% and accelerated feature delivery, improving overall user satisfaction. Additionally, I built a drag-and-drop interface with React Beautiful DnD, increasing user efficiency and boosting feature adoption by 15%.
 
-Sed pulvinar porttitor mi in ultricies. Etiam non dolor gravida eros pulvinar pellentesque et dictum ex. Proin eu ornare ligula, sed condimentum dui. Vivamus tincidunt tellus mi, sed semper ipsum pharetra a. Suspendisse sollicitudin at sapien nec volutpat. Etiam justo urna, laoreet ac lacus sed, ultricies facilisis dolor. Integer posuere, metus vel viverra gravida, risus elit ornare magna, id feugiat erat risus ullamcorper libero. Proin vitae diam auctor, laoreet lorem vitae, varius tellus.
+A key focus of my role was ensuring robust testing and code quality. By leading the implementation of Playwright and Vitest for frontend testing, I achieved 90% test coverage, which reduced production bugs by 50%. I also conducted over 50 code reviews monthly, enhancing code quality by 70% through tools like SonarQube, ESLint, and Prettier.
 
-Mauris sed eros in ex maximus volutpat. Suspendisse potenti. Donec lacinia justo consectetur sagittis tempor. Proin ullamcorper nisi vitae auctor rhoncus. Sed tristique aliquam augue. Pellentesque vitae fringilla ligula. Nulla arcu elit, efficitur eu nunc malesuada, eleifend tincidunt orci. Interdum et malesuada fames ac ante ipsum primis in faucibus. Integer mattis orci in bibendum ultricies. Quisque a dui erat. Phasellus et vulputate ipsum. Proin metus ex, lobortis nec ornare eget, bibendum ut sapien. Aliquam in dolor lobortis, aliquam tellus a, congue augue. Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+To improve API performance, I optimized data delivery with Axios, reducing latency by 35%, and integrated over 50 REST API endpoints to provide real-time data to users. I strengthened frontend security by implementing Google reCAPTCHA and data validation with Zod, cutting form submission errors by 70%.
 
-Aenean pretium purus augue, ut bibendum erat convallis quis. Cras condimentum quis velit ac mollis. Suspendisse non purus fringilla, venenatis nisl porta, finibus odio. Curabitur aliquet metus faucibus libero interdum euismod. Morbi sed magna nisl. Morbi odio nibh, facilisis vel sapien eu, tempus tincidunt erat. Nullam erat velit, sagittis at purus quis, tristique scelerisque tortor. Pellentesque lacinia tortor id est aliquam viverra. Vestibulum et diam ac ipsum mollis fringilla.
+My contributions extended to collaboration with UI/UX teams via Figma to ensure timely delivery of components, component documentation with Storybook, and the adoption of modern practices like Context API and Jotai for state management, which reduced state-related bugs by 30%. Overall, my work at Amplifire significantly improved system performance, user experience, and development efficiency.
