@@ -11,13 +11,32 @@ tags:
   - Frontend
   - DevOps
 ---
+At Amplifire, I modernized a massive legacy system, enhanced UI/UX design, and implemented robust testing and API optimization. My work improved the platform's performance, usability, and scalability for over 200,000 users.
 
-At Amplifire, I led the modernization of a massive legacy Java application, migrating over 1 million lines of code to a modern React framework using Remix and React Router. This transition utilized both server-side rendering (SSR) and client-side rendering (CSR) techniques, reducing load times by 90% for over 200,000 users. My work significantly enhanced the platform's performance, usability, and scalability.
+## Key Projects and Contributions
 
-I was instrumental in designing and implementing responsive user interfaces using the Chakra UI design system. This effort reduced design inconsistencies by 50% and accelerated feature delivery, improving overall user satisfaction. Additionally, I built a drag-and-drop interface with React Beautiful DnD, increasing user efficiency and boosting feature adoption by 15%.
+- **Legacy System Modernization**:
+    - Migrated over 1 million lines of legacy Java code to a modern React framework using Remix and React Router.
+    - Implemented server-side rendering (SSR) and client-side rendering (CSR) techniques, reducing load times by 90%.
 
-A key focus of my role was ensuring robust testing and code quality. By leading the implementation of Playwright and Vitest for frontend testing, I achieved 90% test coverage, which reduced production bugs by 50%. I also conducted over 50 code reviews monthly, enhancing code quality by 70% through tools like SonarQube, ESLint, and Prettier.
+- **UI/UX Design and Optimization**:
+    - Designed and implemented responsive user interfaces using the Chakra UI design system, reducing design inconsistencies by 50% and accelerating feature delivery.
+    - Built drag-and-drop interfaces with React Beautiful DnD, improving user efficiency and increasing feature adoption by 15%.
 
-To improve API performance, I optimized data delivery with Axios, reducing latency by 35%, and integrated over 50 REST API endpoints to provide real-time data to users. I strengthened frontend security by implementing Google reCAPTCHA and data validation with Zod, cutting form submission errors by 70%.
+- **Testing and Code Quality**:
+    - Led the implementation of Playwright and Vitest, achieving 90% test coverage and reducing production bugs by 50%.
+    - Conducted over 50 code reviews monthly, improving code quality by 70% through tools like SonarQube, ESLint, and Prettier.
 
-My contributions extended to collaboration with UI/UX teams via Figma to ensure timely delivery of components, component documentation with Storybook, and the adoption of modern practices like Context API and Jotai for state management, which reduced state-related bugs by 30%. Overall, my work at Amplifire significantly improved system performance, user experience, and development efficiency.
+- **API Development and Optimization**:
+    - Engineered consuming REST APIs with Axios, integrating over 50 endpoints to deliver real-time data to users.
+    - Optimized API performance, reducing latency by 35%, and enhanced frontend security with Google reCAPTCHA and Zod for data validation, cutting form submission errors by 70%.
+
+- **Collaboration and Documentation**:
+    - Partnered with UI/UX teams via Figma, ensuring timely delivery of components and maintaining alignment with design standards.
+    - Managed component documentation with Storybook, streamlining the reuse and scalability of frontend components.
+
+- **State Management and Bug Reduction**:
+    - Utilized Context API and Jotai for state management, reducing state-related bugs by 30%.
+    - Delivered a Single Page Application (SPA) architecture that improved overall user experience and system reliability.
+
+My work at Amplifire combined innovative technology adoption, strategic problem-solving, and collaborative teamwork to deliver a faster, more reliable platform that met the needs of a large and diverse user base.
