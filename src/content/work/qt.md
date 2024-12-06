@@ -2,7 +2,7 @@
 title: Qualified Technology
 publishDate: 2019-12-01 00:00:00
 img: /assets/qt.png
-img_alt: A bright pink sheet of paper used to wrap flowers curves in front of rich blue background
+img_alt: A mac book computer show casing one of clients coaching portfolios.
 description: |
   Developed responsive, customizable WordPress websites using JavaScript, PHP, and the Genesis Framework.
 tags:

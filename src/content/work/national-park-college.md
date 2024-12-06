@@ -2,21 +2,23 @@
 title: National Park College
 publishDate: 2020-03-04 00:00:00
 img: /assets/npccampus.png
-img_alt: Pearls of silky soft white cotton, bubble up under vibrant lighting
+img_alt: Vibrant image of the npc campus map that showcases descriptions of each building.
 description: |
-  We developed a virtual showcase for the softest bedding imaginable.
+  Focused on developing client-facing web components using Vue.js integrated with the OUCampus CMS, delivering features like a faculty directory, blog posts, and a wellness tracking system for HR.
 tags:
-  - Design
-  - Dev
-  - Branding
+  - Fullstack
+  - Accessibility
+  - Web Dev
 ---
 
-Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur posuere commodo venenatis. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Nam non ligula vel metus efficitur hendrerit. In hac habitasse platea dictumst. Praesent et mauris ut mi dapibus semper. Curabitur tortor justo, efficitur sit amet pretium cursus, porta eget odio. Cras ac venenatis dolor. Donec laoreet posuere malesuada. Curabitur nec mi tempor, placerat leo sit amet, tincidunt est. Quisque pellentesque venenatis magna, eget tristique nibh pulvinar in. Vestibulum vitae volutpat arcu. Aenean ut malesuada odio, sit amet pellentesque odio. Suspendisse nunc elit, blandit nec hendrerit non, aliquet at magna. Donec id leo ut nulla sagittis sodales.
+At National Park College, I played a pivotal role in transforming the college's web presence by developing and optimizing client-facing web components using Vue.js integrated with the OUCampus CMS. My work delivered robust solutions such as a faculty directory, blog post features, and a wellness tracking system for HR, streamlining workflows and enhancing user experiences for both internal teams and students.
 
-Integer vitae nibh elit. Suspendisse eget urna eu neque bibendum pharetra. Sed interdum lectus sem, in pulvinar magna dignissim vel. Quisque maximus at urna nec laoreet. Suspendisse potenti. Vestibulum rhoncus sem ut mi pellentesque, in vestibulum erat blandit. Aliquam sodales dui ac maximus consectetur. Duis quis est vehicula, imperdiet nisl nec, fermentum erat. Duis tortor diam, pharetra eu euismod in, vehicula non eros. Curabitur facilisis dui at erat ultrices gravida. In at nunc ultricies, pulvinar mi vel, sagittis mauris. Praesent pharetra posuere purus ac imperdiet. Nulla facilisi.
+I spearheaded a complete frontend performance overhaul, leveraging tools like Webpack and Grunt to reduce client-side load times by 1400%, significantly improving the site’s responsiveness and usability. The refactoring of the CSS architecture using BEM methodologies, coupled with optimization through Tachyons CSS, reduced CSS file size from 1MB to 30KB, achieving a 97% improvement in efficiency.
 
-Sed pulvinar porttitor mi in ultricies. Etiam non dolor gravida eros pulvinar pellentesque et dictum ex. Proin eu ornare ligula, sed condimentum dui. Vivamus tincidunt tellus mi, sed semper ipsum pharetra a. Suspendisse sollicitudin at sapien nec volutpat. Etiam justo urna, laoreet ac lacus sed, ultricies facilisis dolor. Integer posuere, metus vel viverra gravida, risus elit ornare magna, id feugiat erat risus ullamcorper libero. Proin vitae diam auctor, laoreet lorem vitae, varius tellus.
+To enhance accessibility and search engine visibility, I conducted a comprehensive Lighthouse audit, addressing over 4,200 accessibility issues and elevating the site’s performance rating from a D to an A. These improvements were complemented by optimizing search functionality with Funnelback, which increased search speeds by 90% and made critical resources more accessible for students.
 
-Mauris sed eros in ex maximus volutpat. Suspendisse potenti. Donec lacinia justo consectetur sagittis tempor. Proin ullamcorper nisi vitae auctor rhoncus. Sed tristique aliquam augue. Pellentesque vitae fringilla ligula. Nulla arcu elit, efficitur eu nunc malesuada, eleifend tincidunt orci. Interdum et malesuada fames ac ante ipsum primis in faucibus. Integer mattis orci in bibendum ultricies. Quisque a dui erat. Phasellus et vulputate ipsum. Proin metus ex, lobortis nec ornare eget, bibendum ut sapien. Aliquam in dolor lobortis, aliquam tellus a, congue augue. Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+I also implemented automation and standardization across web assets using Style Dictionary, introducing tokenization that allowed instant website updates, reducing changes from days to seconds. This approach enabled faster and more consistent branding updates across the site.
 
-Aenean pretium purus augue, ut bibendum erat convallis quis. Cras condimentum quis velit ac mollis. Suspendisse non purus fringilla, venenatis nisl porta, finibus odio. Curabitur aliquet metus faucibus libero interdum euismod. Morbi sed magna nisl. Morbi odio nibh, facilisis vel sapien eu, tempus tincidunt erat. Nullam erat velit, sagittis at purus quis, tristique scelerisque tortor. Pellentesque lacinia tortor id est aliquam viverra. Vestibulum et diam ac ipsum mollis fringilla.
+By integrating A/B testing workflows with Google Analytics and Google Optimize, I tailored web content based on user behavior, significantly increasing engagement and conversion rates. These efforts aligned with my focus on delivering responsive, user-centered design solutions that catered to diverse stakeholder needs, from students to faculty and administrative teams.
+
+In collaboration with faculty and HR, I designed intuitive and responsive interfaces, modernizing workflows and improving the efficiency of internal and student-facing tools. My contributions ensured that National Park College’s website was not only visually appealing but also optimized for performance, accessibility, and user engagement, aligning with the institution's commitment to providing a superior educational environment.
