@@ -1,6 +1,6 @@
 ---
 title: Lexis Nexis
-publishDate: 2018-11-01 00:00:00
+publishDate: 2018-11-01
 img: /assets/lexisnexis.png
 img_alt: Showcasing Lexis Nexis legal research tools interface.
 description: |

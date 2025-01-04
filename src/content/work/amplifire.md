@@ -1,6 +1,6 @@
 ---
 title: Amplifire
-publishDate: 2019-10-02 00:00:00
+publishDate: 2019-10-02
 img: /assets/amplifire.png
 img_alt: Showcasing login screen of amplifire.
 description: |

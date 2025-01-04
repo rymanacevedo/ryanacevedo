@@ -1,6 +1,6 @@
 ---
 title: Infrastructure I'm Building In 2025 
-publishDate: 2024-12-06 11:58:00
+publishDate: 2024-12-06
 img: /assets/amplifire.png
 img_alt: 
 description: |
@@ -13,6 +13,7 @@ tags:
   - Nonprofit
 ---
 *Infra I'm building in 2025*
+
 As I'm starting out 2025, I'm looking to build on top of my already exisiting knowledge of node. I started learning node in 2015 and have been using it ever since. Bun was pretty cool, and I'm looking to work Deno a little more.
 
 There have been some pros/cons of using Deno so far for this simple app I'm building for the organization Second Chance Center.

@@ -1,6 +1,6 @@
 ---
 title: Qualified Technology
-publishDate: 2019-12-01 00:00:00
+publishDate: 2019-12-01
 img: /assets/qt.png
 img_alt: A mac book computer show casing one of clients coaching portfolios.
 description: |

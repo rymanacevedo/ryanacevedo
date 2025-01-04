@@ -1,6 +1,6 @@
 ---
 title: Platform One
-publishDate: 2020-03-02 00:00:00
+publishDate: 2020-03-02
 img: /assets/p1.dso.mil.png
 img_alt: Platform One homepage with Yoda logo saying waterfall only you can prevent
 description: |

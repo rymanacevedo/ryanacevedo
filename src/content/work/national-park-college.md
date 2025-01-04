@@ -1,6 +1,6 @@
 ---
 title: National Park College
-publishDate: 2020-03-04 00:00:00
+publishDate: 2020-03-04
 img: /assets/npccampus.png
 img_alt: Vibrant image of the npc campus map that showcases descriptions of each building.
 description: |
