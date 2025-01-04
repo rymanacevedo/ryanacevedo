@@ -14,7 +14,6 @@ tags:
 At Platform One, I played a critical role in developing scalable and secure software solutions for Department of Defense (DoD) projects, focusing on frontend development, interactive visualizations, and DevOps integration. Leveraging modern frameworks and methodologies, I delivered applications optimized for performance, usability, and compliance with stringent security standards.
 
 ## Project EOS
->Something
 - **Frontend Development**: Engineered scalable and responsive Angular applications for Project EOS, ensuring a seamless user experience across classified and unclassified environments.
 - **Real-time Data Handling**: Utilized RxJS for reactive data streams, significantly improving the efficiency of real-time user interactions and form submissions.
 - **Security and Compliance**: Collaborated with DevOps teams to deploy applications on Platform One, adhering to strict security requirements, including automated scans and Certification to Operate (CtO) processes.
