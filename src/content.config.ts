@@ -38,7 +38,7 @@ export const collections = defineCollection({
     }),
 });
 
-
+// This is the new way to do it, it's not working due to a bug: https://github.com/withastro/astro/issues/12680 
 // export const collections = {
 //     posts,
 //     work,
