@@ -31,7 +31,9 @@ const projects = (await getCollection("work"))
 			<header class="hero">
 				<Hero title="Hello, my name is Ryan Acevedo" align="start">
 					<Fragment slot="tagline">
-						I am an <strong class="ai-engineer-accent">AI Engineer</strong>
+						I am an <strong class="ai-engineer-accent"
+							>AI Engineer</strong
+						>
 						based out of Denver, Colorado.
 					</Fragment>
 					<div class="roles">
@@ -122,6 +124,10 @@ const projects = (await getCollection("work"))
 
 	.roles {
 		display: none;
+	}
+
+	.ai-engineer-accent {
+		color: #ca7879;
 	}
 
 	.hero img {
