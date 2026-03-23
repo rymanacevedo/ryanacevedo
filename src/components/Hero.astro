@@ -2,16 +2,23 @@
 interface Props {
 	title: string;
 	tagline?: string;
-	align?: 'start' | 'center';
+	align?: "start" | "center";
 }
 
-const { align = 'center', tagline, title } = Astro.props;
+const { align = "center", tagline, title } = Astro.props;
+const hasTaglineSlot = Astro.slots.has("tagline");
 ---
 
-<div class:list={['hero stack gap-4', align]}>
+<div class:list={["hero stack gap-4", align]}>
 	<div class="stack gap-2">
 		<h1 class="title">{title}</h1>
-		{tagline && <p class="tagline">{tagline}</p>}
+		{
+			(hasTaglineSlot || tagline) && (
+				<p class="tagline">
+					{hasTaglineSlot ? <slot name="tagline" /> : tagline}
+				</p>
+			)
+		}
 	</div>
 	<slot />
 </div>
@@ -31,6 +38,10 @@ const { align = 'center', tagline, title } = Astro.props;
 	.title {
 		font-size: var(--text-3xl);
 		color: var(--gray-0);
+	}
+
+	.tagline :global(.ai-engineer-accent) {
+		color: #ca7879;
 	}
 
 	@media (min-width: 50em) {
