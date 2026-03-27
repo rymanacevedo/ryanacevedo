@@ -15,6 +15,7 @@ import PortfolioPreview from "../components/PortfolioPreview.astro";
 // Page section components
 import ContactCTA from "../components/ContactCTA.astro";
 import Skills from "../components/Skills.astro";
+import { Image } from "astro:assets";
 
 // Content Fetching: List four most recent work projects
 const projects = (await getCollection("work"))
@@ -29,36 +30,40 @@ const projects = (await getCollection("work"))
 	<div class="stack gap-20 lg:gap-48">
 		<div class="wrapper stack gap-8 lg:gap-20">
 			<header class="hero">
-				<Hero title="Hello, my name is Ryan Acevedo" align="start">
-					<Fragment slot="tagline">
-						I am an <strong class="ai-engineer-accent"
-							>AI Engineer</strong
+				<Image
+					src="/assets/ryan-acevedo-portrait.jpeg"
+					alt="Ryan Acevedo smiling in a black/white background"
+					width="480"
+					height="620"
+				/>
+				<Hero align="start">
+					<Fragment slot="title">
+						Entrepreneur & <em class="orange-accent thin-font"
+							>AI Engineer</em
 						>
-						based out of Denver, Colorado.
+					</Fragment>
+					<Fragment slot="tagline">
+						I am an <span class="orange-accent">AI Engineer</span>
+						based out of <strong>Denver, Colorado</strong>.
 					</Fragment>
 					<div class="roles">
-						<Pill><Icon icon="code" size="1.33em" /> Developer</Pill
+						<Pill><Icon icon="code" size="1.33em" /> Engineer</Pill>
+						<Pill
+							><Icon icon="rocket-launch" size="1.33em" /> Builder</Pill
 						>
-						<!-- <Pill><Icon icon="microphone-stage" size="1.33em" /> Speaker</Pill> -->
 						<Pill
 							><Icon icon="pencil-line" size="1.33em" /> Writer</Pill
 						>
 					</div>
 				</Hero>
-
-				<img
-					alt="Ryan Acevedo smiling in a black/white background"
-					width="480"
-					height="620"
-					src="/assets/ryan-acevedo-portrait.jpeg"
-				/>
 			</header>
 
+			<ContactCTA />
 			<Skills />
 		</div>
 
 		<main class="wrapper stack gap-20 lg:gap-48">
-			<section class="section with-background with-cta">
+			<!-- <section class="section with-background with-cta">
 				<header class="section-header stack gap-2 lg:gap-4">
 					<h3>Selected Work</h3>
 					<p>
@@ -85,32 +90,36 @@ const projects = (await getCollection("work"))
 						<Icon icon="arrow-right" size="1.2em" />
 					</CallToAction>
 				</div>
-			</section>
+			</section> -->
 
-			<!-- <section class="section with-background bg-variant">
+			<section class="section with-background bg-variant">
 				<header class="section-header stack gap-2 lg:gap-4">
 					<h3>Mentions</h3>
 					<p>
-						I have been fortunate enough to recieve praise for my work in several publications. Take
-						a look below to learn more.
+						The clients I've had the pleasure of working with
+						include:
 					</p>
 				</header>
 
 				<div class="gallery">
 					<Grid variant="small">
 						{
-							['Medium', 'BuzzFeed', 'The Next Web', 'awwwards.', 'TechCrunch'].map((brand) => (
+							[
+								"Omitron",
+								"Lexis Nexus",
+								"Amplifire",
+								"Clyde AI",
+								"Tiding Health",
+							].map((client) => (
 								<li class="mention-card">
-									<p>{brand}</p>
+									<p>{client}</p>
 								</li>
 							))
 						}
 					</Grid>
 				</div>
-			</section> -->
+			</section>
 		</main>
-
-		<ContactCTA />
 	</div>
 </BaseLayout>
 
@@ -126,8 +135,12 @@ const projects = (await getCollection("work"))
 		display: none;
 	}
 
-	.ai-engineer-accent {
+	.orange-accent {
 		color: #ca7879;
+	}
+
+	.thin-font {
+		font-weight: 200;
 	}
 
 	.hero img {

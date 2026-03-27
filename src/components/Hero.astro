@@ -1,17 +1,20 @@
 ---
 interface Props {
-	title: string;
+	title?: string;
 	tagline?: string;
 	align?: "start" | "center";
 }
 
 const { align = "center", tagline, title } = Astro.props;
 const hasTaglineSlot = Astro.slots.has("tagline");
+const hasTitleSlot = Astro.slots.has("title");
 ---
 
 <div class:list={["hero stack gap-4", align]}>
 	<div class="stack gap-2">
-		<h1 class="title">{title}</h1>
+		<h1 class="title">
+			{hasTitleSlot ? <slot name="title" /> : title}
+		</h1>
 		{
 			(hasTaglineSlot || tagline) && (
 				<p class="tagline">
