@@ -106,13 +106,19 @@ const projects = (await getCollection("work"))
 						{
 							[
 								"Omitron",
-								"Lexis Nexus",
+								"Lexis Nexis",
 								"Amplifire",
 								"Clyde AI",
 								"Tiding Health",
+								"Platform One",
 							].map((client) => (
 								<li class="mention-card">
-									<p>{client}</p>
+									<Image
+										src={`/assets/logos/${client.toLowerCase()}.png`}
+										alt={client}
+										width="100"
+										height="100"
+									/>
 								</li>
 							))
 						}
@@ -257,7 +263,8 @@ const projects = (await getCollection("work"))
 
 	.mention-card {
 		display: flex;
-		height: 7rem;
+		height: 200px;
+		max-width: 100px;
 		justify-content: center;
 		align-items: center;
 		text-align: center;
@@ -271,7 +278,7 @@ const projects = (await getCollection("work"))
 	@media (min-width: 50em) {
 		.mention-card {
 			border-radius: 1.5rem;
-			height: 9.5rem;
+			height: 100px;
 		}
 	}
 </style>
