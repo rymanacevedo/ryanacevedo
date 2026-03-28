@@ -1,8 +1,9 @@
 ---
-import BaseLayout from '../layouts/BaseLayout.astro';
+import BaseLayout from "../layouts/BaseLayout.astro";
 
-import ContactCTA from '../components/ContactCTA.astro';
-import Hero from '../components/Hero.astro';
+import ContactCTA from "../components/ContactCTA.astro";
+import Hero from "../components/Hero.astro";
+import { Image } from "astro:assets";
 ---
 
 <BaseLayout title="About | Ryan Acevedo" description="About Ryan Acevedo">
@@ -10,9 +11,9 @@ import Hero from '../components/Hero.astro';
 		<main class="wrapper about">
 			<Hero
 				title="About"
-				tagline="Thanks for stopping by. Read below to learn more about myself and my background."
+				tagline="I'm an engineer by training and a problem-solver by nature."
 			>
-				<img
+				<Image
 					width="1553"
 					height="873"
 					src="/assets/ryan-acevedo-beanie.jpeg"
@@ -20,29 +21,77 @@ import Hero from '../components/Hero.astro';
 				/>
 			</Hero>
 
-			<section>
-				<h2 class="section-title">Background</h2>
-				<div class="content">
+			<!-- Story sections -->
+			<section class="story-block">
+				<div class="story-accent"></div>
+				<div class="story-content">
 					<p>
-						I'm a web developer, teacher, and chess player. I've been building web apps for over 7 years.
+						I spent my career building software systems, debugging
+						complex architectures, and figuring out how things work
+						from the inside out. But the biggest problem I've ever
+						tackled isn't technical&nbsp;&mdash; it's building a
+						business from scratch that proves convenience and
+						compassion aren't mutually exclusive.
 					</p>
 				</div>
 			</section>
-			<section>
-				<h2 class="section-title">Skills</h2>
-				<div class="content">
-					<ul class="skills">
-						<li>React</li>
-						<li>Typescript</li>
-						<li>Bun</li>
-						<li>Vue</li>
-						<li>Angular</li>
-					</ul>
+
+			<section class="story-block highlight">
+				<h2 class="callout-title">The Problem</h2>
+				<div class="story-content">
+					<p>
+						I grew up watching people in my community getting chewed
+						up by the system. As someone who was formerly
+						incarcerated, I experienced firsthand the barriers that
+						most people never think about: can't get hired, can't
+						get housing, can't get a fresh start no matter how hard
+						they work.
+					</p>
+					<p class="punch">That never sat right with me.</p>
+				</div>
+			</section>
+
+			<section class="story-block">
+				<h2 class="callout-title">The Mission</h2>
+				<div class="story-content">
+					<p>
+						So when I started my first business <a
+							href="https://mobileoilhero.com">Mobile Oil Hero</a
+						>, I didn't just want to build another service business.
+						I wanted to build a company where the mission is baked
+						into the operating model. Every oil change we perform
+						funds real jobs for people who've earned a shot. Every
+						customer who books with us is choosing to put their
+						money where their values are.
+					</p>
+				</div>
+			</section>
+
+			<section class="story-block">
+				<div class="story-content">
+					<p>
+						The truth is, I'm a first-time founder figuring this out
+						as I go. But that's the engineer in me&nbsp;&mdash;
+						break it down, solve one piece at a time, and don't stop
+						until it works.
+					</p>
+				</div>
+			</section>
+
+			<section class="story-block highlight closing">
+				<div class="story-content">
+					<p>
+						I have a proven track record of building successful
+						businesses. But this time, I'm doing it for a different
+						reason. This time it's.. it's to change the system.
+					</p>
+					<p class="punch">
+						That's my story. Now it's time for change.
+					</p>
 				</div>
 			</section>
 		</main>
-
-		<ContactCTA />
+		<ContactCTA message="Ready to make an impact?" />
 	</div>
 </BaseLayout>
 
@@ -50,13 +99,9 @@ import Hero from '../components/Hero.astro';
 	.about {
 		display: flex;
 		flex-direction: column;
-		gap: 3.5rem;
-	}
-
-	.skills {
-		display: flex;
-		flex-direction: row;
 		gap: 2rem;
+		max-width: 52rem;
+		margin-inline: auto;
 	}
 
 	img {
@@ -65,47 +110,129 @@ import Hero from '../components/Hero.astro';
 		box-shadow: var(--shadow-md);
 	}
 
-	section {
+	/* Story blocks */
+	.story-block {
+		position: relative;
+		padding: 1.5rem 1.5rem 1.5rem 2rem;
+		border-radius: 0.75rem;
+		color: var(--gray-200);
+		font-size: var(--text-base);
+		line-height: 1.75;
+		border-left: 3px solid transparent;
+	}
+
+	.story-block .story-accent {
+		position: absolute;
+		left: -3px;
+		top: 0;
+		bottom: 0;
+		width: 3px;
+		background: var(--gradient-accent);
+		border-radius: 2px;
+	}
+
+	.story-block .story-content {
 		display: flex;
 		flex-direction: column;
-		gap: 0.5rem;
-		color: var(--gray-200);
+		gap: 1rem;
 	}
 
-	.section-title {
-		grid-column-start: 1;
+	/* Highlighted story blocks */
+	.story-block.highlight {
+		background: rgba(118, 17, 166, 0.08);
+		border-left: 3px solid var(--accent-regular);
+		padding: 2rem;
+	}
+
+	.callout-title {
+		font-family: var(--font-brand);
 		font-size: var(--text-xl);
 		color: var(--gray-0);
+		margin-bottom: 0.75rem;
 	}
 
-	.content {
-		grid-column: 2 / 4;
+	.callout-title::after {
+		content: "";
+		display: block;
+		width: 2rem;
+		height: 3px;
+		background: var(--gradient-accent);
+		border-radius: 2px;
+		margin-top: 0.4rem;
 	}
 
-	.content :global(a) {
-		text-decoration: 1px solid underline transparent;
-		text-underline-offset: 0.25em;
-		transition: text-decoration-color var(--theme-transition);
+	/* Punch lines */
+	.punch {
+		font-family: var(--font-brand);
+		font-size: var(--text-lg);
+		font-weight: 600;
+		color: var(--gray-0);
+		margin-top: 0.25rem;
 	}
 
-	.content :global(a:hover),
-	.content :global(a:focus) {
-		text-decoration-color: currentColor;
+	.closing .punch {
+		font-size: var(--text-xl);
+		background: var(--gradient-accent);
+		-webkit-background-clip: text;
+		-webkit-text-fill-color: transparent;
+		background-clip: text;
+	}
+
+	/* Skills */
+	.skills-section {
+		padding: 1.5rem 0;
+	}
+
+	.skills {
+		display: flex;
+		flex-wrap: wrap;
+		gap: 0.75rem;
+		list-style: none;
+		padding: 0;
+		margin: 0.75rem 0 0 0;
+	}
+
+	.skills li {
+		padding: 0.5rem 1.25rem;
+		border-radius: 999px;
+		background: var(--accent-regular);
+		color: var(--accent-text-over);
+		font-family: var(--font-brand);
+		font-size: var(--text-sm);
+		font-weight: 600;
+		letter-spacing: 0.05em;
+		text-transform: uppercase;
 	}
 
 	@media (min-width: 50em) {
 		.about {
-			display: grid;
-			grid-template-columns: 1fr 60% 1fr;
+			gap: 2.5rem;
 		}
 
-		.about > :global(:first-child) {
-			grid-column-start: 2;
+		.story-block {
+			padding: 2rem 2.5rem 2rem 2.5rem;
+			font-size: var(--text-md);
 		}
 
-		section {
-			display: contents;
-			font-size: var(--text-lg);
+		.story-block.highlight {
+			padding: 2.5rem;
+		}
+
+		.callout-title {
+			font-size: var(--text-2xl);
+		}
+
+		.punch {
+			font-size: var(--text-xl);
+		}
+
+		.closing .punch {
+			font-size: var(--text-2xl);
+		}
+
+		.skills li {
+			font-size: var(--text-sm);
+			padding: 0.625rem 1.5rem;
 		}
 	}
 </style>
