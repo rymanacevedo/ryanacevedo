@@ -105,17 +105,23 @@ const projects = (await getCollection("work"))
 					<Grid variant="small">
 						{
 							[
-								"Omitron",
-								"Lexis Nexis",
-								"Amplifire",
-								"Clyde AI",
-								"Tiding Health",
-								"Platform One",
+								{ name: "Omitron", logo: "omitron.png" },
+								{ name: "Lexis Nexis", logo: "lexisnexis.png" },
+								{ name: "Amplifire", logo: "amplifire.png" },
+								{ name: "Clyde AI", logo: "clyde.png" },
+								{
+									name: "Tiding Health",
+									logo: "tiding-health.png",
+								},
+								{
+									name: "Platform One",
+									logo: "platformone.png",
+								},
 							].map((client) => (
 								<li class="mention-card">
 									<Image
-										src={`/assets/logos/${client.toLowerCase()}.png`}
-										alt={client}
+										src={`/assets/logos/${client.logo}`}
+										alt={client.name}
 										width="100"
 										height="100"
 									/>
@@ -263,8 +269,9 @@ const projects = (await getCollection("work"))
 
 	.mention-card {
 		display: flex;
-		height: 200px;
-		max-width: 100px;
+		width: calc(33% - 1.5rem);
+		min-width: 120px;
+		aspect-ratio: 1;
 		justify-content: center;
 		align-items: center;
 		text-align: center;
@@ -273,12 +280,19 @@ const projects = (await getCollection("work"))
 		color: var(--gray-300);
 		background: var(--gradient-subtle);
 		box-shadow: var(--shadow-sm);
+		padding: 0.75rem;
+	}
+
+	.mention-card img {
+		width: 100%;
+		height: 100%;
+		object-fit: contain;
 	}
 
 	@media (min-width: 50em) {
 		.mention-card {
-			border-radius: 1.5rem;
-			height: 100px;
+			width: calc(14% - 2rem);
+			min-width: 120px;
 		}
 	}
 </style>
