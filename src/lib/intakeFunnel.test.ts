@@ -7,6 +7,7 @@ import {
 	getPromotedTestimonial,
 	getRevealedQuestions,
 	getRevealScrollTarget,
+	parseIntakeFormData,
 	type Stage,
 	shouldScrollOpenedCard,
 	type TestimonialId,
@@ -192,6 +193,36 @@ describe("buildBookingUrl", () => {
 		);
 
 		expect(bookingUrl.searchParams.get("notes")).toBe("Timeframe: 3–6 months");
+	});
+});
+
+describe("parseIntakeFormData", () => {
+	test("uses the non-empty native fallback answers", () => {
+		const formData = new FormData();
+		formData.append("email", "ryan@example.com");
+		formData.append("stage", "");
+		formData.append("stage", "Scaling");
+		formData.append("timeframe", "");
+		formData.append("timeframe", "1–3 months");
+		formData.append("start", "");
+		formData.append("start", "ASAP");
+
+		expect(parseIntakeFormData(formData)).toEqual({
+			email: "ryan@example.com",
+			stage: "Scaling",
+			timeframe: "1–3 months",
+			start: "ASAP",
+		});
+	});
+
+	test("ignores an invalid stage", () => {
+		const formData = new FormData();
+		formData.set("email", "ryan@example.com");
+		formData.set("stage", "Bogus");
+
+		expect(parseIntakeFormData(formData)).toEqual({
+			email: "ryan@example.com",
+		});
 	});
 });
 

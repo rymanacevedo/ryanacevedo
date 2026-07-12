@@ -6,6 +6,14 @@ export const STAGES = [
 	"Established business",
 	"Enterprise",
 ] as const;
+export const TIMEFRAMES = [
+	"1–2 weeks",
+	"1–3 months",
+	"3–6 months",
+	"6–12 months",
+	"1 year and beyond",
+] as const;
+export const START_OPTIONS = ["ASAP", "1–2 weeks", "1–3 months"] as const;
 
 export type Stage = (typeof STAGES)[number];
 
@@ -97,6 +105,30 @@ export function buildBookingUrl(state: IntakeFunnelState): string {
 	}
 
 	return bookingUrl.toString();
+}
+
+function getLastNonEmptyString(formData: FormData, name: string): string {
+	return (
+		formData
+			.getAll(name)
+			.filter((value): value is string => typeof value === "string")
+			.findLast((value) => value.length > 0) ?? ""
+	);
+}
+
+export function parseIntakeFormData(formData: FormData): IntakeFunnelState {
+	const stage = getLastNonEmptyString(formData, "stage");
+	const timeframe = getLastNonEmptyString(formData, "timeframe");
+	const start = getLastNonEmptyString(formData, "start");
+	const state: IntakeFunnelState = {
+		email: getLastNonEmptyString(formData, "email"),
+	};
+
+	if (isStage(stage)) state.stage = stage;
+	if (timeframe) state.timeframe = timeframe;
+	if (start) state.start = start;
+
+	return state;
 }
 
 export function buildFormPayload(

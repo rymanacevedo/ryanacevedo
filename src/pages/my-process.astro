@@ -1,7 +1,12 @@
 ---
 import Button from "../components/Button.astro";
 import BaseLayout from "../layouts/BaseLayout.astro";
-import { BOOKING_URL, FORM_NAME } from "../lib/intakeFunnel";
+import {
+	FORM_NAME,
+	STAGES,
+	START_OPTIONS,
+	TIMEFRAMES,
+} from "../lib/intakeFunnel";
 ---
 
 <BaseLayout
@@ -174,38 +179,16 @@ import { BOOKING_URL, FORM_NAME } from "../lib/intakeFunnel";
 					role="group"
 					aria-labelledby="timeframe-heading"
 				>
-					<Button
-						variant="secondary"
-						name="timeframe"
-						value="1–2 weeks"
-						pressed={false}>1–2 weeks</Button
-					>
-					<Button
-						variant="secondary"
-						name="timeframe"
-						value="1–3 months"
-						pressed={false}>1–3 months</Button
-					>
-					<Button
-						variant="secondary"
-						name="timeframe"
-						value="3–6 months"
-						pressed={false}>3–6 months</Button
-					>
-					<Button
-						variant="secondary"
-						name="timeframe"
-						value="6–12 months"
-						pressed={false}>6–12 months</Button
-					>
-					<Button
-						variant="secondary"
-						name="timeframe"
-						value="1 year and beyond"
-						pressed={false}
-					>
-						1 year and beyond
-					</Button>
+					{TIMEFRAMES.map((timeframe) => (
+						<Button
+							variant="secondary"
+							name="timeframe"
+							value={timeframe}
+							pressed={false}
+						>
+							{timeframe}
+						</Button>
+					))}
 				</div>
 			</section>
 
@@ -219,24 +202,16 @@ import { BOOKING_URL, FORM_NAME } from "../lib/intakeFunnel";
 					role="group"
 					aria-labelledby="start-heading"
 				>
-					<Button
-						variant="secondary"
-						name="start"
-						value="ASAP"
-						pressed={false}>ASAP</Button
-					>
-					<Button
-						variant="secondary"
-						name="start"
-						value="1–2 weeks"
-						pressed={false}>1–2 weeks</Button
-					>
-					<Button
-						variant="secondary"
-						name="start"
-						value="1–3 months"
-						pressed={false}>1–3 months</Button
-					>
+					{START_OPTIONS.map((start) => (
+						<Button
+							variant="secondary"
+							name="start"
+							value={start}
+							pressed={false}
+						>
+							{start}
+						</Button>
+					))}
 				</div>
 			</section>
 
@@ -310,7 +285,7 @@ import { BOOKING_URL, FORM_NAME } from "../lib/intakeFunnel";
 				class="contact-form"
 				data-booking-form
 				name={FORM_NAME}
-				action="/book"
+				action="/.netlify/functions/project-intake"
 				method="post"
 				data-netlify="true"
 				netlify-honeypot="bot-field"
@@ -351,10 +326,31 @@ import { BOOKING_URL, FORM_NAME } from "../lib/intakeFunnel";
 					</Button>
 				</div>
 				<p class="disclosure">
-					I'll use this to follow up about your project
+					Used only to prepare for your call. No lists, no spam.
 				</p>
 				<noscript>
-					<a href={BOOKING_URL}> Book a discovery call directly </a>
+					<fieldset class="fallback-answers">
+						<legend>Project details</legend>
+						<label for="fallback-stage">Company stage</label>
+						<select id="fallback-stage" name="stage" required>
+							<option value="">Choose a stage</option>
+							{STAGES.map((stage) => <option value={stage}>{stage}</option>)}
+						</select>
+						<label for="fallback-timeframe">Timeframe</label>
+						<select id="fallback-timeframe" name="timeframe" required>
+							<option value="">Choose a timeframe</option>
+							{TIMEFRAMES.map((timeframe) => (
+								<option value={timeframe}>{timeframe}</option>
+							))}
+						</select>
+						<label for="fallback-start">Preferred start</label>
+						<select id="fallback-start" name="start" required>
+							<option value="">Choose a start date</option>
+							{START_OPTIONS.map((start) => (
+								<option value={start}>{start}</option>
+							))}
+						</select>
+					</fieldset>
 				</noscript>
 			</form>
 		</aside>
