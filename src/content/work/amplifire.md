@@ -11,6 +11,8 @@ tags:
   - Frontend
   - DevOps
 ---
+Engagement: Employment
+
 At Amplifire, I modernized a massive legacy system, enhanced UI/UX design, and implemented robust testing and API optimization. My work improved the platform's performance, usability, and scalability for its broad user base.
 
 ## Key Projects and Contributions

@@ -11,6 +11,8 @@ tags:
   - Web Dev
 ---
 
+Engagement: Employment
+
 At National Park College, I transformed the institution's web presence by developing innovative web solutions, optimizing frontend performance, and improving accessibility and SEO. My work enhanced workflows for internal teams and students while modernizing the website for greater usability and engagement.
 
 ## Key Projects and Contributions

@@ -11,6 +11,8 @@ tags:
   - SEO
   - API Integrations
 ---
+Engagement: Employment
+
 At Qualified Technology, I focused on developing responsive, high-performing WordPress websites and e-commerce solutions tailored to diverse client needs, while improving frontend performance, user experience, and SEO.
 
 ## Key Projects and Contributions

@@ -11,6 +11,8 @@ tags:
   - TDD
   - Docker
 ---
+Engagement: Employment
+
 At Platform One, I played a critical role in developing scalable and secure software solutions for Department of Defense (DoD) projects, focusing on frontend development, interactive visualizations, and DevOps integration. Leveraging modern frameworks and methodologies, I delivered applications optimized for performance, usability, and compliance with stringent security standards.
 
 ## Project EOS

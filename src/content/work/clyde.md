@@ -14,6 +14,8 @@ tags:
   - LangGraph
 ---
 
+Engagement: Direct client
+
 Solo consultants don't need another chatbot — they need a thought partner that can actually run the room. Clyde is an AI-powered decision platform that facilitates real consulting work: structured brainstorms, idea organization, voting, trade-off analysis, and decision capture, all guided by a bench of specialized AI advisors who participate in the session rather than just answering questions. I made major contributions across the core agent and orchestration layers during the nine-week build, helping the team deliver an ambitious platform on a compressed timeline.
 
 ## Key Projects and Contributions

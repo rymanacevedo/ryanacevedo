@@ -12,6 +12,8 @@ tags:
   - AWS
 ---
 
+Engagement: Employment
+
 At LexisNexis, I collaborated on projects that advanced machine learning capabilities, enhanced data processing, and improved system performance. My contributions drove efficiency, scalability, and innovation, generating substantial cost savings and operational improvements.
 
 ## Key Projects and Contributions

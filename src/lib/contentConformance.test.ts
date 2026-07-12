@@ -101,6 +101,18 @@ const requiredPhrases = [
 	{ route: "/work/amplifire", phrase: "50+ code reviews monthly" },
 ];
 
+const requiredEngagementLabels = [
+	{ route: "/work/clyde", phrase: "Engagement: Direct client" },
+	{ route: "/work/amplifire", phrase: "Engagement: Employment" },
+	{ route: "/work/lexisnexis", phrase: "Engagement: Employment" },
+	{
+		route: "/work/national-park-college",
+		phrase: "Engagement: Employment",
+	},
+	{ route: "/work/platform-one", phrase: "Engagement: Employment" },
+	{ route: "/work/qt", phrase: "Engagement: Employment" },
+];
+
 beforeAll(() => {
 	const buildResult = Bun.spawnSync(["bun", "run", "build"], {
 		stderr: "inherit",
@@ -126,8 +138,15 @@ describe("built-site content conformance", () => {
 		assertPhrasePresentOnBuiltPage(route, phrase);
 	});
 
+	test.each(requiredEngagementLabels)("publishes $phrase on $route", ({
+		route,
+		phrase,
+	}) => {
+		assertPhrasePresentOnBuiltPage(route, phrase);
+	});
+
 	test("publishes the honest organizations heading", () => {
-		assertPhrasePresentOnBuiltPage("/", "Organizations I've supported");
+		assertPhrasePresentOnBuiltPage("/", "Organizations I've supported</h3>");
 	});
 
 	test("publishes the owner-mindset draft on About", () => {
