@@ -39,6 +39,14 @@ export function getRevealedQuestions(
 	return revealed;
 }
 
+// Opening a stage card must not yank the viewport away from the Problem/Answer
+// the visitor just opened, so a newly revealed timeframe question never scrolls.
+export function getRevealScrollTarget(
+	newlyRevealed: readonly QuestionId[],
+): QuestionId | undefined {
+	return newlyRevealed.includes("start") ? "start" : undefined;
+}
+
 const TESTIMONIAL_BY_STAGE: Record<Stage, TestimonialId> = {
 	"Just starting": "seed",
 	Scaling: "scaling",

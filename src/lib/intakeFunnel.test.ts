@@ -6,6 +6,7 @@ import {
 	buildFormPayload,
 	getPromotedTestimonial,
 	getRevealedQuestions,
+	getRevealScrollTarget,
 	type Stage,
 	type TestimonialId,
 } from "./intakeFunnel";
@@ -55,6 +56,20 @@ describe("getRevealedQuestions", () => {
 		revealed = getRevealedQuestions({ email: "" }, revealed);
 
 		expect(revealed).toEqual(["timeframe", "start"]);
+	});
+});
+
+describe("getRevealScrollTarget", () => {
+	test("stays put when the timeframe question is newly revealed", () => {
+		expect(getRevealScrollTarget(["timeframe"])).toBeUndefined();
+	});
+
+	test("targets the start question when it is newly revealed", () => {
+		expect(getRevealScrollTarget(["start"])).toBe("start");
+	});
+
+	test("has no target when nothing is newly revealed", () => {
+		expect(getRevealScrollTarget([])).toBeUndefined();
 	});
 });
 
