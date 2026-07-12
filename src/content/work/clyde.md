@@ -1,10 +1,10 @@
 ---
 title: Clyde AI
 publishDate: 2026-06-12
-img: /assets/logos/clyde.png
+img: /assets/clyde-platform.png
 img_alt: Clyde AI logo
 description: |
-  Building AI-powered claim processing and risk analysis tools.
+  Building for what consultants actually need: an AI co-pilot.
 tags:
   - AI
   - LLM
@@ -15,7 +15,7 @@ tags:
   - LangChain
 ---
 
-At Clyde AI, I collaborated on AI-powered claim processing and risk analysis tools while helping the engineering team turn ambitious product goals into shipped software.
+At Clyde AI, I collaborated on building a platform for consultants trying to navigate the difficult process of solo consultants coming to decisions and completing tasks.
 
 ## Key Projects and Contributions
 

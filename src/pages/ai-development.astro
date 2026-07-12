@@ -1,7 +1,5 @@
 ---
 import { getCollection } from "astro:content";
-
-import CallToAction from "../components/CallToAction.astro";
 import ContactCTA from "../components/ContactCTA.astro";
 import Hero from "../components/Hero.astro";
 import Icon from "../components/Icon.astro";
@@ -20,19 +18,18 @@ const capabilities = [
 		icon: "terminal-window" as const,
 		title: "Custom AI agents",
 		description:
-			"Purpose-built agents that connect to your tools, follow your workflows, and help your team move faster.",
+			"Agents that can search the web (research), brainstorm ideas, and even build webapps.",
 	},
 	{
 		icon: "code" as const,
 		title: "AI-enabled products",
 		description:
-			"Fullstack applications that turn useful models into reliable experiences your customers and team can actually use.",
+			"Fullstack applications that turn useful frontier models into software people use. Not AI fluff.",
 	},
 	{
 		icon: "strategy" as const,
 		title: "Workflow automation",
-		description:
-			"Practical automation for repetitive, high-friction work—designed around measurable business value.",
+		description: "From manual workflow to production AI system.",
 	},
 ];
 ---
@@ -46,28 +43,23 @@ const capabilities = [
 			<header class="page-hero">
 				<Hero align="start">
 					<Fragment slot="title">
-						AI that earns its place in your <em>business</em>
+						AI that works <em>for you</em>
 					</Fragment>
 					<Fragment slot="tagline">
-						I design and build custom AI agents and fullstack
-						applications that automate real work, extend your team's
-						capabilities, and create measurable value.
+						Custom AI Agents, workflows, and products that work for
+						your business.
 					</Fragment>
-					<div class="hero-cta">
-						<CallToAction href="#case-studies">Explore case studies</CallToAction>
-					</div>
 				</Hero>
 			</header>
 
-			<section class="capabilities stack gap-8" aria-labelledby="capabilities-title">
+			<section
+				class="capabilities stack gap-8"
+				aria-labelledby="capabilities-title"
+			>
 				<header class="section-heading stack gap-2">
 					<p class="eyebrow">What I build</p>
-					<h2 id="capabilities-title">From opportunity to production</h2>
-					<p>
-						The best AI work starts with the business problem—not the
-						model. I find the useful seam, build the product around it,
-						and help your team ship it safely.
-					</p>
+					<h2 id="capabilities-title">From idea to production</h2>
+					<p></p>
 				</header>
 
 				<div class="capability-grid">
@@ -88,13 +80,18 @@ const capabilities = [
 				</div>
 			</section>
 
-			<section id="case-studies" class="case-studies stack gap-8" aria-labelledby="case-studies-title">
+			<section
+				id="case-studies"
+				class="case-studies stack gap-8"
+				aria-labelledby="case-studies-title"
+			>
 				<header class="section-heading stack gap-2">
 					<p class="eyebrow">Selected work</p>
 					<h2 id="case-studies-title">AI case studies</h2>
 					<p>
-						See how I have applied machine learning and modern software
-						engineering to improve real systems and workflows.
+						See how I have applied machine learning and modern
+						software engineering to improve real systems and
+						workflows.
 					</p>
 				</header>
 
