@@ -552,29 +552,15 @@ import { BOOKING_URL, FORM_NAME } from "../lib/intakeFunnel";
 	}
 
 	if (bookingForm && emailInput instanceof HTMLInputElement) {
-		bookingTrigger?.addEventListener("click", (event) => {
-			if (!bookingForm.checkValidity()) {
-				event.preventDefault();
-				event.stopPropagation();
-				bookingForm.reportValidity();
-				return;
-			}
-
+		let captureQueued = false;
+		const captureLead = () => {
+			if (captureQueued) return;
+			captureQueued = true;
+			setTimeout(() => {
+				captureQueued = false;
+			}, 0);
 			funnelState.email = emailInput.value;
-			const notes = buildBrief(funnelState);
-			bookingTrigger.dataset.calConfig = JSON.stringify({
-				layout: "month_view",
-				useSlotsViewOnSmallScreen: "true",
-				email: funnelState.email,
-				...(notes ? { notes } : {}),
-			});
-		});
-
-		bookingForm.addEventListener("submit", (event) => {
-			event.preventDefault();
-
 			try {
-				funnelState.email = emailInput.value;
 				const botField = bookingForm.elements.namedItem("bot-field");
 
 				void fetch(bookingForm.action, {
@@ -593,6 +579,41 @@ import { BOOKING_URL, FORM_NAME } from "../lib/intakeFunnel";
 			} catch (error) {
 				console.warn("Lead capture failed", error);
 			}
+		};
+
+		document.addEventListener(
+			"click",
+			(event) => {
+				if (
+					!bookingTrigger ||
+					!(event.target instanceof Node) ||
+					!bookingTrigger.contains(event.target)
+				) {
+					return;
+				}
+
+				if (!bookingForm.checkValidity()) {
+					event.preventDefault();
+					event.stopImmediatePropagation();
+					bookingForm.reportValidity();
+					return;
+				}
+
+				captureLead();
+				const notes = buildBrief(funnelState);
+				bookingTrigger.dataset.calConfig = JSON.stringify({
+					layout: "month_view",
+					useSlotsViewOnSmallScreen: "true",
+					email: funnelState.email,
+					...(notes ? { notes } : {}),
+				});
+			},
+			{ capture: true },
+		);
+
+		bookingForm.addEventListener("submit", (event) => {
+			event.preventDefault();
+			captureLead();
 		});
 	}
 
