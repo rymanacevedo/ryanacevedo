@@ -47,4 +47,13 @@ describe("buildFormPayload", () => {
 			"bot-field": "",
 		});
 	});
+
+	test("includes a populated honeypot value", () => {
+		const payload = buildFormPayload(
+			{ email: "bot@example.com" },
+			{ botField: "spam" },
+		);
+
+		expect(new URLSearchParams(payload).get("bot-field")).toBe("spam");
+	});
 });

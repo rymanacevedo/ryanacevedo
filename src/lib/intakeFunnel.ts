@@ -1,4 +1,5 @@
 export const BOOKING_URL = "https://cal.com/avocadotechgroup/discovery-call";
+export const FORM_NAME = "project-intake";
 
 export interface IntakeFunnelState {
 	email: string;
@@ -16,10 +17,10 @@ export function buildBookingUrl({ email }: IntakeFunnelState): string {
 
 export function buildFormPayload(
 	{ email, stage = "", timeframe = "", start = "" }: IntakeFunnelState,
-	botField = "",
+	{ botField = "" }: { botField?: string } = {},
 ): string {
 	return new URLSearchParams({
-		"form-name": "project-intake",
+		"form-name": FORM_NAME,
 		email,
 		stage,
 		timeframe,

@@ -1,0 +1,26 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import { BOOKING_URL } from "../lib/intakeFunnel";
+---
+
+<BaseLayout
+	title="Book a Discovery Call | Ryan Acevedo"
+	description="Continue to Ryan Acevedo's discovery-call calendar."
+>
+	<meta slot="head" http-equiv="refresh" content={`0;url=${BOOKING_URL}`} />
+	<main class="wrapper booking-fallback">
+		<h1>Continue to booking</h1>
+		<p>Your details have been submitted.</p>
+		<a href={BOOKING_URL}>Choose a time for your discovery call</a>
+	</main>
+</BaseLayout>
+
+<style>
+	.booking-fallback {
+		display: flex;
+		min-height: 50vh;
+		flex-direction: column;
+		justify-content: center;
+		gap: 1.5rem;
+	}
+</style>

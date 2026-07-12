@@ -1,7 +1,7 @@
 ---
 import Button from "../components/Button.astro";
 import BaseLayout from "../layouts/BaseLayout.astro";
-import { BOOKING_URL } from "../lib/intakeFunnel";
+import { BOOKING_URL, FORM_NAME } from "../lib/intakeFunnel";
 ---
 
 <BaseLayout
@@ -200,13 +200,14 @@ import { BOOKING_URL } from "../lib/intakeFunnel";
 			<form
 				class="contact-form"
 				data-booking-form
-				name="project-intake"
-				action="/"
+				name={FORM_NAME}
+				action="/book"
 				method="post"
 				data-netlify="true"
 				netlify-honeypot="bot-field"
 			>
-				<input type="hidden" name="form-name" value="project-intake" />
+				<input type="hidden" name="form-name" value={FORM_NAME} />
+				<!-- These fields enable Netlify detection and native-form fallback. -->
 				<input type="hidden" name="stage" value="" />
 				<input type="hidden" name="timeframe" value="" />
 				<input type="hidden" name="start" value="" />
@@ -226,7 +227,7 @@ import { BOOKING_URL } from "../lib/intakeFunnel";
 						placeholder="you@example.com"
 						required
 					/>
-					<Button>Let's talk</Button>
+					<Button type="submit">Let's talk</Button>
 				</div>
 				<p class="disclosure">I'll only use this to follow up about your project</p>
 				<noscript>
@@ -241,6 +242,7 @@ import { BOOKING_URL } from "../lib/intakeFunnel";
 
 <script>
 	import {
+		BOOKING_URL,
 		buildBookingUrl,
 		buildFormPayload,
 		type IntakeFunnelState,
@@ -248,38 +250,31 @@ import { BOOKING_URL } from "../lib/intakeFunnel";
 
 	const bookingForm = document.querySelector<HTMLFormElement>("[data-booking-form]");
 	const emailInput = bookingForm?.elements.namedItem("email");
-	const stageInput = bookingForm?.elements.namedItem("stage");
-	const timeframeInput = bookingForm?.elements.namedItem("timeframe");
-	const startInput = bookingForm?.elements.namedItem("start");
-	const botField = bookingForm?.elements.namedItem("bot-field");
 	const funnelState: IntakeFunnelState = { email: "" };
 
-	if (
-		bookingForm &&
-		emailInput instanceof HTMLInputElement &&
-		stageInput instanceof HTMLInputElement &&
-		timeframeInput instanceof HTMLInputElement &&
-		startInput instanceof HTMLInputElement &&
-		botField instanceof HTMLInputElement
-	) {
+	if (bookingForm && emailInput instanceof HTMLInputElement) {
 		bookingForm.addEventListener("submit", (event) => {
 			event.preventDefault();
-
-			funnelState.email = emailInput.value;
-			stageInput.value = funnelState.stage ?? "";
-			timeframeInput.value = funnelState.timeframe ?? "";
-			startInput.value = funnelState.start ?? "";
+			let redirectUrl = BOOKING_URL;
 
 			try {
+				funnelState.email = emailInput.value;
+				redirectUrl = buildBookingUrl(funnelState);
+				const botField = bookingForm.elements.namedItem("bot-field");
+
 				void fetch(bookingForm.action, {
 					method: "POST",
 					headers: { "Content-Type": "application/x-www-form-urlencoded" },
-					body: buildFormPayload(funnelState, botField.value),
+					body: buildFormPayload(funnelState, {
+						botField: botField instanceof HTMLInputElement ? botField.value : "",
+					}),
 					keepalive: true,
-				}).catch(() => {});
-			} finally {
-				window.location.assign(buildBookingUrl(funnelState));
+				}).catch((error) => console.warn("Lead capture failed", error));
+			} catch (error) {
+				console.warn("Lead capture failed", error);
 			}
+
+			window.location.assign(redirectUrl);
 		});
 	}
 </script>
