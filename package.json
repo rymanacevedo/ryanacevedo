@@ -1,20 +1,26 @@
 {
-	"name": "ryanacevedo",
-	"type": "module",
-	"version": "1.0.0",
-	"scripts": {
-		"dev": "astro dev",
-		"start": "astro dev",
-		"build": "astro build",
-		"preview": "astro preview",
-		"astro": "astro"
-	},
-	"dependencies": {
-		"@astrojs/react": "6.0.1",
-		"@types/react": "^19.0.0",
-		"@types/react-dom": "^19.0.0",
-		"astro": "7.0.6",
-		"react": "^19.0.0",
-		"react-dom": "^19.0.0"
-	}
+  "name": "ryanacevedo",
+  "type": "module",
+  "version": "1.0.0",
+  "scripts": {
+    "dev": "astro dev",
+    "start": "astro dev",
+    "build": "astro build",
+    "preview": "astro preview",
+    "astro": "astro",
+    "prepare": "husky"
+  },
+  "dependencies": {
+    "@astrojs/react": "6.0.1",
+    "@types/react": "^19.0.0",
+    "@types/react-dom": "^19.0.0",
+    "astro": "7.0.6",
+    "react": "^19.0.0",
+    "react-dom": "^19.0.0"
+  },
+  "devDependencies": {
+    "husky": "^9.1.7",
+    "lint-staged": "^17.0.8",
+    "prettier": "^3.9.5"
+  }
 }
