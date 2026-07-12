@@ -101,7 +101,7 @@ const requiredPhrases = [
 	{ route: "/work/amplifire", phrase: "50+ code reviews monthly" },
 ];
 
-const requiredEngagementLabels = [
+const requiredEmploymentLabels = [
 	{ route: "/work/amplifire", phrase: "Engagement: Employment" },
 	{ route: "/work/lexisnexis", phrase: "Engagement: Employment" },
 	{
@@ -137,7 +137,7 @@ describe("built-site content conformance", () => {
 		assertPhrasePresentOnBuiltPage(route, phrase);
 	});
 
-	test.each(requiredEngagementLabels)("publishes $phrase on $route", ({
+	test.each(requiredEmploymentLabels)("publishes $phrase on $route", ({
 		route,
 		phrase,
 	}) => {
