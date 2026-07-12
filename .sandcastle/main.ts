@@ -81,8 +81,8 @@ const sandboxUser = resolveSandboxUser(
 
 const stageAgents = {
 	planner: { model: "gpt-5.6-sol", effort: "high" },
-	implementer: { model: "gpt-5.6-sol", effort: "medium" },
-	reviewer: { model: "gpt-5.6-sol", effort: "medium" },
+	implementer: { model: "gpt-5.6-terra", effort: "high" },
+	reviewer: { model: "gpt-5.6-terra", effort: "high" },
 	merger: { model: "gpt-5.6-sol", effort: "high" },
 } as const;
 
