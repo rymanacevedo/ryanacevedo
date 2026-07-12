@@ -9,20 +9,18 @@ const principles = [
 	{
 		number: "01",
 		title: "Start with a real problem",
-		description:
-			"Look for friction people already feel, then build around the outcome they actually need.",
+		description: "Look for friction people already feel.",
 	},
 	{
 		number: "02",
 		title: "Ship the smallest proof",
-		description:
-			"Turn assumptions into something customers can use, react to, and teach you from.",
+		description: "Turn theories into something customers can use.",
 	},
 	{
 		number: "03",
-		title: "Build the mission in",
+		title: "Iterate",
 		description:
-			"Make impact part of how the business operates—not a promise bolted on after it succeeds.",
+			"Listen to what customers say and build what they actually need.",
 	},
 ];
 ---
@@ -38,15 +36,17 @@ const principles = [
 					<p class="kicker">Entrepreneurship</p>
 					<Hero align="start">
 						<Fragment slot="title">
-							Build the thing.<br /><em>Learn from the market.</em>
+							Build the thing. <em>Learn from the market.</em>
 						</Fragment>
 						<Fragment slot="tagline">
-							I bring an engineer's mindset to entrepreneurship: break
-							the problem down, test the riskiest assumption, and keep
-							building until the idea creates real value.
+							For fun, I like to build businesses. It's honestly
+							the best way to learn how to build systems that
+							actually work in the real world.
 						</Fragment>
 						<div class="hero-cta">
-							<CallToAction href="#featured-venture">See the work</CallToAction>
+							<CallToAction href="#featured-venture"
+								>See the work</CallToAction
+							>
 						</div>
 					</Hero>
 				</div>
@@ -66,7 +66,9 @@ const principles = [
 					{
 						principles.map((principle) => (
 							<li class="principle">
-								<span class="principle-number">{principle.number}</span>
+								<span class="principle-number">
+									{principle.number}
+								</span>
 								<h3>{principle.title}</h3>
 								<p>{principle.description}</p>
 							</li>
@@ -88,38 +90,44 @@ const principles = [
 					<p class="kicker">Service business · Social mission</p>
 					<h2 id="venture-title">Mobile Oil Hero</h2>
 					<p class="venture-lede">
-						A mobile oil-change business designed around convenience
-						and a larger mission: creating real employment opportunities
+						A mobile mechanic designed around convenience and a
+						larger mission: creating real employment opportunities
 						for people rebuilding their lives after incarceration.
 					</p>
 					<p>
-						The mission is part of the operating model. Every service
-						connects a practical customer need with the chance to fund
-						meaningful work and a fresh start.
+						The mission is part of the operating model. Every
+						service connects a practical customer need with the
+						chance to fund meaningful work and a fresh start.
 					</p>
 					<div class="venture-links">
-						<a href="https://mobileoilhero.com">Visit Mobile Oil Hero</a>
-						<a href="/about">Read the founder story</a>
+						<a href="https://mobileoilhero.com"
+							>Visit Mobile Oil Hero</a
+						>
+						<a href="https:/mobileoilhero.com/about-us"
+							>Read the founder story</a
+						>
 					</div>
-				</div>
-				<div class="venture-callout">
-					<p>Convenience and compassion aren't mutually exclusive.</p>
 				</div>
 			</section>
 
 			<section class="belief stack gap-4" aria-labelledby="belief-title">
 				<Icon icon="strategy" size="2.75rem" gradient />
-				<h2 id="belief-title">Software is leverage. The business is the product.</h2>
+				<h2 id="belief-title">
+					Software is leverage. The business was the outcome.
+				</h2>
 				<p>
-					Technology can make an operation faster, smarter, and easier
-					to scale. But the durable advantage comes from understanding
-					customers, designing the right system, and staying close enough
-					to the work to keep learning.
+					The automotive industry is ripe for change. It is
+					fragmented, filled with independent mechanics who lack the
+					technology to compete with dealerships, and underserved when
+					it comes to convenience and transparency. Mobile Oil Hero
+					was built to address these issues head-on, offering a
+					modern, tech-enabled solution that benefits both customers
+					and mechanics.
 				</p>
 			</section>
 		</main>
 
-		<ContactCTA message="Building something that matters?" />
+		<ContactCTA />
 	</div>
 </BaseLayout>
 
@@ -164,7 +172,11 @@ const principles = [
 		border: 1px solid var(--gray-800);
 		border-radius: 1.5rem;
 		background:
-			linear-gradient(135deg, var(--accent-subtle-overlay), transparent 65%),
+			linear-gradient(
+				135deg,
+				var(--accent-subtle-overlay),
+				transparent 65%
+			),
 			var(--gray-999_40);
 		box-shadow: var(--shadow-sm);
 		color: var(--gray-400);
@@ -303,7 +315,9 @@ const principles = [
 		}
 
 		.venture {
-			grid-template-columns: minmax(8rem, 0.35fr) minmax(0, 1.25fr) minmax(16rem, 0.7fr);
+			grid-template-columns:
+				minmax(8rem, 0.35fr) minmax(0, 1.25fr)
+				minmax(16rem, 0.7fr);
 			padding: 2.5rem;
 		}
 
