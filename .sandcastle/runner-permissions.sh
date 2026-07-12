@@ -5,8 +5,16 @@ mode=${1:-doctor}
 script_dir=$(cd -- "$(dirname -- "${BASH_SOURCE[0]}")" && pwd)
 repo=$(cd -- "$script_dir/.." && pwd)
 runner_user=${SANDCASTLE_RUNNER_USER:-${SUDO_USER:-$(id -un)}}
-container_uid=${SANDCASTLE_CONTAINER_UID:-1001}
-container_gid=${SANDCASTLE_CONTAINER_GID:-1002}
+platform=$(uname -s)
+if [[ "$platform" == Darwin ]]; then
+	default_container_uid=$(id -u)
+	default_container_gid=$(id -g)
+else
+	default_container_uid=1001
+	default_container_gid=1002
+fi
+container_uid=${SANDCASTLE_CONTAINER_UID:-$default_container_uid}
+container_gid=${SANDCASTLE_CONTAINER_GID:-$default_container_gid}
 image=${SANDCASTLE_IMAGE:-sandcastle:ryanacevedo}
 probe_root=
 probe_ref=
@@ -64,6 +72,11 @@ set_mapped_acl() {
 }
 
 repair_permissions() {
+	if [[ "$platform" == Darwin ]]; then
+		echo "Sandcastle ACL repair is not required on macOS."
+		return 0
+	fi
+
 	(( EUID == 0 )) || die "repair must run as root"
 	require_command setfacl
 	load_mapping
@@ -76,6 +89,14 @@ repair_permissions() {
 }
 
 prepare_worktree() {
+	if [[ "$platform" == Darwin ]]; then
+		local git_dir
+		git_dir=$(git rev-parse --absolute-git-dir)
+		[[ -w "$PWD" ]] || die "worktree is not writable: $PWD"
+		[[ -w "$git_dir" ]] || die "Git metadata is not writable: $git_dir"
+		return 0
+	fi
+
 	require_command setfacl
 	load_mapping
 
@@ -97,11 +118,16 @@ prepare_worktree() {
 
 doctor() {
 	require_command docker
-	require_command getfacl
-	load_mapping
 
 	[[ $(id -un) == "$runner_user" ]] || die "run doctor as $runner_user (current user: $(id -un))"
-	[[ ${DOCKER_HOST:-} == unix://* ]] || die "DOCKER_HOST must point at the rootless Docker Unix socket"
+	if [[ "$platform" == Darwin ]]; then
+		mapped_uid=$container_uid
+		mapped_gid=$container_gid
+	else
+		require_command getfacl
+		load_mapping
+		[[ ${DOCKER_HOST:-} == unix://* ]] || die "DOCKER_HOST must point at the rootless Docker Unix socket"
+	fi
 
 	local image_user
 	image_user=$(docker image inspect "$image" --format '{{.Config.User}}' 2>/dev/null) ||
@@ -131,14 +157,24 @@ doctor() {
     "; then
 		cat >&2 <<EOF
 Sandcastle cannot write host-created worktree or Git metadata as the container agent.
+EOF
+		if [[ "$platform" == Darwin ]]; then
+			echo "Check Docker Desktop file sharing for $repo, rebuild the image, then rerun the doctor." >&2
+		else
+			cat >&2 <<EOF
 Repair explicitly, then rerun the doctor:
 
   sudo env SANDCASTLE_RUNNER_USER=$runner_user bash $repo/.sandcastle/runner-permissions.sh repair
 EOF
+		fi
 		exit 1
 	fi
 
-	echo "Sandcastle runner healthy: $runner_user -> container $container_uid:$container_gid -> host $mapped_uid:$mapped_gid"
+	if [[ "$platform" == Darwin ]]; then
+		echo "Sandcastle runner healthy: macOS $runner_user -> Docker Desktop $container_uid:$container_gid"
+	else
+		echo "Sandcastle runner healthy: $runner_user -> container $container_uid:$container_gid -> host $mapped_uid:$mapped_gid"
+	fi
 }
 
 case "$mode" in

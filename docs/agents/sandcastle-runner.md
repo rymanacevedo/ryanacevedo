@@ -1,11 +1,36 @@
 # Sandcastle Runner
 
-## Invariants
+## Host Modes
+
+### macOS with Docker Desktop
+
+On macOS, Sandcastle uses the current user's UID/GID for both the image and
+runtime container. Docker Desktop handles bind-mount ownership, so subordinate
+IDs, `getfacl`, and ACL repair are not required.
+
+Build and verify the local image after cloning or changing the Dockerfile:
+
+```bash
+bun run sandcastle:build-image
+bun run sandcastle:doctor
+```
+
+The doctor verifies that the image identity matches the current macOS user and
+that the container can write both worktree files and Git metadata. If it fails,
+confirm the repository is shared with Docker Desktop and rebuild the image.
+
+Start a run from `master` after the doctor passes:
+
+```bash
+bun run sandcastle
+```
+
+### Dedicated Linux runner
 
 Sandcastle runs from `/home/claw/ryanacevedo` as `claw` using rootless Docker
 at `unix:///run/user/1001/docker.sock`. Keep human checkouts separate.
 
-The image and `.sandcastle/main.ts` both use container UID `1001` and GID
+On Linux, the image and `.sandcastle/main.ts` both use container UID `1001` and GID
 `1002`. Rootless Docker maps those IDs into `claw`'s subordinate ranges. This
 creates two writers:
 

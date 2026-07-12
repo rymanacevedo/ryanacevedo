@@ -37,6 +37,7 @@ import dotenv from "dotenv";
 import { z } from "zod";
 
 import { branchHasUnmergedCommits } from "./git-state";
+import { resolveSandboxUser } from "./platform";
 
 dotenv.config({ path: path.resolve(".sandcastle/.env") });
 
@@ -72,7 +73,11 @@ const sandboxRuntimeMount = "/mnt/sandcastle-runtime";
 const sandboxCodexHome = "/home/agent/.codex";
 const sandboxTmpDir = "/home/agent/tmp";
 const sandboxBunCacheDir = "/home/agent/.bun-cache";
-const sandboxUser = { uid: 1001, gid: 1002 };
+const sandboxUser = resolveSandboxUser(
+	process.platform,
+	() => process.getuid?.() ?? 1000,
+	() => process.getgid?.() ?? 1000,
+);
 
 const stageAgents = {
 	planner: { model: "gpt-5.6-sol", effort: "high" },
