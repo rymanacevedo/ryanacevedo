@@ -9,6 +9,7 @@ describe("buildBrief", () => {
 
 	test("returns no brief when no stage is selected", () => {
 		expect(buildBrief({ email: "" })).toBe("");
+		expect(buildBrief({ email: "", stage: "" })).toBe("");
 	});
 });
 
@@ -35,8 +36,12 @@ describe("buildBookingUrl", () => {
 
 	test("omits booking notes when no stage is selected", () => {
 		const bookingUrl = new URL(buildBookingUrl({ email: "ryan@example.com" }));
+		const emptyStageUrl = new URL(
+			buildBookingUrl({ email: "ryan@example.com", stage: "" }),
+		);
 
 		expect(bookingUrl.searchParams.has("notes")).toBe(false);
+		expect(emptyStageUrl.searchParams.has("notes")).toBe(false);
 	});
 });
 
@@ -44,7 +49,7 @@ describe("buildFormPayload", () => {
 	test("builds a Netlify payload from the funnel answers", () => {
 		const payload = buildFormPayload({
 			email: "ryan+website@example.com",
-			stage: "scaling",
+			stage: "Scaling",
 			timeframe: "1-3 months",
 			start: "ASAP",
 		});
@@ -52,7 +57,7 @@ describe("buildFormPayload", () => {
 		expect(Object.fromEntries(new URLSearchParams(payload))).toEqual({
 			"form-name": "project-intake",
 			email: "ryan+website@example.com",
-			stage: "scaling",
+			stage: "Scaling",
 			timeframe: "1-3 months",
 			start: "ASAP",
 			"bot-field": "",

@@ -290,15 +290,34 @@ import { BOOKING_URL, FORM_NAME } from "../lib/intakeFunnel";
 	const briefText = brief?.querySelector<HTMLElement>("[data-brief-text]");
 	const funnelState: IntakeFunnelState = { email: "" };
 
+	if (stageCards.length !== 4) console.warn("Expected four company stage cards");
+	if (!(stageInput instanceof HTMLInputElement)) {
+		console.warn("Company stage capture field is missing");
+	}
+	if (!brief) console.warn("Company stage brief container is missing");
+	if (!briefText) console.warn("Company stage brief text target is missing");
+
 	for (const stageCard of stageCards) {
 		stageCard.addEventListener("toggle", () => {
-			if (!stageCard.open || !stageCard.dataset.stage) return;
+			const stage = stageCard.dataset.stage;
+			if (!stage) return;
 
+			if (!stageCard.open) {
+				if (funnelState.stage !== stage) return;
+
+				funnelState.stage = undefined;
+				if (stageInput instanceof HTMLInputElement) stageInput.value = "";
+				if (briefText) briefText.textContent = "";
+				if (brief) brief.hidden = true;
+				return;
+			}
+
+			// The manual close loop backstops browsers without named-details support.
 			for (const otherCard of stageCards) {
 				if (otherCard !== stageCard) otherCard.open = false;
 			}
 
-			funnelState.stage = stageCard.dataset.stage;
+			funnelState.stage = stage;
 			if (stageInput instanceof HTMLInputElement) {
 				stageInput.value = funnelState.stage;
 			}
