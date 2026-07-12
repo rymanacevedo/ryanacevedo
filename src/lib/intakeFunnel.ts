@@ -8,9 +8,18 @@ export interface IntakeFunnelState {
 	start?: string;
 }
 
-export function buildBookingUrl({ email }: IntakeFunnelState): string {
+export function buildBrief({ stage }: IntakeFunnelState): string {
+	return stage ? `Stage: ${stage}` : "";
+}
+
+export function buildBookingUrl(state: IntakeFunnelState): string {
 	const bookingUrl = new URL(BOOKING_URL);
-	bookingUrl.searchParams.set("email", email);
+	bookingUrl.searchParams.set("email", state.email);
+	const brief = buildBrief(state);
+
+	if (brief) {
+		bookingUrl.searchParams.set("notes", brief);
+	}
 
 	return bookingUrl.toString();
 }

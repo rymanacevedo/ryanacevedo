@@ -35,11 +35,17 @@ import { BOOKING_URL, FORM_NAME } from "../lib/intakeFunnel";
 
 				<ol class="steps">
 					<li>
-						<span>01</span>
-						<div>
-							<h3>I am just starting</h3>
-							<!-- TODO: Accordion here -->
-							<!-- Customer Profile, solo founder with a business idea just trying to figure out how to navigate -->
+						<details name="company-stage" data-stage="Just starting">
+							<summary>
+								<span>01</span>
+								<div>
+									<h3>I am just starting</h3>
+									<p class="persona">
+										Solo founder with an idea who needs a clear path forward.
+									</p>
+								</div>
+							</summary>
+							<div class="stage-details">
 							<p>
 								<strong>Problem:</strong> You have an idea and need a plan
 								with options.
@@ -48,14 +54,21 @@ import { BOOKING_URL, FORM_NAME } from "../lib/intakeFunnel";
 								<strong>Answer:</strong> We hop on a call, review
 								the feasibility, create a roadmap.
 							</p>
-						</div>
+							</div>
+						</details>
 					</li>
 					<li>
-						<span>02</span>
-						<div>
-							<h3>I am scaling</h3>
-							<!-- TODO: Accordion here -->
-							<!-- Customer profile, growing startup with an MVP and initial users, but hitting scalability issues or product-market fit. -->
+						<details name="company-stage" data-stage="Scaling">
+							<summary>
+								<span>02</span>
+								<div>
+									<h3>I am scaling</h3>
+									<p class="persona">
+										Growing startup with an MVP and early users, ready to scale.
+									</p>
+								</div>
+							</summary>
+							<div class="stage-details">
 							<p>
 								<strong>Problem:</strong> You have an existing MVP
 								or prototype, but you're not sure how to deploy or scale
@@ -66,14 +79,21 @@ import { BOOKING_URL, FORM_NAME } from "../lib/intakeFunnel";
 								of the product, identify gaps, and work IN your team
 								to deploy it to your users.
 							</p>
-						</div>
+							</div>
+						</details>
 					</li>
 					<li>
-						<span>03</span>
-						<div>
-							<h3>I am an established business</h3>
-							<!-- TODO: Accordion here -->
-							<!-- Customer Profile, established business with real customers, but want have problems in the business (slow process, lack of automation) that could be improved. Or even an idea to integration features into existing products. -->
+						<details name="company-stage" data-stage="Established business">
+							<summary>
+								<span>03</span>
+								<div>
+									<h3>I am an established business</h3>
+									<p class="persona">
+										Established team ready to improve products and processes.
+									</p>
+								</div>
+							</summary>
+							<div class="stage-details">
 							<p>
 								<strong>Problem:</strong> Your customers are knocking
 								down your door for features or reporting bugs, or you've
@@ -87,14 +107,21 @@ import { BOOKING_URL, FORM_NAME } from "../lib/intakeFunnel";
 								team clear the path to bring REAL value for your customers
 								in weeks.
 							</p>
-						</div>
+							</div>
+						</details>
 					</li>
 					<li>
-						<span>04</span>
-						<!-- TODO: Accordion here -->
-						<!-- Customer Profile, enterprise with an legacy product and customers, but need engineering support to accelerate product development or to integrate with other systems. -->
-						<div>
-							<h3>I am an enterprise</h3>
+						<details name="company-stage" data-stage="Enterprise">
+							<summary>
+								<span>04</span>
+								<div>
+									<h3>I am an enterprise</h3>
+									<p class="persona">
+										Enterprise team with a legacy product that needs momentum.
+									</p>
+								</div>
+							</summary>
+							<div class="stage-details">
 							<p>
 								<strong>Problem:</strong> You have a mega monolith,
 								but the engineers are scrambling. The engineer who
@@ -111,7 +138,8 @@ import { BOOKING_URL, FORM_NAME } from "../lib/intakeFunnel";
 								the voice to management to get everyone on the same
 								page.
 							</p>
-						</div>
+							</div>
+						</details>
 					</li>
 				</ol>
 			</section>
@@ -196,6 +224,9 @@ import { BOOKING_URL, FORM_NAME } from "../lib/intakeFunnel";
 			<div>
 				<h2 id="contact-heading">Want to work together?</h2>
 				<p>Tell me where to follow up, then choose a time that works for you.</p>
+				<p class="brief" data-brief hidden>
+					<strong>Your brief:</strong> <span data-brief-text></span>
+				</p>
 			</div>
 			<form
 				class="contact-form"
@@ -244,13 +275,40 @@ import { BOOKING_URL, FORM_NAME } from "../lib/intakeFunnel";
 	import {
 		BOOKING_URL,
 		buildBookingUrl,
+		buildBrief,
 		buildFormPayload,
 		type IntakeFunnelState,
 	} from "../lib/intakeFunnel";
 
 	const bookingForm = document.querySelector<HTMLFormElement>("[data-booking-form]");
 	const emailInput = bookingForm?.elements.namedItem("email");
+	const stageInput = bookingForm?.elements.namedItem("stage");
+	const stageCards = document.querySelectorAll<HTMLDetailsElement>(
+		".steps details[data-stage]",
+	);
+	const brief = document.querySelector<HTMLElement>("[data-brief]");
+	const briefText = brief?.querySelector<HTMLElement>("[data-brief-text]");
 	const funnelState: IntakeFunnelState = { email: "" };
+
+	for (const stageCard of stageCards) {
+		stageCard.addEventListener("toggle", () => {
+			if (!stageCard.open || !stageCard.dataset.stage) return;
+
+			for (const otherCard of stageCards) {
+				if (otherCard !== stageCard) otherCard.open = false;
+			}
+
+			funnelState.stage = stageCard.dataset.stage;
+			if (stageInput instanceof HTMLInputElement) {
+				stageInput.value = funnelState.stage;
+			}
+
+			if (brief && briefText) {
+				briefText.textContent = buildBrief(funnelState);
+				brief.hidden = false;
+			}
+		});
+	}
 
 	if (bookingForm && emailInput instanceof HTMLInputElement) {
 		bookingForm.addEventListener("submit", (event) => {
@@ -354,10 +412,7 @@ import { BOOKING_URL, FORM_NAME } from "../lib/intakeFunnel";
 	}
 
 	.steps li {
-		display: grid;
-		grid-template-columns: auto 1fr;
-		gap: 1rem;
-		padding: 1rem;
+		overflow: hidden;
 		border: 1px solid var(--gray-800);
 		border-radius: 1rem;
 		background: var(--gradient-subtle);
@@ -365,8 +420,41 @@ import { BOOKING_URL, FORM_NAME } from "../lib/intakeFunnel";
 		text-align: left;
 	}
 
-	.steps li button {
+	.steps summary {
+		display: grid;
+		grid-template-columns: auto 1fr auto;
+		gap: 1rem;
+		align-items: start;
+		padding: 1rem;
 		cursor: pointer;
+		list-style: none;
+	}
+
+	.steps summary::-webkit-details-marker {
+		display: none;
+	}
+
+	.steps summary::after {
+		content: "+";
+		color: var(--accent-regular);
+		font-size: var(--text-xl);
+		line-height: 1;
+	}
+
+	.steps details[open] summary::after {
+		content: "−";
+	}
+
+	.steps summary:focus-visible {
+		outline: 3px solid var(--accent-overlay);
+		outline-offset: -3px;
+	}
+
+	.stage-details {
+		display: flex;
+		flex-direction: column;
+		gap: 1rem;
+		padding: 0 1rem 1rem 3rem;
 	}
 
 	.steps span {
@@ -379,6 +467,10 @@ import { BOOKING_URL, FORM_NAME } from "../lib/intakeFunnel";
 	.impact-grid h3 {
 		margin-bottom: 0.5rem;
 		font-size: var(--text-lg);
+	}
+
+	.steps .persona {
+		color: var(--gray-400);
 	}
 
 	.steps p,
@@ -460,6 +552,10 @@ import { BOOKING_URL, FORM_NAME } from "../lib/intakeFunnel";
 		color: var(--gray-400);
 	}
 
+	.brief {
+		color: var(--gray-100);
+	}
+
 	@media (min-width: 50em) {
 		.process-page {
 			gap: 4rem;
@@ -474,9 +570,16 @@ import { BOOKING_URL, FORM_NAME } from "../lib/intakeFunnel";
 			grid-template-columns: 1fr 1fr;
 		}
 
-		.steps li,
 		.impact-grid article {
 			padding: 2rem;
+		}
+
+		.steps summary {
+			padding: 2rem;
+		}
+
+		.stage-details {
+			padding: 0 2rem 2rem 4rem;
 		}
 
 		.impact-grid {

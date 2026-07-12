@@ -1,6 +1,16 @@
 import { describe, expect, test } from "bun:test";
 
-import { buildBookingUrl, buildFormPayload } from "./intakeFunnel";
+import { buildBookingUrl, buildBrief, buildFormPayload } from "./intakeFunnel";
+
+describe("buildBrief", () => {
+	test("builds a brief for the selected company stage", () => {
+		expect(buildBrief({ email: "", stage: "Scaling" })).toBe("Stage: Scaling");
+	});
+
+	test("returns no brief when no stage is selected", () => {
+		expect(buildBrief({ email: "" })).toBe("");
+	});
+});
 
 describe("buildBookingUrl", () => {
 	test("builds the discovery-call URL with the visitor email", () => {
@@ -13,6 +23,20 @@ describe("buildBookingUrl", () => {
 		expect(buildBookingUrl({ email: "ryan+website@example.com" })).toBe(
 			"https://cal.com/avocadotechgroup/discovery-call?email=ryan%2Bwebsite%40example.com",
 		);
+	});
+
+	test("adds the selected stage to the booking notes", () => {
+		expect(
+			buildBookingUrl({ email: "ryan@example.com", stage: "Just starting" }),
+		).toBe(
+			"https://cal.com/avocadotechgroup/discovery-call?email=ryan%40example.com&notes=Stage%3A+Just+starting",
+		);
+	});
+
+	test("omits booking notes when no stage is selected", () => {
+		const bookingUrl = new URL(buildBookingUrl({ email: "ryan@example.com" }));
+
+		expect(bookingUrl.searchParams.has("notes")).toBe(false);
 	});
 });
 
