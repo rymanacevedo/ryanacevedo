@@ -173,8 +173,9 @@ import { BOOKING_URL, FORM_NAME } from "../lib/intakeFunnel";
 				</div>
 			</section>
 
+			<div class="testimonial-stack" data-testimonials>
 			<!-- Testimonial -->
-			<section class="fit-section">
+			<section class="fit-section" data-testimonial="scaling">
 				<!-- Testimonial: Clyde AI CTO (Scaling Quote) -->
 				<blockquote>
 					We would not be anywhere near where we needed to be without
@@ -187,7 +188,7 @@ import { BOOKING_URL, FORM_NAME } from "../lib/intakeFunnel";
 			</section>
 
 			<!-- Testimonial -->
-			<section class="fit-section">
+			<section class="fit-section" data-testimonial="seed">
 				<!-- Testimonial: Kyle Fowler Director of Employeer Engagement as SCC (Seed Quote) -->
 				<blockquote>
 					Ryan came, sat down, and got to work. He asked our client
@@ -200,7 +201,7 @@ import { BOOKING_URL, FORM_NAME } from "../lib/intakeFunnel";
 			</section>
 
 			<!-- Testimonial -->
-			<section class="fit-section">
+			<section class="fit-section" data-testimonial="established">
 				<!-- Testimonial: Blake Ingram, Director of Engineering at LLM (establish business quote)-->
 				<blockquote>
 					Ryan is a strong developer and is easy to work with. He made
@@ -210,7 +211,7 @@ import { BOOKING_URL, FORM_NAME } from "../lib/intakeFunnel";
 			</section>
 
 			<!-- Testimonial -->
-			<section class="fit-section">
+			<section class="fit-section" data-testimonial="enterprise">
 				<!-- Testimonial: Tiding Health (Enterprise quote)-->
 				<blockquote>
 					Ryan connected all the dots for our B2B implementation of
@@ -219,6 +220,7 @@ import { BOOKING_URL, FORM_NAME } from "../lib/intakeFunnel";
 				</blockquote>
 				<p>- CEO of Tiding Health</p>
 			</section>
+			</div>
 		</main>
 		<aside class="contact-section" aria-labelledby="contact-heading">
 			<div>
@@ -277,6 +279,7 @@ import { BOOKING_URL, FORM_NAME } from "../lib/intakeFunnel";
 		buildBookingUrl,
 		buildBrief,
 		buildFormPayload,
+		getPromotedTestimonial,
 		type IntakeFunnelState,
 	} from "../lib/intakeFunnel";
 
@@ -295,11 +298,33 @@ import { BOOKING_URL, FORM_NAME } from "../lib/intakeFunnel";
 	const answerButtons = [...timeframeButtons, ...startButtons];
 	const brief = document.querySelector<HTMLElement>("[data-brief]");
 	const briefText = brief?.querySelector<HTMLElement>("[data-brief-text]");
+	const testimonialStack = document.querySelector<HTMLElement>("[data-testimonials]");
+	const testimonials = testimonialStack
+		? Array.from(
+				testimonialStack.querySelectorAll<HTMLElement>("[data-testimonial]"),
+			)
+		: [];
 	const funnelState: IntakeFunnelState = { email: "" };
 	const renderBrief = () => {
 		const text = buildBrief(funnelState);
 		if (briefText) briefText.textContent = text;
 		if (brief) brief.hidden = !text;
+	};
+	const renderTestimonials = () => {
+		if (!testimonialStack) return;
+
+		const promotedId = getPromotedTestimonial(funnelState.stage);
+		const promoted = testimonials.find(
+			(testimonial) => testimonial.dataset.testimonial === promotedId,
+		);
+		const orderedTestimonials = promoted
+			? [promoted, ...testimonials.filter((testimonial) => testimonial !== promoted)]
+			: testimonials;
+
+		for (const testimonial of orderedTestimonials) {
+			testimonial.classList.toggle("is-promoted", testimonial === promoted);
+			testimonialStack.append(testimonial);
+		}
 	};
 
 	if (stageCards.length !== 4) console.warn("Expected four company stage cards");
@@ -323,6 +348,8 @@ import { BOOKING_URL, FORM_NAME } from "../lib/intakeFunnel";
 	}
 	if (!brief) console.warn("Company stage brief container is missing");
 	if (!briefText) console.warn("Company stage brief text target is missing");
+	if (!testimonialStack) console.warn("Testimonial stack is missing");
+	if (testimonials.length !== 4) console.warn("Expected four testimonials");
 
 	for (const stageCard of stageCards) {
 		stageCard.addEventListener("toggle", () => {
@@ -335,6 +362,7 @@ import { BOOKING_URL, FORM_NAME } from "../lib/intakeFunnel";
 				funnelState.stage = undefined;
 				if (stageInput instanceof HTMLInputElement) stageInput.value = "";
 				renderBrief();
+				renderTestimonials();
 				return;
 			}
 
@@ -349,6 +377,7 @@ import { BOOKING_URL, FORM_NAME } from "../lib/intakeFunnel";
 			}
 
 			renderBrief();
+			renderTestimonials();
 		});
 	}
 
@@ -570,6 +599,17 @@ import { BOOKING_URL, FORM_NAME } from "../lib/intakeFunnel";
 		background: rgba(118, 17, 166, 0.08);
 	}
 
+	.testimonial-stack {
+		display: flex;
+		flex-direction: column;
+		gap: 6rem;
+	}
+
+	.fit-section.is-promoted {
+		outline: 3px solid #ca7879;
+		background: rgba(118, 17, 166, 0.16);
+	}
+
 	.contact-section {
 		display: grid;
 		gap: 2rem;
@@ -627,6 +667,10 @@ import { BOOKING_URL, FORM_NAME } from "../lib/intakeFunnel";
 
 	@media (min-width: 50em) {
 		.process-page {
+			gap: 4rem;
+		}
+
+		.testimonial-stack {
 			gap: 4rem;
 		}
 

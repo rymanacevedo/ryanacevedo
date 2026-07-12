@@ -1,6 +1,26 @@
 import { describe, expect, test } from "bun:test";
 
-import { buildBookingUrl, buildBrief, buildFormPayload } from "./intakeFunnel";
+import {
+	buildBookingUrl,
+	buildBrief,
+	buildFormPayload,
+	getPromotedTestimonial,
+} from "./intakeFunnel";
+
+describe("getPromotedTestimonial", () => {
+	test.each([
+		["Just starting", "seed"],
+		["Scaling", "scaling"],
+		["Established business", "established"],
+		["Enterprise", "enterprise"],
+	])("maps %s to the %s testimonial", (stage, testimonial) => {
+		expect(getPromotedTestimonial(stage)).toBe(testimonial);
+	});
+
+	test("returns no promotion when no stage is selected", () => {
+		expect(getPromotedTestimonial()).toBeUndefined();
+	});
+});
 
 describe("buildBrief", () => {
 	test("builds a brief for the selected company stage", () => {

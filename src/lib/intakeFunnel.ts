@@ -8,6 +8,21 @@ export interface IntakeFunnelState {
 	start?: string;
 }
 
+export type TestimonialId = "seed" | "scaling" | "established" | "enterprise";
+
+const TESTIMONIAL_BY_STAGE: Record<string, TestimonialId> = {
+	"Just starting": "seed",
+	Scaling: "scaling",
+	"Established business": "established",
+	Enterprise: "enterprise",
+};
+
+export function getPromotedTestimonial(
+	stage?: string,
+): TestimonialId | undefined {
+	return stage ? TESTIMONIAL_BY_STAGE[stage] : undefined;
+}
+
 export function buildBrief({
 	stage,
 	timeframe,
