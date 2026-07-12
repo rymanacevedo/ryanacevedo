@@ -1,11 +1,17 @@
 import { beforeAll, describe, test } from "bun:test";
 
 import {
+	assertElementCountOnBuiltPage,
+	assertElementTextEqualsOnBuiltPage,
+	assertLinkInBuiltPageElement,
 	assertNoInternalLinksToRoute,
+	assertPhraseAbsentFromBuiltPageElement,
 	assertPhraseAbsentFromBuiltPages,
 	assertPhrasePresentOnBuiltPage,
 	assertPhrasePresentOnlyOnBuiltPage,
+	assertPrimaryNavConformsOnBuiltPages,
 	assertStaticRedirect,
+	assertTagCountInBuiltPageElement,
 } from "./contentConformance";
 
 const bannedPhrases = [
@@ -69,6 +75,8 @@ const bannedPhrases = [
 	"over 4,200 accessibility issues",
 	"in seconds rather than days",
 	"over 10,000 possible configurations",
+	"Insights",
+	"Entrepreneur &",
 ];
 
 const requiredPhrases = [
@@ -112,6 +120,18 @@ const requiredEmploymentLabels = [
 	{ route: "/work/qt", phrase: "Engagement: Employment" },
 ];
 
+const primaryNavLinks = [
+	{ label: "Services", href: "/ai-development/" },
+	{ label: "Case Studies", href: "/work/" },
+	{ label: "Process", href: "/my-process/" },
+	{ label: "About", href: "/about/" },
+	{ label: "Blog", href: "/blog/" },
+	{
+		label: "Book a call",
+		href: "https://cal.com/avocadotechgroup/discovery-call",
+	},
+];
+
 beforeAll(() => {
 	const buildResult = Bun.spawnSync(["bun", "run", "build"], {
 		stderr: "inherit",
@@ -126,6 +146,71 @@ beforeAll(() => {
 });
 
 describe("built-site content conformance", () => {
+	test("publishes the locked homepage hero copy and heading structure", () => {
+		assertElementTextEqualsOnBuiltPage(
+			"/",
+			"p",
+			"kicker",
+			"AI Product Engineer · Denver, CO",
+		);
+		assertElementTextEqualsOnBuiltPage(
+			"/",
+			"h1",
+			"headline",
+			"I ship reliable AI features. Fast.",
+		);
+		assertElementTextEqualsOnBuiltPage(
+			"/",
+			"p",
+			"subline",
+			"I embed with funded B2B startups to design, build, and ship reliable AI features — in weeks.",
+		);
+		assertElementTextEqualsOnBuiltPage(
+			"/",
+			"header",
+			"hero",
+			"AI Product Engineer · Denver, CO I ship reliable AI features. Fast. I embed with funded B2B startups to design, build, and ship reliable AI features — in weeks. Book a call View case studies",
+		);
+		assertElementCountOnBuiltPage("/", "h1", 1);
+	});
+
+	test("publishes both homepage hero calls to action", () => {
+		assertLinkInBuiltPageElement("/", "header", "hero", {
+			label: "Book a call",
+			href: "https://cal.com/avocadotechgroup/discovery-call",
+		});
+		assertLinkInBuiltPageElement("/", "header", "hero", {
+			label: "View case studies",
+			href: "/work/",
+		});
+	});
+
+	test("publishes no rejected proof shape in the homepage hero", () => {
+		for (const rejectedProofShape of [
+			"<article",
+			"<ul",
+			"%",
+			"logo-strip",
+			"case-study-card",
+		]) {
+			assertPhraseAbsentFromBuiltPageElement(
+				"/",
+				"header",
+				"hero",
+				rejectedProofShape,
+			);
+		}
+		assertTagCountInBuiltPageElement("/", "header", "hero", "img", 1);
+	});
+
+	test("publishes the primary nav contract on every built page", () => {
+		assertPrimaryNavConformsOnBuiltPages(
+			primaryNavLinks,
+			"Book a call",
+			"https://github.com/rymanacevedo",
+		);
+	});
+
 	test.each(bannedPhrases)("publishes no %p phrase", (phrase) => {
 		assertPhraseAbsentFromBuiltPages(phrase);
 	});
