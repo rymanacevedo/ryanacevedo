@@ -1,4 +1,5 @@
 ---
+import CallToAction from "./CallToAction.astro";
 import Icon from "./Icon.astro";
 ---
 
@@ -16,7 +17,11 @@ import Icon from "./Icon.astro";
 			that integrate AI into the product. Could be: automating a
 			repetitive task or unlocking new capabilities for your business.
 		</p>
-		<a href="/ai-development">View AI Case Studies</a>
+		<div class="cta">
+			<CallToAction variant="secondary" href="/ai-development"
+				>View AI Case Studies</CallToAction
+			>
+		</div>
 	</div>
 	<div class="stack gap-2 lg:gap-4">
 		<Icon
@@ -31,7 +36,11 @@ import Icon from "./Icon.astro";
 			the greatest impact, developing strategies that align with goals and
 			maximize ROI then execute it to scale.
 		</p>
-		<a href="/my-process">See my process</a>
+		<div class="cta">
+			<CallToAction variant="secondary" href="/my-process"
+				>See my process</CallToAction
+			>
+		</div>
 	</div>
 	<div class="stack gap-2 lg:gap-4">
 		<Icon
@@ -45,7 +54,11 @@ import Icon from "./Icon.astro";
 			I have started and scaled multiple businesses from the ground up,
 			learning what it takes to succeed in the new AI-first economy.
 		</p>
-		<a href="/entrepreneurship">View examples</a>
+		<div class="cta">
+			<CallToAction variant="secondary" href="/entrepreneurship"
+				>View examples</CallToAction
+			>
+		</div>
 	</div>
 </section>
 
@@ -70,6 +83,16 @@ import Icon from "./Icon.astro";
 
 	.skills p {
 		color: var(--gray-400);
+	}
+
+	.cta {
+		align-self: flex-start;
+		margin-top: auto;
+	}
+
+	.cta :global(a) {
+		font-size: var(--text-md);
+		padding: 0.5em 1.5em;
 	}
 
 	@media (min-width: 50em) {
