@@ -58,6 +58,7 @@ const bannedPhrases = [
 	"40% increase in organic traffic",
 	"increase velocity by 10x",
 	"clients I've had the pleasure",
+	"I've founded and run my own products",
 	"I have started and scaled multiple businesses from the ground up",
 	"I have a proven track record of building successful businesses",
 	"For fun, I like to build businesses",
@@ -124,7 +125,7 @@ const requiredEmploymentLabels = [
 const primaryNavLinks = [
 	{ label: "Services", href: "/ai-development/" },
 	{ label: "Case Studies", href: "/work/" },
-	{ label: "Process", href: "/my-process/" },
+	{ label: "My Process", href: "/my-process/" },
 	{ label: "About", href: "/about/" },
 	{ label: "Blog", href: "/blog/" },
 	{
@@ -245,10 +246,17 @@ describe("built-site content conformance", () => {
 		assertPhrasePresentOnBuiltPage("/", ">Organizations I've supported</h3>");
 	});
 
-	test("publishes the owner-mindset draft on About", () => {
+	test("publishes the approved founder story on About", () => {
 		assertPhrasePresentOnBuiltPage(
 			"/about",
-			"I've founded and run my own products, so I work like an owner",
+			"because at my own company, it is",
+		);
+	});
+
+	test("publishes the approved owner-mindset line on the homepage", () => {
+		assertPhrasePresentOnBuiltPage(
+			"/",
+			"so I know what software costs and what it's worth",
 		);
 	});
 
