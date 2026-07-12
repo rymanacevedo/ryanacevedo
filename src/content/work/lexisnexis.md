@@ -17,12 +17,12 @@ At LexisNexis, I collaborated on projects that advanced machine learning capabil
 ## Key Projects and Contributions
 
 - **Machine Learning Optimization**:
-    - Accelerated training of a machine learning model in Python, reducing processing time from 3 days to 5 hours, a 720% improvement.
+    - Accelerated training of a machine learning model in Python, reducing processing time from 3 days to 5 hours (roughly 14× faster).
     - Optimized data processing workflows using AWS S3 and SageMaker, enabling faster and more reliable training pipelines.
 
 - **API Development and System Integration**:
     - Designed and implemented secure Java REST APIs using RESTEasy, integrating them with AWS API Gateway to ensure robust security and scalability.
-    - Integrated AWS EC2 instances, Flask, and Lambda into the architecture, improving system performance by 70%.
+    - Integrated AWS EC2 instances, Flask, and Lambda into a scalable processing architecture.
 
 - **Frontend and Data Annotation Tools**:
     - Constructed intuitive Java GUI interfaces for data annotation, allowing legal editors to analyze documents in under an hour.
@@ -33,7 +33,7 @@ At LexisNexis, I collaborated on projects that advanced machine learning capabil
     - Delivered features efficiently while maintaining high-quality standards.
 
 - **DevOps and Automation**:
-    - Streamlined continuous integration and deployment pipelines using Jenkins, reducing build times by 30% and doubling deployment frequency.
+    - Streamlined continuous integration and deployment pipelines using Jenkins, doubling deployment frequency.
     - Automated workflows to enhance productivity and minimize downtime.
 
 My time at LexisNexis showcased my ability to integrate cutting-edge technology, optimize processes, and deliver impactful solutions that drove business value and operational excellence.
