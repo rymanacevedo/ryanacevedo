@@ -38,12 +38,14 @@ function getPageFileForRoute(route: string): string {
 	return normalizedRoute ? `${normalizedRoute}/index.html` : "index.html";
 }
 
-export function assertPhraseAbsentFromBuiltPages(phrase: string): void {
-	const matchingPages = [...getBuiltPages().entries()]
+function getPageFilesContainingPhrase(phrase: string): string[] {
+	return [...getBuiltPages().entries()]
 		.filter(([, renderedHtml]) => renderedHtml.includes(phrase))
 		.map(([pageFile]) => pageFile);
+}
 
-	expect(matchingPages).toEqual([]);
+export function assertPhraseAbsentFromBuiltPages(phrase: string): void {
+	expect(getPageFilesContainingPhrase(phrase)).toEqual([]);
 }
 
 export function assertPhrasePresentOnBuiltPages(phrase: string): void {
@@ -71,11 +73,8 @@ export function assertPhrasePresentOnlyOnBuiltPage(
 	phrase: string,
 ): void {
 	const pageFile = getPageFileForRoute(pageRoute);
-	const matchingPages = [...getBuiltPages().entries()]
-		.filter(([, renderedHtml]) => renderedHtml.includes(phrase))
-		.map(([matchingPageFile]) => matchingPageFile);
 
-	expect(matchingPages).toEqual([pageFile]);
+	expect(getPageFilesContainingPhrase(phrase)).toEqual([pageFile]);
 }
 
 export function assertStaticRedirect(fromRoute: string, toRoute: string): void {

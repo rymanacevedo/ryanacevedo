@@ -127,10 +127,7 @@ describe("built-site content conformance", () => {
 	});
 
 	test("publishes the Clyde estimate only in its case study", () => {
-		assertPhrasePresentOnlyOnBuiltPage(
-			"/work/clyde",
-			"cutting iteration time by an estimated 5–10x",
-		);
+		assertPhrasePresentOnlyOnBuiltPage("/work/clyde", "5–10x");
 	});
 
 	test("redirects the retired entrepreneurship route to About", () => {
