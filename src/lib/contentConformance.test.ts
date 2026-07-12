@@ -102,7 +102,6 @@ const requiredPhrases = [
 ];
 
 const requiredEngagementLabels = [
-	{ route: "/work/clyde", phrase: "Engagement: Direct client" },
 	{ route: "/work/amplifire", phrase: "Engagement: Employment" },
 	{ route: "/work/lexisnexis", phrase: "Engagement: Employment" },
 	{
@@ -143,6 +142,13 @@ describe("built-site content conformance", () => {
 		phrase,
 	}) => {
 		assertPhrasePresentOnBuiltPage(route, phrase);
+	});
+
+	test("presents Clyde as the only direct client engagement", () => {
+		assertPhrasePresentOnlyOnBuiltPage(
+			"/work/clyde",
+			"Engagement: Direct client",
+		);
 	});
 
 	test("publishes the honest organizations heading", () => {
