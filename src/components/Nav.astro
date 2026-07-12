@@ -1,4 +1,5 @@
 ---
+import { BOOKING_URL } from "../lib/intakeFunnel";
 import Icon from "./Icon.astro";
 import type { iconPaths } from "./IconPaths";
 import ThemeToggle from "./ThemeToggle.astro";
@@ -12,7 +13,7 @@ const textLinks: { label: string; href: string; cta?: boolean }[] = [
 	{ label: "Process", href: "/my-process/" },
 	{ label: "About", href: "/about/" },
 	{ label: "Blog", href: "/blog/" },
-	{ label: "Book a call", href: "/book/", cta: true },
+	{ label: "Book a call", href: BOOKING_URL, cta: true },
 ];
 
 /** Icon links to social media — edit these with links to your profiles! */

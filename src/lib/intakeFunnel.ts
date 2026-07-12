@@ -99,6 +99,28 @@ export function buildBookingUrl(state: IntakeFunnelState): string {
 	return bookingUrl.toString();
 }
 
+function getLastNonEmptyString(formData: FormData, name: string): string {
+	return (
+		formData
+			.getAll(name)
+			.filter((value): value is string => typeof value === "string")
+			.findLast((value) => value.length > 0) ?? ""
+	);
+}
+
+export function parseIntakeFormData(formData: FormData): IntakeFunnelState {
+	const stage = getLastNonEmptyString(formData, "stage");
+	const timeframe = getLastNonEmptyString(formData, "timeframe");
+	const start = getLastNonEmptyString(formData, "start");
+
+	return {
+		email: getLastNonEmptyString(formData, "email"),
+		...(isStage(stage) ? { stage } : {}),
+		...(timeframe ? { timeframe } : {}),
+		...(start ? { start } : {}),
+	};
+}
+
 export function buildFormPayload(
 	{ email, stage = "", timeframe = "", start = "" }: FormPayloadState,
 	{ botField = "" }: { botField?: string } = {},
