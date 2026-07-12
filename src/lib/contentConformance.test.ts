@@ -146,7 +146,7 @@ describe("built-site content conformance", () => {
 	});
 
 	test("publishes the honest organizations heading", () => {
-		assertPhrasePresentOnBuiltPage("/", "Organizations I've supported</h3>");
+		assertPhrasePresentOnBuiltPage("/", ">Organizations I've supported</h3>");
 	});
 
 	test("publishes the owner-mindset draft on About", () => {
