@@ -1,0 +1,6 @@
+[build]
+command = "bun run test:built-site"
+publish = "dist"
+
+[build.environment]
+BUN_VERSION = "1.3.13"

@@ -1,4 +1,4 @@
-import { describe, test } from "bun:test";
+import { beforeAll, describe, test } from "bun:test";
 
 import {
 	assertPhraseAbsentFromBuiltPages,
@@ -40,6 +40,19 @@ const requiredPhrases = [
 	"1MB to 30KB",
 	"Organizations I've supported",
 ];
+
+beforeAll(() => {
+	const buildResult = Bun.spawnSync(["bun", "run", "build"], {
+		stderr: "inherit",
+		stdout: "inherit",
+	});
+
+	if (buildResult.exitCode !== 0) {
+		throw new Error(
+			`Production site build failed with exit code ${buildResult.exitCode}`,
+		);
+	}
+});
 
 describe("built-site content conformance", () => {
 	test.each(bannedPhrases)("publishes no %p phrase", (phrase) => {

@@ -6,14 +6,7 @@ This repository uses Astro `7.0.6`, Bun, React islands, and static output. Astro
 
 Do not rely only on model memory for Astro APIs. Astro recommends its remote Docs MCP server because it indexes the current official documentation. The streamable HTTP endpoint is `https://mcp.docs.astro.build/mcp`; Astro's Codex example configures it in `~/.codex/config.toml` or the project `.codex/config.toml` with an `npx mcp-remote` proxy. In this Bun-only repository, use the equivalent `bunx mcp-remote` command if configuring that proxy. [Astro's AI guide documents the server and Codex setup](https://docs.astro.build/en/guides/build-with-ai/#codex-cli).
 
-If MCP is unavailable, use Astro's generated, first-party text sets directly:
-
-- [`llms.txt`](https://docs.astro.build/llms.txt) is the index; start here to choose the smallest relevant set.
-- [`llms-small.txt`](https://docs.astro.build/llms-small.txt) is abridged framework guidance.
-- [`_llms-txt/api-reference.txt`](https://docs.astro.build/_llms-txt/api-reference.txt) is the compact API reference.
-- [`llms-full.txt`](https://docs.astro.build/llms-full.txt) is the complete documentation and should be loaded only when narrower sets are insufficient.
-
-These feeds are generated from the official documentation, but they track the latest Astro release. Confirm that an API exists in pinned Astro `7.0.6` (look for the docs' “Added in” annotation or inspect installed types) before using newer guidance. MCP or text retrieval supplies context; it does not replace reviewing generated code and running the repository checks. [Astro explicitly requires review and testing of AI output](https://docs.astro.build/en/guides/build-with-ai/#usage).
+If MCP is unavailable, consult the relevant pages in [Astro's official documentation](https://docs.astro.build/) directly. The online documentation tracks the latest Astro release, so confirm that an API exists in pinned Astro `7.0.6` (look for the docs' “Added in” annotation or inspect installed types) before using newer guidance. Whether context comes from MCP or direct documentation, review generated code and run the repository checks. [Astro explicitly requires review and testing of AI output](https://docs.astro.build/en/guides/build-with-ai/#usage).
 
 ## Run the dev server as an agent
 
