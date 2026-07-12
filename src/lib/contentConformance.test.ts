@@ -28,7 +28,7 @@ const bannedPhrases = [
 	"Employeer Engagement as SCC",
 ];
 
-const requiredPhrases = [
+const requiredPagePhrases = [
 	{
 		page: "/work/lexisnexis/",
 		phrase:
@@ -37,14 +37,14 @@ const requiredPhrases = [
 ];
 
 beforeAll(() => {
-	const build = Bun.spawnSync(["bun", "run", "build"], {
+	const buildResult = Bun.spawnSync(["bun", "run", "build"], {
 		stderr: "inherit",
 		stdout: "inherit",
 	});
 
-	if (build.exitCode !== 0) {
+	if (buildResult.exitCode !== 0) {
 		throw new Error(
-			`Production site build failed with exit code ${build.exitCode}`,
+			`Production site build failed with exit code ${buildResult.exitCode}`,
 		);
 	}
 });
@@ -54,7 +54,7 @@ describe("built-site content conformance", () => {
 		assertPhraseAbsentFromBuiltPages(phrase);
 	});
 
-	test.each(requiredPhrases)("publishes $phrase verbatim on $page", ({
+	test.each(requiredPagePhrases)("publishes $phrase verbatim on $page", ({
 		page,
 		phrase,
 	}) => {

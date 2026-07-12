@@ -3,21 +3,21 @@ import { readFileSync } from "node:fs";
 import { resolve } from "node:path";
 
 const builtSiteDirectory = resolve(import.meta.dir, "../../dist");
-const htmlFiles = new Bun.Glob("**/*.html");
+const htmlFileGlob = new Bun.Glob("**/*.html");
 
 function readBuiltPages(): Map<string, string> {
-	const files = [...htmlFiles.scanSync({ cwd: builtSiteDirectory })];
+	const pageFiles = [...htmlFileGlob.scanSync({ cwd: builtSiteDirectory })];
 
-	if (files.length === 0) {
+	if (pageFiles.length === 0) {
 		throw new Error(
 			`No rendered HTML found in ${builtSiteDirectory}. Run the production build before the conformance suite.`,
 		);
 	}
 
 	return new Map(
-		files.map((page) => [
-			page,
-			readFileSync(resolve(builtSiteDirectory, page), "utf8"),
+		pageFiles.map((pageFile) => [
+			pageFile,
+			readFileSync(resolve(builtSiteDirectory, pageFile), "utf8"),
 		]),
 	);
 }
@@ -32,18 +32,20 @@ function getBuiltPages(): Map<string, string> {
 export function assertPhraseAbsentFromBuiltPages(phrase: string): void {
 	const matchingPages = [...getBuiltPages().entries()]
 		.filter(([, renderedHtml]) => renderedHtml.includes(phrase))
-		.map(([page]) => page);
+		.map(([pageFile]) => pageFile);
 
 	expect(matchingPages).toEqual([]);
 }
 
 export function assertPhrasePresentOnBuiltPage(
-	page: string,
+	pageRoute: string,
 	phrase: string,
 ): void {
-	const route = page.replace(/^\/+|\/+$/g, "");
+	const route = pageRoute.replace(/^\/+|\/+$/g, "");
 	const pageFile = route ? `${route}/index.html` : "index.html";
 	const renderedHtml = getBuiltPages().get(pageFile);
 
-	expect(renderedHtml, `No rendered page found for ${page}`).toContain(phrase);
+	expect(renderedHtml, `No rendered page found for ${pageRoute}`).toContain(
+		phrase,
+	);
 }
