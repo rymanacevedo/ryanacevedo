@@ -108,22 +108,22 @@ const principles = [
 						>
 					</div>
 				</div>
-			</section>
 
-			<section class="belief stack gap-4" aria-labelledby="belief-title">
-				<Icon icon="strategy" size="2.75rem" gradient />
-				<h2 id="belief-title">
-					Software is leverage. The business was the outcome.
-				</h2>
-				<p>
-					The automotive industry is ripe for change. It is
-					fragmented, filled with independent mechanics who lack the
-					technology to compete with dealerships, and underserved when
-					it comes to convenience and transparency. Mobile Oil Hero
-					was built to address these issues head-on, offering a
-					modern, tech-enabled solution that benefits both customers
-					and mechanics.
-				</p>
+				<div class="belief stack gap-4" aria-labelledby="belief-title">
+					<Icon icon="strategy" size="2.75rem" gradient />
+					<h2 id="belief-title">
+						Software is leverage. The business was the outcome.
+					</h2>
+					<p>
+						The automotive industry is ripe for change. It is
+						fragmented, filled with independent mechanics who lack
+						the technology to compete with dealerships, and
+						underserved when it comes to convenience and
+						transparency. Mobile Oil Hero was built to address these
+						issues head-on, offering a modern, tech-enabled solution
+						that benefits both customers and mechanics.
+					</p>
+				</div>
 			</section>
 		</main>
 
@@ -287,6 +287,7 @@ const principles = [
 	}
 
 	.belief {
+		grid-column: 1 / -1;
 		max-width: 52rem;
 		padding-left: 1.5rem;
 		border-left: 3px solid var(--accent-regular);
@@ -315,9 +316,7 @@ const principles = [
 		}
 
 		.venture {
-			grid-template-columns:
-				minmax(8rem, 0.35fr) minmax(0, 1.25fr)
-				minmax(16rem, 0.7fr);
+			grid-template-columns: minmax(8rem, 0.35fr) minmax(0, 1.25fr);
 			padding: 2.5rem;
 		}
 
