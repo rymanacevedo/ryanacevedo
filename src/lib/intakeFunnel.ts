@@ -16,6 +16,13 @@ export interface IntakeFunnelState {
 	start?: string;
 }
 
+interface FormPayloadState {
+	email: string;
+	stage?: string;
+	timeframe?: string;
+	start?: string;
+}
+
 export type TestimonialId = "seed" | "scaling" | "established" | "enterprise";
 
 export type QuestionId = "timeframe" | "start";
@@ -76,7 +83,7 @@ export function buildBookingUrl(state: IntakeFunnelState): string {
 }
 
 export function buildFormPayload(
-	{ email, stage = "", timeframe = "", start = "" }: IntakeFunnelState,
+	{ email, stage = "", timeframe = "", start = "" }: FormPayloadState,
 	{ botField = "" }: { botField?: string } = {},
 ): string {
 	return new URLSearchParams({

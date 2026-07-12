@@ -11,6 +11,11 @@ import { BOOKING_URL, FORM_NAME } from "../lib/intakeFunnel";
 	<!-- Signals JS availability before first paint so gated sections never flash. -->
 	<script is:inline>
 		document.documentElement.dataset.js = "true";
+		setTimeout(() => {
+			if (document.documentElement.dataset.processReady !== "true") {
+				delete document.documentElement.dataset.js;
+			}
+		}, 3000);
 	</script>
 	<div class="stack gap-20">
 		<main class="wrapper process-page">
@@ -392,7 +397,9 @@ import { BOOKING_URL, FORM_NAME } from "../lib/intakeFunnel";
 				section.dataset.revealed = "true";
 			}
 		}
+		if (newlyRevealed.length === 0) return;
 
+		// One interaction reveals at most one follow-up question.
 		const scrollTarget = document.querySelector<HTMLElement>(
 			`[data-question="${newlyRevealed[0]}"]`,
 		);
@@ -421,7 +428,11 @@ import { BOOKING_URL, FORM_NAME } from "../lib/intakeFunnel";
 			swapActiveTestimonial();
 			return;
 		}
-		document.startViewTransition(swapActiveTestimonial);
+		document
+			.startViewTransition(swapActiveTestimonial)
+			.updateCallbackDone.catch((error) =>
+				console.warn("Testimonial swap failed", error),
+			);
 	};
 
 	if (stageCards.length !== 4)
@@ -561,6 +572,8 @@ import { BOOKING_URL, FORM_NAME } from "../lib/intakeFunnel";
 			window.location.assign(redirectUrl);
 		});
 	}
+
+	document.documentElement.dataset.processReady = "true";
 </script>
 
 <style>

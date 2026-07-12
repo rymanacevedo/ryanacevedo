@@ -26,7 +26,7 @@ describe("getRevealedQuestions", () => {
 			getRevealedQuestions({
 				email: "",
 				stage: "Scaling",
-				timeframe: "1-3 months",
+				timeframe: "1–3 months",
 			}),
 		).toEqual(["timeframe", "start"]);
 	});
@@ -35,6 +35,26 @@ describe("getRevealedQuestions", () => {
 		expect(getRevealedQuestions({ email: "" }, ["timeframe", "start"])).toEqual(
 			["timeframe", "start"],
 		);
+	});
+
+	test("preserves prior questions when a later answer reveals the next one", () => {
+		expect(
+			getRevealedQuestions({ email: "", timeframe: "3–6 months" }, [
+				"timeframe",
+			]),
+		).toEqual(["timeframe", "start"]);
+	});
+
+	test("keeps the full journey revealed as answers are cleared", () => {
+		let revealed = getRevealedQuestions({ email: "", stage: "Scaling" });
+		revealed = getRevealedQuestions(
+			{ email: "", stage: "Scaling", timeframe: "1–3 months" },
+			revealed,
+		);
+		revealed = getRevealedQuestions({ email: "", stage: "Scaling" }, revealed);
+		revealed = getRevealedQuestions({ email: "" }, revealed);
+
+		expect(revealed).toEqual(["timeframe", "start"]);
 	});
 });
 
@@ -82,9 +102,7 @@ describe("buildBrief", () => {
 
 	test("returns no brief when no answers are selected", () => {
 		expect(buildBrief({ email: "" })).toBe("");
-		expect(buildBrief({ email: "", stage: "", timeframe: "", start: "" })).toBe(
-			"",
-		);
+		expect(buildBrief({ email: "", timeframe: "", start: "" })).toBe("");
 	});
 });
 
@@ -111,12 +129,8 @@ describe("buildBookingUrl", () => {
 
 	test("omits booking notes when no stage is selected", () => {
 		const bookingUrl = new URL(buildBookingUrl({ email: "ryan@example.com" }));
-		const emptyStageUrl = new URL(
-			buildBookingUrl({ email: "ryan@example.com", stage: "" }),
-		);
 
 		expect(bookingUrl.searchParams.has("notes")).toBe(false);
-		expect(emptyStageUrl.searchParams.has("notes")).toBe(false);
 	});
 
 	test("adds the complete brief to booking notes", () => {
