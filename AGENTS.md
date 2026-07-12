@@ -2,6 +2,11 @@
 
 ## Agent skills
 
+### Astro 7 development
+
+- Consult [`docs/agents/astro-7-ai.md`](docs/agents/astro-7-ai.md) before changing Astro APIs, `.astro` markup, content processing, or agent-driven dev-server workflows.
+- Prefer Astro's managed background server, status/log commands, JSON output, and `/_astro/status` health check over foreground processes or custom PID handling.
+
 ### Sandcastle runner
 
 - macOS runs through Docker Desktop using the current host UID/GID; no ACL repair is required.
