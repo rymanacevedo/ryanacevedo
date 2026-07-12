@@ -57,3 +57,40 @@ export function assertPhrasePresentOnBuiltPage(
 		phrase,
 	);
 }
+
+export function assertStaticRedirect(fromRoute: string, toRoute: string): void {
+	const route = fromRoute.replace(/^\/+|\/+$/g, "");
+	const pageFile = route ? `${route}/index.html` : "index.html";
+	const renderedHtml = getBuiltPages().get(pageFile);
+
+	expect(renderedHtml, `No redirect artifact found for ${fromRoute}`).toContain(
+		`<meta http-equiv="refresh" content="0;url=${toRoute}">`,
+	);
+	expect(renderedHtml).toContain(`<a href="${toRoute}">`);
+}
+
+export function assertNoInternalLinksToRoute(
+	pageRoute: string,
+	siteOrigin = "https://ryanacevedo.com",
+): void {
+	const route = pageRoute.replace(/^\/+|\/+$/g, "");
+	const redirectPageFile = route ? `${route}/index.html` : "index.html";
+	const matchingPages = [...getBuiltPages().entries()]
+		.filter(([pageFile]) => pageFile !== redirectPageFile)
+		.filter(([pageFile, renderedHtml]) => {
+			const pageUrl = new URL(pageFile.replace(/index\.html$/, ""), siteOrigin);
+			const linkedUrls = [...renderedHtml.matchAll(/href=["']([^"']+)["']/g)]
+				.map(([, href]) => href)
+				.filter((href): href is string => href !== undefined)
+				.map((href) => new URL(href, pageUrl));
+
+			return linkedUrls.some(
+				(linkedUrl) =>
+					linkedUrl.origin === siteOrigin &&
+					linkedUrl.pathname.replace(/^\/+|\/+$/g, "") === route,
+			);
+		})
+		.map(([pageFile]) => pageFile);
+
+	expect(matchingPages).toEqual([]);
+}

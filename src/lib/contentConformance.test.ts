@@ -1,8 +1,10 @@
 import { beforeAll, describe, test } from "bun:test";
 
 import {
+	assertNoInternalLinksToRoute,
 	assertPhraseAbsentFromBuiltPages,
 	assertPhrasePresentOnBuiltPages,
+	assertStaticRedirect,
 } from "./contentConformance";
 
 const bannedPhrases = [
@@ -32,6 +34,7 @@ const bannedPhrases = [
 	"clients I've had the pleasure",
 	"multiple businesses",
 	"proven track record of building successful",
+	"For fun, I like to build businesses",
 ];
 
 const requiredPhrases = [
@@ -61,5 +64,10 @@ describe("built-site content conformance", () => {
 
 	test.each(requiredPhrases)("publishes the required %p phrase", (phrase) => {
 		assertPhrasePresentOnBuiltPages(phrase);
+	});
+
+	test("redirects the retired entrepreneurship route to About", () => {
+		assertStaticRedirect("/entrepreneurship", "/about");
+		assertNoInternalLinksToRoute("/entrepreneurship");
 	});
 });

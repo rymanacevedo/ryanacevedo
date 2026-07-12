@@ -15,7 +15,10 @@ const lastmodByPath = {
 // https://astro.build/config
 export default defineConfig({
 	site: siteUrl,
-	redirects: BLOG_REDIRECTS,
+	redirects: {
+		...BLOG_REDIRECTS,
+		"/entrepreneurship": "/about",
+	},
 	vite: {
 		server: {
 			watch: {
