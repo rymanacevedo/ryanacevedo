@@ -328,7 +328,7 @@ import { BOOKING_URL, FORM_NAME } from "../lib/intakeFunnel";
 					</Button>
 				</div>
 				<p class="disclosure">
-					I'll only use this to follow up about your project
+					I'll use this to follow up about your project
 				</p>
 				<noscript>
 					<a href={BOOKING_URL}> Book a discovery call directly </a>
@@ -344,6 +344,7 @@ import { BOOKING_URL, FORM_NAME } from "../lib/intakeFunnel";
 		buildBrief,
 		buildFormPayload,
 		getPromotedTestimonial,
+		getRevealScrollTarget,
 		getRevealedQuestions,
 		isStage,
 		type IntakeFunnelState,
@@ -385,9 +386,8 @@ import { BOOKING_URL, FORM_NAME } from "../lib/intakeFunnel";
 				),
 			)
 		: [];
-	const questionSections = document.querySelectorAll<HTMLElement>(
-		"[data-question]",
-	);
+	const questionSections =
+		document.querySelectorAll<HTMLElement>("[data-question]");
 	const prefersReducedMotion = window.matchMedia(
 		"(prefers-reduced-motion: reduce)",
 	);
@@ -400,7 +400,10 @@ import { BOOKING_URL, FORM_NAME } from "../lib/intakeFunnel";
 		if (brief) brief.hidden = !text;
 	};
 	const renderQuestions = () => {
-		const nextRevealed = getRevealedQuestions(funnelState, revealedQuestions);
+		const nextRevealed = getRevealedQuestions(
+			funnelState,
+			revealedQuestions,
+		);
 		const newlyRevealed = nextRevealed.filter(
 			(question) => !revealedQuestions.includes(question),
 		);
@@ -413,11 +416,11 @@ import { BOOKING_URL, FORM_NAME } from "../lib/intakeFunnel";
 				section.dataset.revealed = "true";
 			}
 		}
-		if (newlyRevealed.length === 0) return;
+		const scrollTargetId = getRevealScrollTarget(newlyRevealed);
+		if (!scrollTargetId) return;
 
-		// One interaction reveals at most one follow-up question.
 		const scrollTarget = document.querySelector<HTMLElement>(
-			`[data-question="${newlyRevealed[0]}"]`,
+			`[data-question="${scrollTargetId}"]`,
 		);
 		// Only pull the viewport down when the fresh question is fully out of view.
 		if (
@@ -451,7 +454,8 @@ import { BOOKING_URL, FORM_NAME } from "../lib/intakeFunnel";
 			);
 	};
 	const promptForEmail = () => {
-		if (!contactSection || !(emailInput instanceof HTMLInputElement)) return;
+		if (!contactSection || !(emailInput instanceof HTMLInputElement))
+			return;
 
 		contactSection.scrollIntoView({
 			behavior: prefersReducedMotion.matches ? "auto" : "smooth",
@@ -647,11 +651,45 @@ import { BOOKING_URL, FORM_NAME } from "../lib/intakeFunnel";
 
 <!-- Cal element-click embed code begins -->
 <script is:inline type="text/javascript">
-	(function (C, A, L) { let p = function (a, ar) { a.q.push(ar); }; let d = C.document; C.Cal = C.Cal || function () { let cal = C.Cal; let ar = arguments; if (!cal.loaded) { cal.ns = {}; cal.q = cal.q || []; d.head.appendChild(d.createElement("script")).src = A; cal.loaded = true; } if (ar[0] === L) { const api = function () { p(api, arguments); }; const namespace = ar[1]; api.q = api.q || []; if(typeof namespace === "string"){cal.ns[namespace] = cal.ns[namespace] || api;p(cal.ns[namespace], ar);p(cal, ["initNamespace", namespace]);} else p(cal, ar); return;} p(cal, ar); }; })(window, "https://app.cal.com/embed/embed.js", "init");
-	Cal("init", "discovery-call", {origin:"https://app.cal.com"});
+	(function (C, A, L) {
+		let p = function (a, ar) {
+			a.q.push(ar);
+		};
+		let d = C.document;
+		C.Cal =
+			C.Cal ||
+			function () {
+				let cal = C.Cal;
+				let ar = arguments;
+				if (!cal.loaded) {
+					cal.ns = {};
+					cal.q = cal.q || [];
+					d.head.appendChild(d.createElement("script")).src = A;
+					cal.loaded = true;
+				}
+				if (ar[0] === L) {
+					const api = function () {
+						p(api, arguments);
+					};
+					const namespace = ar[1];
+					api.q = api.q || [];
+					if (typeof namespace === "string") {
+						cal.ns[namespace] = cal.ns[namespace] || api;
+						p(cal.ns[namespace], ar);
+						p(cal, ["initNamespace", namespace]);
+					} else p(cal, ar);
+					return;
+				}
+				p(cal, ar);
+			};
+	})(window, "https://app.cal.com/embed/embed.js", "init");
+	Cal("init", "discovery-call", { origin: "https://app.cal.com" });
 	Cal.config = Cal.config || {};
 	Cal.config.forwardQueryParams = true;
-	Cal.ns["discovery-call"]("ui", {"hideEventTypeDetails":false,"layout":"month_view"});
+	Cal.ns["discovery-call"]("ui", {
+		hideEventTypeDetails: false,
+		layout: "month_view",
+	});
 </script>
 <!-- Cal element-click embed code ends -->
 
@@ -691,6 +729,7 @@ import { BOOKING_URL, FORM_NAME } from "../lib/intakeFunnel";
 	}
 
 	.intro {
+		padding: 1.5rem;
 		border-left: 3px solid #ca7879;
 		background-color: var(--gray-999_40);
 	}
@@ -721,6 +760,12 @@ import { BOOKING_URL, FORM_NAME } from "../lib/intakeFunnel";
 	.section-heading h2,
 	.fit-section h2 {
 		font-size: var(--text-3xl);
+	}
+
+	.subtitle {
+		color: var(--gray-400);
+		font-size: var(--text-lg);
+		font-weight: 400;
 	}
 
 	.steps {
