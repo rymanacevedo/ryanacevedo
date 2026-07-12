@@ -7,6 +7,26 @@ describe("buildBrief", () => {
 		expect(buildBrief({ email: "", stage: "Scaling" })).toBe("Stage: Scaling");
 	});
 
+	test("builds a brief from all three funnel answers", () => {
+		expect(
+			buildBrief({
+				email: "",
+				stage: "Scaling",
+				timeframe: "1–3 months",
+				start: "ASAP",
+			}),
+		).toBe("Stage: Scaling · Timeframe: 1–3 months · Start: ASAP");
+	});
+
+	test("omits unanswered parts from partial briefs", () => {
+		expect(buildBrief({ email: "", timeframe: "3–6 months" })).toBe(
+			"Timeframe: 3–6 months",
+		);
+		expect(
+			buildBrief({ email: "", stage: "Enterprise", start: "1–2 weeks" }),
+		).toBe("Stage: Enterprise · Start: 1–2 weeks");
+	});
+
 	test("returns no brief when no stage is selected", () => {
 		expect(buildBrief({ email: "" })).toBe("");
 		expect(buildBrief({ email: "", stage: "" })).toBe("");
@@ -43,6 +63,21 @@ describe("buildBookingUrl", () => {
 		expect(bookingUrl.searchParams.has("notes")).toBe(false);
 		expect(emptyStageUrl.searchParams.has("notes")).toBe(false);
 	});
+
+	test("adds the complete brief to booking notes", () => {
+		const bookingUrl = new URL(
+			buildBookingUrl({
+				email: "ryan@example.com",
+				stage: "Scaling",
+				timeframe: "1–3 months",
+				start: "ASAP",
+			}),
+		);
+
+		expect(bookingUrl.searchParams.get("notes")).toBe(
+			"Stage: Scaling · Timeframe: 1–3 months · Start: ASAP",
+		);
+	});
 });
 
 describe("buildFormPayload", () => {
@@ -50,7 +85,7 @@ describe("buildFormPayload", () => {
 		const payload = buildFormPayload({
 			email: "ryan+website@example.com",
 			stage: "Scaling",
-			timeframe: "1-3 months",
+			timeframe: "1–3 months",
 			start: "ASAP",
 		});
 
@@ -58,7 +93,7 @@ describe("buildFormPayload", () => {
 			"form-name": "project-intake",
 			email: "ryan+website@example.com",
 			stage: "Scaling",
-			timeframe: "1-3 months",
+			timeframe: "1–3 months",
 			start: "ASAP",
 			"bot-field": "",
 		});

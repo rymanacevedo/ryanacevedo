@@ -147,30 +147,30 @@ import { BOOKING_URL, FORM_NAME } from "../lib/intakeFunnel";
 			<section class="impact-section">
 				<div class="section-heading">
 					<p class="eyebrow">Q2</p>
-					<h2>What's the timeframe?</h2>
+					<h2 id="timeframe-heading">What's the timeframe?</h2>
 					<h3 class="subtitle">How long do you need my help?</h3>
 				</div>
-				<form class="impact-grid">
-					<!-- TODO: Grid with engagement length -->
-					<Button> 1 - 2 weeks </Button>
-					<Button> 1 month - 3 months </Button>
-					<Button> 3 - 6 months </Button>
-					<Button> 6 - 12 months </Button>
-					<Button> 1 year and beyond </Button>
-				</form>
+				<div class="impact-grid" role="group" aria-labelledby="timeframe-heading">
+					<Button name="timeframe" value="1–2 weeks" pressed={false}>1–2 weeks</Button>
+					<Button name="timeframe" value="1–3 months" pressed={false}>1–3 months</Button>
+					<Button name="timeframe" value="3–6 months" pressed={false}>3–6 months</Button>
+					<Button name="timeframe" value="6–12 months" pressed={false}>6–12 months</Button>
+					<Button name="timeframe" value="1 year and beyond" pressed={false}>
+						1 year and beyond
+					</Button>
+				</div>
 			</section>
 
 			<section class="impact-section">
 				<div class="section-heading">
 					<p class="eyebrow">Q3</p>
-					<h2>When do you want me to start?</h2>
+					<h2 id="start-heading">When do you want me to start?</h2>
 				</div>
-				<form class="impact-grid">
-					<!-- TODO: Grid with start date options -->
-					<Button> ASAP </Button>
-					<Button> 1 week - 2 weeks </Button>
-					<Button> 1 month - 3 months </Button>
-				</form>
+				<div class="impact-grid" role="group" aria-labelledby="start-heading">
+					<Button name="start" value="ASAP" pressed={false}>ASAP</Button>
+					<Button name="start" value="1–2 weeks" pressed={false}>1–2 weeks</Button>
+					<Button name="start" value="1–3 months" pressed={false}>1–3 months</Button>
+				</div>
 			</section>
 
 			<!-- Testimonial -->
@@ -283,16 +283,33 @@ import { BOOKING_URL, FORM_NAME } from "../lib/intakeFunnel";
 	const bookingForm = document.querySelector<HTMLFormElement>("[data-booking-form]");
 	const emailInput = bookingForm?.elements.namedItem("email");
 	const stageInput = bookingForm?.elements.namedItem("stage");
+	const timeframeInput = bookingForm?.elements.namedItem("timeframe");
+	const startInput = bookingForm?.elements.namedItem("start");
 	const stageCards = document.querySelectorAll<HTMLDetailsElement>(
 		".steps details[data-stage]",
+	);
+	const answerButtons = document.querySelectorAll<HTMLButtonElement>(
+		'button[name="timeframe"], button[name="start"]',
 	);
 	const brief = document.querySelector<HTMLElement>("[data-brief]");
 	const briefText = brief?.querySelector<HTMLElement>("[data-brief-text]");
 	const funnelState: IntakeFunnelState = { email: "" };
+	const renderBrief = () => {
+		const text = buildBrief(funnelState);
+		if (briefText) briefText.textContent = text;
+		if (brief) brief.hidden = !text;
+	};
 
 	if (stageCards.length !== 4) console.warn("Expected four company stage cards");
+	if (answerButtons.length !== 8) console.warn("Expected eight funnel answer buttons");
 	if (!(stageInput instanceof HTMLInputElement)) {
 		console.warn("Company stage capture field is missing");
+	}
+	if (!(timeframeInput instanceof HTMLInputElement)) {
+		console.warn("Timeframe capture field is missing");
+	}
+	if (!(startInput instanceof HTMLInputElement)) {
+		console.warn("Start-date capture field is missing");
 	}
 	if (!brief) console.warn("Company stage brief container is missing");
 	if (!briefText) console.warn("Company stage brief text target is missing");
@@ -307,8 +324,7 @@ import { BOOKING_URL, FORM_NAME } from "../lib/intakeFunnel";
 
 				funnelState.stage = undefined;
 				if (stageInput instanceof HTMLInputElement) stageInput.value = "";
-				if (briefText) briefText.textContent = "";
-				if (brief) brief.hidden = true;
+				renderBrief();
 				return;
 			}
 
@@ -322,10 +338,34 @@ import { BOOKING_URL, FORM_NAME } from "../lib/intakeFunnel";
 				stageInput.value = funnelState.stage;
 			}
 
-			if (brief && briefText) {
-				briefText.textContent = buildBrief(funnelState);
-				brief.hidden = false;
+			renderBrief();
+		});
+	}
+
+	for (const answerButton of answerButtons) {
+		answerButton.addEventListener("click", () => {
+			const answerName = answerButton.name;
+			if (answerName !== "timeframe" && answerName !== "start") return;
+
+			const nextAnswer =
+				funnelState[answerName] === answerButton.value ? undefined : answerButton.value;
+			funnelState[answerName] = nextAnswer;
+
+			for (const groupButton of answerButtons) {
+				if (groupButton.name === answerName) {
+					groupButton.setAttribute(
+						"aria-pressed",
+						String(groupButton.value === nextAnswer),
+					);
+				}
 			}
+
+			const captureInput = answerName === "timeframe" ? timeframeInput : startInput;
+			if (captureInput instanceof HTMLInputElement) {
+				captureInput.value = nextAnswer ?? "";
+			}
+
+			renderBrief();
 		});
 	}
 

@@ -8,8 +8,18 @@ export interface IntakeFunnelState {
 	start?: string;
 }
 
-export function buildBrief({ stage }: IntakeFunnelState): string {
-	return stage ? `Stage: ${stage}` : "";
+export function buildBrief({
+	stage,
+	timeframe,
+	start,
+}: IntakeFunnelState): string {
+	return [
+		stage ? `Stage: ${stage}` : "",
+		timeframe ? `Timeframe: ${timeframe}` : "",
+		start ? `Start: ${start}` : "",
+	]
+		.filter(Boolean)
+		.join(" · ");
 }
 
 export function buildBookingUrl(state: IntakeFunnelState): string {

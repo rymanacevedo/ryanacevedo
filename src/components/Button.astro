@@ -1,12 +1,15 @@
 ---
 interface Props {
 	type?: "button" | "submit" | "reset";
+	name?: string;
+	value?: string;
+	pressed?: boolean;
 }
 
-const { type = "button" } = Astro.props;
+const { type = "button", name, value, pressed } = Astro.props;
 ---
 
-<button type={type}><slot /></button>
+<button type={type} name={name} value={value} aria-pressed={pressed}><slot /></button>
 
 <style>
     button {
@@ -36,6 +39,11 @@ const { type = "button" } = Astro.props;
     button:hover::after,
     button:focus::after {
         background-color: hsla(var(--gray-999-basis), 0.3);
+    }
+
+    button[aria-pressed="true"] {
+        outline: 3px solid var(--accent-regular);
+        outline-offset: 3px;
     }
 
     @media (min-width: 20em) {
