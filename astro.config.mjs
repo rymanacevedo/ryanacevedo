@@ -15,6 +15,13 @@ const lastmodByPath = {
 // https://astro.build/config
 export default defineConfig({
 	site: siteUrl,
+	vite: {
+		server: {
+			watch: {
+				ignored: ["**/.sandcastle/worktrees/**"],
+			},
+		},
+	},
 	integrations: [
 		react(),
 		sitemap({

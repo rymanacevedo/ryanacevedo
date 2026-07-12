@@ -1,7 +1,7 @@
 {
 	"extends": "astro/tsconfigs/base",
 	"include": [".astro/types.d.ts", "**/*"],
-	"exclude": ["dist"],
+	"exclude": ["dist", ".sandcastle/worktrees"],
 	"compilerOptions": {
 		"strictNullChecks": true,
 		"allowJs": true,

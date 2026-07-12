@@ -1,12 +1,25 @@
 {
 	"$schema": "https://biomejs.dev/schemas/2.5.3/schema.json",
+	"overrides": [
+		{
+			"includes": ["**/*.astro"],
+			"linter": {
+				"rules": {
+					"correctness": {
+						"noUnusedImports": "off",
+						"noUnusedVariables": "off"
+					}
+				}
+			}
+		}
+	],
 	"vcs": {
 		"enabled": true,
 		"clientKind": "git",
 		"useIgnoreFile": true
 	},
 	"files": {
-		"includes": ["**", "!!**/dist"]
+		"includes": ["**", "!!**/dist", "!!**/.sandcastle/worktrees"]
 	},
 	"formatter": {
 		"enabled": true,
