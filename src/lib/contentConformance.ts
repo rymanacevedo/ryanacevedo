@@ -5,6 +5,15 @@ import { resolve } from "node:path";
 const builtSiteDirectory = resolve(import.meta.dir, "../../dist");
 const htmlFileGlob = new Bun.Glob("**/*.html");
 
+type ExpectedLink = {
+	href: string;
+	label: string;
+};
+
+type ParsedLink = ExpectedLink & {
+	classes: string[];
+};
+
 function readBuiltPages(): Map<string, string> {
 	const pageFiles = [...htmlFileGlob.scanSync({ cwd: builtSiteDirectory })];
 
@@ -75,6 +84,18 @@ function getElementMarkups(
 	);
 }
 
+function getAttribute(
+	attributes: string,
+	attributeName: string,
+): string | undefined {
+	return attributes.match(new RegExp(`${attributeName}=["']([^"']*)["']`))?.[1];
+}
+
+function getClassNames(attributes: string): string[] {
+	const className = getAttribute(attributes, "class");
+	return className === undefined ? [] : className.split(/\s+/);
+}
+
 function getRequiredBuiltPageElement(
 	pageRoute: string,
 	tagName: string,
@@ -92,7 +113,7 @@ function getRequiredBuiltPageElement(
 	return elementMarkup;
 }
 
-function getText(markup: string): string {
+function getTextContent(markup: string): string {
 	return markup
 		.replace(/<[^>]*>/g, " ")
 		.replace(/\s+/g, " ")
@@ -108,20 +129,18 @@ function getNavigableBuiltPages(): Map<string, string> {
 	);
 }
 
-function getLinks(
-	markup: string,
-): { classes: string[]; href: string; label: string }[] {
+function getLinks(markup: string): ParsedLink[] {
 	return [...markup.matchAll(/<a\b([^>]*)>([\s\S]*?)<\/a>/g)].map(
 		([, attributes = "", contents = ""]) => ({
-			classes:
-				attributes.match(/class=["']([^"']*)["']/)?.[1]?.split(/\s+/) ?? [],
-			href: attributes.match(/href=["']([^"']*)["']/)?.[1] ?? "",
-			label: contents
-				.replace(/<[^>]*>/g, " ")
-				.replace(/\s+/g, " ")
-				.trim(),
+			classes: getClassNames(attributes),
+			href: getAttribute(attributes, "href") ?? "",
+			label: getTextContent(contents),
 		}),
 	);
+}
+
+function toExpectedLinks(links: ParsedLink[]): ExpectedLink[] {
+	return links.map(({ href, label }) => ({ href, label }));
 }
 
 export function assertPhraseAbsentFromBuiltPages(phrase: string): void {
@@ -168,7 +187,7 @@ export function assertElementTextEqualsOnBuiltPage(
 		tagName,
 		className,
 	);
-	expect(getText(elementMarkup)).toBe(expectedText);
+	expect(getTextContent(elementMarkup)).toBe(expectedText);
 }
 
 export function assertPhraseAbsentFromBuiltPageElement(
@@ -189,16 +208,14 @@ export function assertLinkInBuiltPageElement(
 	pageRoute: string,
 	tagName: string,
 	className: string,
-	expectedLink: { href: string; label: string },
+	expectedLink: ExpectedLink,
 ): void {
 	const elementMarkup = getRequiredBuiltPageElement(
 		pageRoute,
 		tagName,
 		className,
 	);
-	expect(
-		getLinks(elementMarkup).map(({ href, label }) => ({ href, label })),
-	).toContainEqual(expectedLink);
+	expect(toExpectedLinks(getLinks(elementMarkup))).toContainEqual(expectedLink);
 }
 
 export function assertTagCountInBuiltPageElement(
@@ -232,22 +249,21 @@ export function assertElementCountOnBuiltPage(
 }
 
 export function assertPrimaryNavConformsOnBuiltPages(
-	expectedLinks: { href: string; label: string }[],
+	expectedLinks: ExpectedLink[],
 	ctaLabel: string,
 	githubHref: string,
 ): void {
 	for (const [pageFile, renderedHtml] of getNavigableBuiltPages()) {
 		const navMarkup = getElementMarkup(renderedHtml, "nav");
 		expect(navMarkup, `No primary nav found in ${pageFile}`).toBeDefined();
+		if (!navMarkup) throw new Error(`No primary nav found in ${pageFile}`);
 
-		const navLists = navMarkup
-			? getElementMarkups(navMarkup, "ul", "nav-items")
-			: [];
+		const navLists = getElementMarkups(navMarkup, "ul", "nav-items");
 		expect(navLists, `Missing nav variants in ${pageFile}`).toHaveLength(2);
 		for (const navListMarkup of navLists) {
 			const navLinks = getLinks(navListMarkup);
 			expect(
-				navLinks.map(({ href, label }) => ({ href, label })),
+				toExpectedLinks(navLinks),
 				`Unexpected primary nav links in ${pageFile}`,
 			).toEqual(expectedLinks);
 			expect(
@@ -255,9 +271,9 @@ export function assertPrimaryNavConformsOnBuiltPages(
 				`The ${ctaLabel} link is not a pill in ${pageFile}`,
 			).toContain("book-cta");
 		}
-		expect(
-			getLinks(navMarkup ?? "").some(({ href }) => href === githubHref),
-		).toBe(true);
+		expect(getLinks(navMarkup).some(({ href }) => href === githubHref)).toBe(
+			true,
+		);
 	}
 }
 
