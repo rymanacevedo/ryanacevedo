@@ -987,6 +987,8 @@ import { BOOKING_URL, FORM_NAME } from "../lib/intakeFunnel";
 
 		.steps {
 			grid-template-columns: 1fr 1fr;
+			/* Keep closed cards at natural height when a neighbor opens. */
+			align-items: start;
 		}
 
 		.impact-grid article {
