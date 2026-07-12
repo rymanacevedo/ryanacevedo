@@ -1,0 +1,201 @@
+---
+import { getCollection } from "astro:content";
+
+import CallToAction from "../components/CallToAction.astro";
+import ContactCTA from "../components/ContactCTA.astro";
+import Hero from "../components/Hero.astro";
+import Icon from "../components/Icon.astro";
+import PortfolioPreview from "../components/PortfolioPreview.astro";
+import BaseLayout from "../layouts/BaseLayout.astro";
+
+const aiTags = new Set(["ai", "machine learning", "llm"]);
+const caseStudies = (await getCollection("work"))
+	.filter((project) =>
+		project.data.tags.some((tag) => aiTags.has(tag.toLowerCase())),
+	)
+	.sort((a, b) => b.data.publishDate.valueOf() - a.data.publishDate.valueOf());
+
+const capabilities = [
+	{
+		icon: "terminal-window" as const,
+		title: "Custom AI agents",
+		description:
+			"Purpose-built agents that connect to your tools, follow your workflows, and help your team move faster.",
+	},
+	{
+		icon: "code" as const,
+		title: "AI-enabled products",
+		description:
+			"Fullstack applications that turn useful models into reliable experiences your customers and team can actually use.",
+	},
+	{
+		icon: "strategy" as const,
+		title: "Workflow automation",
+		description:
+			"Practical automation for repetitive, high-friction work—designed around measurable business value.",
+	},
+];
+---
+
+<BaseLayout
+	title="AI Development | Ryan Acevedo"
+	description="Custom AI agents, AI-enabled applications, and workflow automation built around real business outcomes."
+>
+	<div class="stack gap-20">
+		<main class="wrapper stack gap-20">
+			<header class="page-hero">
+				<Hero align="start">
+					<Fragment slot="title">
+						AI that earns its place in your <em>business</em>
+					</Fragment>
+					<Fragment slot="tagline">
+						I design and build custom AI agents and fullstack
+						applications that automate real work, extend your team's
+						capabilities, and create measurable value.
+					</Fragment>
+					<div class="hero-cta">
+						<CallToAction href="#case-studies">Explore case studies</CallToAction>
+					</div>
+				</Hero>
+			</header>
+
+			<section class="capabilities stack gap-8" aria-labelledby="capabilities-title">
+				<header class="section-heading stack gap-2">
+					<p class="eyebrow">What I build</p>
+					<h2 id="capabilities-title">From opportunity to production</h2>
+					<p>
+						The best AI work starts with the business problem—not the
+						model. I find the useful seam, build the product around it,
+						and help your team ship it safely.
+					</p>
+				</header>
+
+				<div class="capability-grid">
+					{
+						capabilities.map((capability) => (
+							<article class="capability-card stack gap-4">
+								<Icon
+									icon={capability.icon}
+									color="var(--accent-regular)"
+									size="2.5rem"
+									gradient
+								/>
+								<h3>{capability.title}</h3>
+								<p>{capability.description}</p>
+							</article>
+						))
+					}
+				</div>
+			</section>
+
+			<section id="case-studies" class="case-studies stack gap-8" aria-labelledby="case-studies-title">
+				<header class="section-heading stack gap-2">
+					<p class="eyebrow">Selected work</p>
+					<h2 id="case-studies-title">AI case studies</h2>
+					<p>
+						See how I have applied machine learning and modern software
+						engineering to improve real systems and workflows.
+					</p>
+				</header>
+
+				<ul class="case-study-grid">
+					{
+						caseStudies.map((project) => (
+							<li>
+								<PortfolioPreview project={project} />
+							</li>
+						))
+					}
+				</ul>
+			</section>
+		</main>
+
+		<ContactCTA />
+	</div>
+</BaseLayout>
+
+<style>
+	.page-hero {
+		max-width: 62rem;
+		padding-block: 2rem;
+	}
+
+	.page-hero em {
+		color: #ca7879;
+		font-weight: 300;
+	}
+
+	.hero-cta {
+		align-self: flex-start;
+		margin-top: 0.5rem;
+	}
+
+	.capabilities,
+	.case-studies {
+		scroll-margin-top: 2rem;
+	}
+
+	.section-heading {
+		max-width: 48rem;
+	}
+
+	.section-heading h2 {
+		font-size: var(--text-3xl);
+	}
+
+	.section-heading > p:last-child,
+	.capability-card p {
+		color: var(--gray-400);
+	}
+
+	.eyebrow {
+		color: var(--accent-regular);
+		font-family: var(--font-brand);
+		font-size: var(--text-sm);
+		font-weight: 700;
+		letter-spacing: 0.12em;
+		text-transform: uppercase;
+	}
+
+	.capability-grid,
+	.case-study-grid {
+		display: grid;
+		gap: 1.5rem;
+	}
+
+	.capability-card {
+		padding: 1.5rem;
+		border: 1px solid var(--gray-800);
+		border-radius: 0.75rem;
+		background-color: var(--gray-999_40);
+		box-shadow: var(--shadow-sm);
+	}
+
+	.capability-card h3 {
+		font-size: var(--text-xl);
+	}
+
+	.case-study-grid {
+		padding: 0;
+		list-style: none;
+	}
+
+	@media (min-width: 50em) {
+		.page-hero {
+			padding-block: 5rem;
+		}
+
+		.capability-grid {
+			grid-template-columns: repeat(3, minmax(0, 1fr));
+		}
+
+		.capability-card {
+			padding: 2rem;
+			border-radius: 1.5rem;
+		}
+
+		.case-study-grid {
+			grid-template-columns: repeat(2, minmax(0, 1fr));
+		}
+	}
+</style>
