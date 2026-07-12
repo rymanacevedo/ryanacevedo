@@ -1,9 +1,9 @@
 ---
-import BaseLayout from "../layouts/BaseLayout.astro";
+import { Image } from "astro:assets";
 
 import ContactCTA from "../components/ContactCTA.astro";
 import Hero from "../components/Hero.astro";
-import { Image } from "astro:assets";
+import BaseLayout from "../layouts/BaseLayout.astro";
 ---
 
 <BaseLayout title="About | Ryan Acevedo" description="About Ryan Acevedo">
@@ -91,7 +91,7 @@ import { Image } from "astro:assets";
 				</div>
 			</section>
 		</main>
-		<ContactCTA message="Ready to make an impact?" />
+		<ContactCTA />
 	</div>
 </BaseLayout>
 
