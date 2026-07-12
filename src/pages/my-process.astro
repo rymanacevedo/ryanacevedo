@@ -276,10 +276,12 @@ import { BOOKING_URL, FORM_NAME } from "../lib/intakeFunnel";
 <script>
 	import {
 		BOOKING_URL,
+		STAGES,
 		buildBookingUrl,
 		buildBrief,
 		buildFormPayload,
 		getPromotedTestimonial,
+		isStage,
 		type IntakeFunnelState,
 	} from "../lib/intakeFunnel";
 
@@ -350,11 +352,25 @@ import { BOOKING_URL, FORM_NAME } from "../lib/intakeFunnel";
 	if (!briefText) console.warn("Company stage brief text target is missing");
 	if (!testimonialStack) console.warn("Testimonial stack is missing");
 	if (testimonials.length !== 4) console.warn("Expected four testimonials");
+	for (const stageCard of stageCards) {
+		if (!isStage(stageCard.dataset.stage)) {
+			console.warn("Unknown company stage", stageCard.dataset.stage);
+		}
+	}
+	const testimonialIds = testimonials.map(
+		(testimonial) => testimonial.dataset.testimonial,
+	);
+	for (const stage of STAGES) {
+		const expectedId = getPromotedTestimonial(stage);
+		const matches = testimonialIds.filter((id) => id === expectedId).length;
+		if (matches === 0) console.warn("Missing testimonial", expectedId);
+		if (matches > 1) console.warn("Duplicate testimonial", expectedId);
+	}
 
 	for (const stageCard of stageCards) {
 		stageCard.addEventListener("toggle", () => {
 			const stage = stageCard.dataset.stage;
-			if (!stage) return;
+			if (!isStage(stage)) return;
 
 			if (!stageCard.open) {
 				if (funnelState.stage !== stage) return;

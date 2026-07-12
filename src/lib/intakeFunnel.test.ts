@@ -5,10 +5,12 @@ import {
 	buildBrief,
 	buildFormPayload,
 	getPromotedTestimonial,
+	type Stage,
+	type TestimonialId,
 } from "./intakeFunnel";
 
 describe("getPromotedTestimonial", () => {
-	test.each([
+	test.each<[Stage, TestimonialId]>([
 		["Just starting", "seed"],
 		["Scaling", "scaling"],
 		["Established business", "established"],
@@ -19,6 +21,8 @@ describe("getPromotedTestimonial", () => {
 
 	test("returns no promotion when no stage is selected", () => {
 		expect(getPromotedTestimonial()).toBeUndefined();
+		expect(getPromotedTestimonial("")).toBeUndefined();
+		expect(getPromotedTestimonial("bogus")).toBeUndefined();
 	});
 });
 

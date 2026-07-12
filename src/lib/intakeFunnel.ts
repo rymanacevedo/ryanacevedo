@@ -1,16 +1,24 @@
 export const BOOKING_URL = "https://cal.com/avocadotechgroup/discovery-call";
 export const FORM_NAME = "project-intake";
+export const STAGES = [
+	"Just starting",
+	"Scaling",
+	"Established business",
+	"Enterprise",
+] as const;
+
+export type Stage = (typeof STAGES)[number];
 
 export interface IntakeFunnelState {
 	email: string;
-	stage?: string;
+	stage?: Stage;
 	timeframe?: string;
 	start?: string;
 }
 
 export type TestimonialId = "seed" | "scaling" | "established" | "enterprise";
 
-const TESTIMONIAL_BY_STAGE: Record<string, TestimonialId> = {
+const TESTIMONIAL_BY_STAGE: Record<Stage, TestimonialId> = {
 	"Just starting": "seed",
 	Scaling: "scaling",
 	"Established business": "established",
@@ -20,7 +28,11 @@ const TESTIMONIAL_BY_STAGE: Record<string, TestimonialId> = {
 export function getPromotedTestimonial(
 	stage?: string,
 ): TestimonialId | undefined {
-	return stage ? TESTIMONIAL_BY_STAGE[stage] : undefined;
+	return isStage(stage) ? TESTIMONIAL_BY_STAGE[stage] : undefined;
+}
+
+export function isStage(stage?: string): stage is Stage {
+	return STAGES.includes(stage as Stage);
 }
 
 export function buildBrief({
