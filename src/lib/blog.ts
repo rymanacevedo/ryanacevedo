@@ -1,8 +1,16 @@
-const BLOG_CATEGORIES = new Set([
+const BLOG_CATEGORIES = [
 	"ai-engineering",
 	"infrastructure",
 	"tooling",
-]);
+] as const;
+
+type BlogCategory = (typeof BLOG_CATEGORIES)[number];
+
+export interface BlogPostRoute {
+	category: BlogCategory;
+	slug: string;
+	path: string;
+}
 
 export const BLOG_REDIRECTS = {
 	"/blog/posts/2024/infraimbuilding2024":
@@ -20,13 +28,13 @@ export function formatPublishDate(date: Date): string {
 	return PUBLISH_DATE_FORMAT.format(date);
 }
 
-export function getBlogPostRoute(id: string): {
-	category: string;
-	slug: string;
-	path: string;
-} {
+function isBlogCategory(category: string): category is BlogCategory {
+	return BLOG_CATEGORIES.some((blogCategory) => blogCategory === category);
+}
+
+export function getBlogPostRoute(id: string): BlogPostRoute {
 	const [category, slug, ...rest] = id.split("/");
-	if (!category || !slug || rest.length > 0 || !BLOG_CATEGORIES.has(category)) {
+	if (!category || !slug || rest.length > 0 || !isBlogCategory(category)) {
 		throw new Error(`Unknown blog category in post id: ${id}`);
 	}
 

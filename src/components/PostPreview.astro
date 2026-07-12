@@ -14,7 +14,7 @@ const { data, id } = Astro.props.post;
 		<span class="title">{data.title}</span>
 		<time datetime={data.publishDate.toISOString()}>{formatPublishDate(data.publishDate)}</time>
 	</div>
-	<img src={data.img} alt={data.img_alt || ''} loading="lazy" decoding="async" />
+	<img src={data.img} alt={data.img_alt || ""} loading="lazy" decoding="async" />
 </a>
 
 <style>
