@@ -377,6 +377,7 @@ import { BOOKING_URL, FORM_NAME } from "../lib/intakeFunnel";
 		getRevealScrollTarget,
 		getRevealedQuestions,
 		isStage,
+		shouldScrollOpenedCard,
 		type IntakeFunnelState,
 		type QuestionId,
 	} from "../lib/intakeFunnel";
@@ -575,6 +576,26 @@ import { BOOKING_URL, FORM_NAME } from "../lib/intakeFunnel";
 			renderBrief();
 			renderQuestions();
 			renderTestimonials();
+
+			// Measure on the next frame so a collapsing sibling has settled.
+			requestAnimationFrame(() => {
+				if (!stageCard.open) return;
+				const cardRect = stageCard.getBoundingClientRect();
+				if (
+					shouldScrollOpenedCard(
+						cardRect.top,
+						cardRect.bottom,
+						window.innerHeight,
+					)
+				) {
+					stageCard.scrollIntoView({
+						behavior: prefersReducedMotion.matches
+							? "auto"
+							: "smooth",
+						block: "start",
+					});
+				}
+			});
 		});
 	}
 
@@ -811,6 +832,11 @@ import { BOOKING_URL, FORM_NAME } from "../lib/intakeFunnel";
 		background: var(--gradient-subtle);
 		box-shadow: var(--shadow-sm);
 		text-align: left;
+	}
+
+	.steps details {
+		/* Breathing room above a card scrolled to the viewport top. */
+		scroll-margin-top: 1rem;
 	}
 
 	.steps summary {

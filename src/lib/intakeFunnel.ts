@@ -47,6 +47,15 @@ export function getRevealScrollTarget(
 	return newlyRevealed.includes("start") ? "start" : undefined;
 }
 
+// A fully visible answer must not move the page; only a clipped card earns a scroll.
+export function shouldScrollOpenedCard(
+	cardTop: number,
+	cardBottom: number,
+	viewportHeight: number,
+): boolean {
+	return cardTop < 0 || cardBottom > viewportHeight;
+}
+
 const TESTIMONIAL_BY_STAGE: Record<Stage, TestimonialId> = {
 	"Just starting": "seed",
 	Scaling: "scaling",

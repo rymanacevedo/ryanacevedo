@@ -8,6 +8,7 @@ import {
 	getRevealedQuestions,
 	getRevealScrollTarget,
 	type Stage,
+	shouldScrollOpenedCard,
 	type TestimonialId,
 } from "./intakeFunnel";
 
@@ -70,6 +71,28 @@ describe("getRevealScrollTarget", () => {
 
 	test("has no target when nothing is newly revealed", () => {
 		expect(getRevealScrollTarget([])).toBeUndefined();
+	});
+});
+
+describe("shouldScrollOpenedCard", () => {
+	test("stays put when the opened card is fully visible", () => {
+		expect(shouldScrollOpenedCard(100, 500, 800)).toBe(false);
+	});
+
+	test("scrolls when the card bottom is clipped by the viewport", () => {
+		expect(shouldScrollOpenedCard(400, 900, 800)).toBe(true);
+	});
+
+	test("scrolls when the card top is above the viewport", () => {
+		expect(shouldScrollOpenedCard(-50, 300, 800)).toBe(true);
+	});
+
+	test("scrolls when the card is taller than the viewport", () => {
+		expect(shouldScrollOpenedCard(-50, 900, 800)).toBe(true);
+	});
+
+	test("stays put when the card exactly fits the viewport", () => {
+		expect(shouldScrollOpenedCard(0, 800, 800)).toBe(false);
 	});
 });
 
