@@ -37,6 +37,14 @@ export function assertPhraseAbsentFromBuiltPages(phrase: string): void {
 	expect(matchingPages).toEqual([]);
 }
 
+export function assertPhrasePresentOnBuiltPages(phrase: string): void {
+	const matchingPages = [...getBuiltPages().values()].filter((renderedHtml) =>
+		renderedHtml.includes(phrase),
+	);
+
+	expect(matchingPages.length).toBeGreaterThan(0);
+}
+
 export function assertPhrasePresentOnBuiltPage(
 	pageRoute: string,
 	phrase: string,

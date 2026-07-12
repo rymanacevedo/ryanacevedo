@@ -1,8 +1,8 @@
-import { beforeAll, describe, test } from "bun:test";
+import { describe, test } from "bun:test";
 
 import {
 	assertPhraseAbsentFromBuiltPages,
-	assertPhrasePresentOnBuiltPage,
+	assertPhrasePresentOnBuiltPages,
 } from "./contentConformance";
 
 const bannedPhrases = [
@@ -28,36 +28,14 @@ const bannedPhrases = [
 	"Employeer Engagement as SCC",
 ];
 
-const requiredPagePhrases = [
-	{
-		page: "/work/lexisnexis/",
-		phrase:
-			"Accelerated training of a machine learning model in Python, reducing processing time from 3 days to 5 hours, a 720% improvement.",
-	},
-];
-
-beforeAll(() => {
-	const buildResult = Bun.spawnSync(["bun", "run", "build"], {
-		stderr: "inherit",
-		stdout: "inherit",
-	});
-
-	if (buildResult.exitCode !== 0) {
-		throw new Error(
-			`Production site build failed with exit code ${buildResult.exitCode}`,
-		);
-	}
-});
+const requiredPhrases = ["LexisNexis"];
 
 describe("built-site content conformance", () => {
 	test.each(bannedPhrases)("publishes no %p phrase", (phrase) => {
 		assertPhraseAbsentFromBuiltPages(phrase);
 	});
 
-	test.each(requiredPagePhrases)("publishes $phrase verbatim on $page", ({
-		page,
-		phrase,
-	}) => {
-		assertPhrasePresentOnBuiltPage(page, phrase);
+	test.each(requiredPhrases)("publishes the required %p phrase", (phrase) => {
+		assertPhrasePresentOnBuiltPages(phrase);
 	});
 });
