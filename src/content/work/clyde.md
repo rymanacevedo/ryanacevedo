@@ -4,18 +4,17 @@ publishDate: 2026-06-12
 img: /assets/clyde-platform.png
 img_alt: Clyde AI logo
 description: |
-  Building for what consultants actually need: an AI co-pilot.
+  Building for what consultants actually need: an AI partner.
 tags:
   - AI
-  - LLM
+  - LLMs
   - TypeScript
-  - Python
   - GCP
   - LangGraph
   - LangChain
 ---
 
-At Clyde AI, I collaborated on building a platform for consultants trying to navigate the difficult process of solo consultants coming to decisions and completing tasks.
+Clyde solves a specific in the consultant space. I collaborated on building a platform for consultants trying to navigate the difficult process of solo consultants coming to decisions and completing tasks.
 
 ## Key Projects and Contributions
 
