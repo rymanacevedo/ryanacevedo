@@ -73,6 +73,10 @@ const bannedPhrases = [
 
 const requiredPhrases = [
 	{
+		route: "/blog/tooling/bunaddiction",
+		phrase: "A 78% reduction — about 4.5× faster!",
+	},
+	{
 		route: "/work/clyde",
 		phrase: "nine weeks — five LangGraph agents",
 	},
