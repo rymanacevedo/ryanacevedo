@@ -1,5 +1,6 @@
 ---
 interface Props {
+	variant?: "primary" | "secondary";
 	type?: "button" | "submit" | "reset";
 	name?: string;
 	value?: string;
@@ -10,6 +11,7 @@ interface Props {
 }
 
 const {
+	variant = "primary",
 	type = "button",
 	name,
 	value,
@@ -21,6 +23,7 @@ const {
 ---
 
 <button
+	class={variant}
 	type={type}
 	name={name}
 	value={value}
@@ -31,49 +34,69 @@ const {
 ><slot /></button>
 
 <style>
-    button {
-        display: flex;
-        place-content: center;
-        padding: 2rem;
-        color: var(--accent-text-over);
-        text-decoration: none;
-        line-height: 1.1;
-        border-radius: 999rem;
-        background: var(--gradient-accent-orange);
-        box-shadow: var(--shadow-md);
-        cursor: pointer;
-        transition:
-            transform var(--theme-transition),
-            box-shadow var(--theme-transition);
-        position: relative;
-    }
-    button::after {
-        content: "";
-        position: absolute;
-        inset: 0;
-        pointer-events: none;
-        transition: background-color var(--theme-transition);
-        mix-blend-mode: overlay;
-    }
-    button:hover::after,
-    button:focus::after {
-        background-color: hsla(var(--gray-999-basis), 0.3);
-    }
+	button {
+		position: relative;
+		display: flex;
+		place-content: center;
+		padding: 2rem;
+		border-radius: 999rem;
+		text-decoration: none;
+		line-height: 1.1;
+		cursor: pointer;
+		transition:
+			background-color var(--theme-transition),
+			border-color var(--theme-transition),
+			box-shadow var(--theme-transition),
+			transform var(--theme-transition);
+	}
 
-    button[aria-pressed="true"] {
-        outline: 3px solid var(--accent-regular);
-        outline-offset: 3px;
-    }
+	.primary {
+		color: var(--accent-text-over);
+		background: var(--gradient-accent-orange);
+		box-shadow: var(--shadow-md);
+	}
 
-    @media (min-width: 20em) {
-        button {
-            font-size: var(--text-lg);
-        }
-    }
-    @media (min-width: 50em) {
-        button {
-            padding: 1.125rem 2.5rem;
-            font-size: var(--text-xl);
-        }
-    }
+	.primary::after {
+		content: '';
+		position: absolute;
+		inset: 0;
+		pointer-events: none;
+		transition: background-color var(--theme-transition);
+		mix-blend-mode: overlay;
+	}
+
+	.primary:hover::after,
+	.primary:focus::after {
+		background-color: hsla(var(--gray-999-basis), 0.3);
+	}
+
+	.secondary {
+		color: var(--link-color);
+		border: 2px solid var(--link-color);
+		background: transparent;
+		box-shadow: var(--shadow-sm);
+	}
+
+	.secondary:hover,
+	.secondary:focus {
+		background-color: var(--accent-subtle-overlay);
+	}
+
+	button[aria-pressed="true"] {
+		outline: 3px solid var(--accent-regular);
+		outline-offset: 3px;
+	}
+
+	@media (min-width: 20em) {
+		button {
+			font-size: var(--text-lg);
+		}
+	}
+
+	@media (min-width: 50em) {
+		button {
+			padding: 1.125rem 2.5rem;
+			font-size: var(--text-xl);
+		}
+	}
 </style>
