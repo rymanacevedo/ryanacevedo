@@ -24,12 +24,12 @@ At National Park College, I transformed the institution's web presence by develo
     - Refactored the CSS architecture using BEM methodologies and Tachyons CSS, cutting the CSS bundle from 1MB to 30KB.
 
 - **Accessibility and SEO Enhancements**:
-    - Conducted a comprehensive Lighthouse audit, improving the site’s performance from a D rating to an A rating.
-    - Resolved over 4,200 accessibility issues, ensuring compliance with modern web standards.
+    - Conducted a comprehensive Lighthouse audit and brought the site up to a strong performance rating.
+    - Resolved a large backlog of accessibility issues, improving compliance with modern web standards.
     - Optimized search functionality with Funnelback, making critical resources easier for students to find.
 
 - **Automation and Tokenization**:
-    - Designed and standardized all web assets using Style Dictionary, implementing tokenization that allowed website updates in seconds rather than days.
+    - Designed and standardized all web assets using Style Dictionary, implementing tokenization that made website updates dramatically faster.
     - Introduced automated workflows for consistent and rapid deployment of web changes.
 
 - **User Engagement and Analytics**:

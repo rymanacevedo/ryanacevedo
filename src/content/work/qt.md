@@ -20,7 +20,7 @@ At Qualified Technology, I focused on developing responsive, high-performing Wor
     - Delivered tailored solutions for a variety of clients, including a large cabinet door shop, doctors, dentists, and coaches, with a focus on showcasing their services effectively.
 
 - **Advanced Features**:
-    - Developed a JavaScript-based product configurator for a cabinet door shop, enabling over 10,000 possible configurations and significantly improving user experience.
+    - Developed a JavaScript-based product configurator for a cabinet door shop, supporting a broad range of product options while simplifying the customer experience.
     - Built e-commerce platforms with intuitive frontend interactions that supported online sales.
 
 - **Frontend Performance Optimization**:

@@ -66,6 +66,18 @@ export function assertPhrasePresentOnBuiltPage(
 	);
 }
 
+export function assertPhrasePresentOnlyOnBuiltPage(
+	pageRoute: string,
+	phrase: string,
+): void {
+	const pageFile = getPageFileForRoute(pageRoute);
+	const matchingPages = [...getBuiltPages().entries()]
+		.filter(([, renderedHtml]) => renderedHtml.includes(phrase))
+		.map(([matchingPageFile]) => matchingPageFile);
+
+	expect(matchingPages).toEqual([pageFile]);
+}
+
 export function assertStaticRedirect(fromRoute: string, toRoute: string): void {
 	const pageFile = getPageFileForRoute(fromRoute);
 	const renderedHtml = getBuiltPages().get(pageFile);

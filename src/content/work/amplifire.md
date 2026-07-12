@@ -4,19 +4,19 @@ publishDate: 2019-10-02
 img: /assets/amplifire.png
 img_alt: Showcasing login screen of amplifire.
 description: |
-  Modernized legacy systems, improved UI/UX design with React and Chakra UI, and implemented test-driven development while optimizing API performance and frontend security for 200,000+ users.
+  Modernized legacy systems, improved UI/UX design with React and Chakra UI, and implemented test-driven development while optimizing API performance and frontend security for a large user base.
 tags:
   - UI/UX
   - React
   - Frontend
   - DevOps
 ---
-At Amplifire, I modernized a massive legacy system, enhanced UI/UX design, and implemented robust testing and API optimization. My work improved the platform's performance, usability, and scalability for over 200,000 users.
+At Amplifire, I modernized a massive legacy system, enhanced UI/UX design, and implemented robust testing and API optimization. My work improved the platform's performance, usability, and scalability for its broad user base.
 
 ## Key Projects and Contributions
 
 - **Legacy System Modernization**:
-    - Migrated over 1 million lines of legacy Java code to a modern React framework using Remix and React Router.
+    - Helped migrate a large legacy Java codebase to a modern React framework using Remix and React Router.
     - Implemented server-side rendering (SSR) and client-side rendering (CSR) techniques to deliver faster page loads.
 
 - **UI/UX Design and Optimization**:
@@ -25,10 +25,10 @@ At Amplifire, I modernized a massive legacy system, enhanced UI/UX design, and i
 
 - **Testing and Code Quality**:
     - Led the implementation of Playwright and Vitest, achieving 90% test coverage and strengthening release confidence.
-    - Conducted over 50 code reviews monthly and used SonarQube, ESLint, and Prettier to improve code quality.
+    - Conducted 50+ code reviews monthly and used SonarQube, ESLint, and Prettier to improve code quality.
 
 - **API Development and Optimization**:
-    - Engineered consuming REST APIs with Axios, integrating over 50 endpoints to deliver real-time data to users.
+    - Built REST API integrations with Axios to deliver real-time data across the application.
     - Optimized API performance and enhanced frontend security and validation with Google reCAPTCHA and Zod.
 
 - **Collaboration and Documentation**:

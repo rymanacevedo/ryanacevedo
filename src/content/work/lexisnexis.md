@@ -25,7 +25,7 @@ At LexisNexis, I collaborated on projects that advanced machine learning capabil
     - Integrated AWS EC2 instances, Flask, and Lambda into a scalable processing architecture.
 
 - **Frontend and Data Annotation Tools**:
-    - Constructed intuitive Java GUI interfaces for data annotation, allowing legal editors to analyze documents in under an hour.
+    - Constructed intuitive Java GUI interfaces that helped legal editors analyze documents efficiently.
     - Ensured responsive and user-friendly design to streamline workflows and improve accuracy.
 
 - **Agile Methodologies**:
