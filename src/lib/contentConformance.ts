@@ -38,11 +38,11 @@ export function assertPhraseAbsentFromBuiltPages(phrase: string): void {
 }
 
 export function assertPhrasePresentOnBuiltPages(phrase: string): void {
-	const matchingPages = [...getBuiltPages().values()].filter((renderedHtml) =>
+	const isPresent = [...getBuiltPages().values()].some((renderedHtml) =>
 		renderedHtml.includes(phrase),
 	);
 
-	expect(matchingPages.length).toBeGreaterThan(0);
+	expect(isPresent).toBe(true);
 }
 
 export function assertPhrasePresentOnBuiltPage(
