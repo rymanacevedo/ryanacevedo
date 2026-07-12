@@ -29,9 +29,17 @@ const bannedPhrases = [
 	"1400%",
 	"720% improvement",
 	"78% increase",
+	"clients I've had the pleasure",
+	"multiple businesses",
+	"proven track record of building successful",
 ];
 
-const requiredPhrases = ["LexisNexis", "from 3 days to 5 hours", "1MB to 30KB"];
+const requiredPhrases = [
+	"LexisNexis",
+	"from 3 days to 5 hours",
+	"1MB to 30KB",
+	"Organizations I've supported",
+];
 
 describe("built-site content conformance", () => {
 	test.each(bannedPhrases)("publishes no %p phrase", (phrase) => {
