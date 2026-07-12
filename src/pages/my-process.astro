@@ -1,7 +1,7 @@
 ---
 import BaseLayout from "../layouts/BaseLayout.astro";
-import ContactCTA from "../components/ContactCTA.astro";
 import Button from "../components/Button.astro";
+import { BOOKING_URL } from "../lib/intakeFunnel";
 ---
 
 <BaseLayout
@@ -193,9 +193,53 @@ import Button from "../components/Button.astro";
 				<p>- CEO of Tiding Health</p>
 			</section>
 		</main>
-		<ContactCTA />
+		<aside class="contact-section" aria-labelledby="contact-heading">
+			<div>
+				<h2 id="contact-heading">Want to work together?</h2>
+				<p>Tell me where to follow up, then choose a time that works for you.</p>
+			</div>
+			<form
+				class="contact-form"
+				data-booking-form
+				action={BOOKING_URL}
+				method="get"
+			>
+				<label for="contact-email">Email</label>
+				<div class="contact-fields">
+					<input
+						id="contact-email"
+						name="email"
+						type="email"
+						autocomplete="email"
+						placeholder="you@example.com"
+						required
+					/>
+					<Button>Let's talk</Button>
+				</div>
+				<p class="disclosure">I'll only use this to follow up about your project</p>
+				<noscript>
+					<a href={BOOKING_URL}>
+						Book a discovery call directly
+					</a>
+				</noscript>
+			</form>
+		</aside>
 	</div>
 </BaseLayout>
+
+<script>
+	import { buildBookingUrl } from "../lib/intakeFunnel";
+
+	const bookingForm = document.querySelector<HTMLFormElement>("[data-booking-form]");
+	const emailInput = bookingForm?.elements.namedItem("email");
+
+	if (bookingForm && emailInput instanceof HTMLInputElement) {
+		bookingForm.addEventListener("submit", (event) => {
+			event.preventDefault();
+			window.location.assign(buildBookingUrl({ email: emailInput.value }));
+		});
+	}
+</script>
 
 <style>
 	.orange-accent {
@@ -327,6 +371,57 @@ import Button from "../components/Button.astro";
 		background: rgba(118, 17, 166, 0.08);
 	}
 
+	.contact-section {
+		display: grid;
+		gap: 2rem;
+		padding: 5rem 1.5rem;
+		border-block: 1px solid var(--gray-800);
+		background-color: var(--gray-999_40);
+		box-shadow: var(--shadow-sm);
+	}
+
+	.contact-section > div,
+	.contact-form {
+		display: flex;
+		flex-direction: column;
+		gap: 0.75rem;
+	}
+
+	.contact-section h2 {
+		font-size: var(--text-3xl);
+	}
+
+	.contact-form label {
+		font-family: var(--font-brand);
+		font-weight: 600;
+		color: var(--gray-100);
+	}
+
+	.contact-fields {
+		display: grid;
+		gap: 1rem;
+	}
+
+	.contact-fields input {
+		min-width: 0;
+		padding: 1rem 1.25rem;
+		border: 1px solid var(--gray-700);
+		border-radius: 999rem;
+		background: var(--gray-999);
+		color: var(--gray-100);
+		font: inherit;
+	}
+
+	.contact-fields input:focus {
+		outline: 3px solid var(--accent-overlay);
+		border-color: var(--accent-regular);
+	}
+
+	.disclosure {
+		font-size: var(--text-sm);
+		color: var(--gray-400);
+	}
+
 	@media (min-width: 50em) {
 		.process-page {
 			gap: 4rem;
@@ -348,6 +443,16 @@ import Button from "../components/Button.astro";
 
 		.impact-grid {
 			grid-template-columns: 1fr 1fr;
+		}
+
+		.contact-section {
+			grid-template-columns: minmax(0, 1fr) minmax(25rem, 1fr);
+			align-items: center;
+			padding: 7.5rem max(1.5rem, calc((100% - 80rem) / 2));
+		}
+
+		.contact-fields {
+			grid-template-columns: minmax(0, 1fr) auto;
 		}
 	}
 </style>
