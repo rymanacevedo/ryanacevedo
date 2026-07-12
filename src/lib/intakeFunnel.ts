@@ -18,6 +18,20 @@ export interface IntakeFunnelState {
 
 export type TestimonialId = "seed" | "scaling" | "established" | "enterprise";
 
+export type QuestionId = "timeframe" | "start";
+
+export function getRevealedQuestions(
+	state: IntakeFunnelState,
+	alreadyRevealed: readonly QuestionId[] = [],
+): QuestionId[] {
+	const revealed: QuestionId[] = [];
+	if (state.stage || alreadyRevealed.includes("timeframe"))
+		revealed.push("timeframe");
+	if (state.timeframe || alreadyRevealed.includes("start"))
+		revealed.push("start");
+	return revealed;
+}
+
 const TESTIMONIAL_BY_STAGE: Record<Stage, TestimonialId> = {
 	"Just starting": "seed",
 	Scaling: "scaling",

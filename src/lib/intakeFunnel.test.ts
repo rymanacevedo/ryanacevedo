@@ -5,9 +5,38 @@ import {
 	buildBrief,
 	buildFormPayload,
 	getPromotedTestimonial,
+	getRevealedQuestions,
 	type Stage,
 	type TestimonialId,
 } from "./intakeFunnel";
+
+describe("getRevealedQuestions", () => {
+	test("reveals no follow-up questions before any answers", () => {
+		expect(getRevealedQuestions({ email: "" })).toEqual([]);
+	});
+
+	test("reveals the timeframe question once a stage is selected", () => {
+		expect(getRevealedQuestions({ email: "", stage: "Scaling" })).toEqual([
+			"timeframe",
+		]);
+	});
+
+	test("reveals the start question once a timeframe is selected", () => {
+		expect(
+			getRevealedQuestions({
+				email: "",
+				stage: "Scaling",
+				timeframe: "1-3 months",
+			}),
+		).toEqual(["timeframe", "start"]);
+	});
+
+	test("keeps revealed questions revealed after answers are cleared", () => {
+		expect(getRevealedQuestions({ email: "" }, ["timeframe", "start"])).toEqual(
+			["timeframe", "start"],
+		);
+	});
+});
 
 describe("getPromotedTestimonial", () => {
 	test.each<[Stage, TestimonialId]>([
