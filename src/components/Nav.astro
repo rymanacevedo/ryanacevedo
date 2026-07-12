@@ -1,20 +1,32 @@
 ---
-import Icon from './Icon.astro';
-import ThemeToggle from './ThemeToggle.astro';
-import type { iconPaths } from './IconPaths';
+import Icon from "./Icon.astro";
+import type { iconPaths } from "./IconPaths";
+import ThemeToggle from "./ThemeToggle.astro";
 
 /** Main menu items */
-const textLinks: { label: string; href: string }[] = [
-	{ label: 'Home', href: '/' },
-	{ label: 'Work', href: '/work/' },
-	{ label: 'About', href: '/about/' },
-	{ label: 'Blog', href: '/blog/'}
+const textLinks: { label: string; href: string; cta?: boolean }[] = [
+	// Points at the existing AI development page until the dedicated
+	// services page ships (map #51), then this href moves to /services/.
+	{ label: "Services", href: "/ai-development/" },
+	{ label: "Case Studies", href: "/work/" },
+	{ label: "Process", href: "/my-process/" },
+	{ label: "About", href: "/about/" },
+	{ label: "Blog", href: "/blog/" },
+	{ label: "Book a call", href: "/book/", cta: true },
 ];
 
 /** Icon links to social media — edit these with links to your profiles! */
-const iconLinks: { label: string; href: string; icon: keyof typeof iconPaths }[] = [
+const iconLinks: {
+	label: string;
+	href: string;
+	icon: keyof typeof iconPaths;
+}[] = [
 	// { label: 'Twitter', href: 'https://twitter.com/me', icon: 'twitter-logo' },
-	{ label: 'GitHub', href: 'https://github.com/rymanacevedo', icon: 'github-logo' },
+	{
+		label: "GitHub",
+		href: "https://github.com/rymanacevedo",
+		icon: "github-logo",
+	},
 	// { label: 'CodePen', href: 'https://codepen.io/me', icon: 'codepen-logo' },
 	// { label: 'dribbble', href: 'https://dribbble.com/me', icon: 'dribbble-logo' },
 	// { label: 'YouTube', href: 'https://www.youtube.com/@me/', icon: 'youtube-logo' },
@@ -39,13 +51,14 @@ const iconLinks: { label: string; href: string; icon: keyof typeof iconPaths }[]
 	<noscript>
 		<ul class="nav-items">
 			{
-				textLinks.map(({ label, href }) => (
+				textLinks.map(({ label, href, cta }) => (
 					<li>
 						<a
 							aria-current={Astro.url.pathname === href}
 							class:list={[
 								'link',
 								{
+									'book-cta': cta,
 									active:
 										Astro.url.pathname === href ||
 										(href !== '/' && Astro.url.pathname.startsWith(href)),
@@ -77,13 +90,14 @@ const iconLinks: { label: string; href: string; icon: keyof typeof iconPaths }[]
 	<div id="menu-content" hidden>
 		<ul class="nav-items">
 			{
-				textLinks.map(({ label, href }) => (
+				textLinks.map(({ label, href, cta }) => (
 					<li>
 						<a
 							aria-current={Astro.url.pathname === href}
 							class:list={[
 								'link',
 								{
+									'book-cta': cta,
 									active:
 										Astro.url.pathname === href ||
 										(href !== '/' && Astro.url.pathname.startsWith(href)),
@@ -238,6 +252,14 @@ const iconLinks: { label: string; href: string; icon: keyof typeof iconPaths }[]
 		color: var(--gray-0);
 	}
 
+	.link.book-cta {
+		align-self: flex-start;
+		color: var(--accent-text-over);
+		background: var(--gradient-accent-orange);
+		border-radius: 999rem;
+		padding: 0.5rem 1rem;
+	}
+
 	.menu-footer {
 		--icon-size: var(--text-xl);
 		--icon-padding: 0.5rem;
@@ -335,6 +357,19 @@ const iconLinks: { label: string; href: string; icon: keyof typeof iconPaths }[]
 		.link.active {
 			color: var(--accent-text-over);
 			background-color: var(--accent-regular);
+		}
+
+		.link.book-cta,
+		.link.book-cta.active {
+			color: var(--accent-text-over);
+			background: var(--gradient-accent-orange);
+			box-shadow: var(--shadow-sm);
+		}
+
+		.link.book-cta:hover,
+		.link.book-cta:focus {
+			color: var(--accent-text-over);
+			filter: brightness(1.1);
 		}
 
 		.menu-footer {

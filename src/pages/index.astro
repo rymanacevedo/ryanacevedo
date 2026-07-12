@@ -2,12 +2,11 @@
 import { Image } from "astro:assets";
 import { getCollection } from "astro:content";
 // Page section components
+import CallToAction from "../components/CallToAction.astro";
 import ContactCTA from "../components/ContactCTA.astro";
 // Component Imports
 import Grid from "../components/Grid.astro";
-import Hero from "../components/Hero.astro";
 import Icon from "../components/Icon.astro";
-import Pill from "../components/Pill.astro";
 import Skills from "../components/Skills.astro";
 // Layout import — provides basic page elements: <head>, <nav>, <footer> etc.
 import BaseLayout from "../layouts/BaseLayout.astro";
@@ -25,32 +24,35 @@ const projects = (await getCollection("work"))
 	<div class="stack gap-20 lg:gap-48">
 		<div class="wrapper stack gap-8 lg:gap-20">
 			<header class="hero">
+				<div class="stack gap-4 hero-copy">
+					<p class="kicker">AI Product Engineer · Denver, CO</p>
+					<h1 class="headline">
+						I ship reliable AI features. <em class="orange-accent"
+							>Fast.</em
+						>
+					</h1>
+					<p class="subline">
+						I embed with funded B2B startups to design, build, and
+						ship reliable AI features — in weeks.
+					</p>
+					<div class="cta-row">
+						<CallToAction
+							href="https://cal.com/avocadotechgroup/discovery-call"
+						>
+							Book a call
+							<Icon icon="paper-plane-tilt" size="1.2em" />
+						</CallToAction>
+						<CallToAction href="/work/" variant="secondary">
+							View case studies
+						</CallToAction>
+					</div>
+				</div>
 				<Image
 					src="/assets/profile.png"
 					alt="Ryan Acevedo smiling in a black/white background"
 					width="480"
 					height="620"
 				/>
-				<Hero align="start">
-					<Fragment slot="title">
-						Entrepreneur & <em class="orange-accent thin-font"
-							>AI Engineer</em
-						>
-					</Fragment>
-					<Fragment slot="tagline">
-						I am an <span class="orange-accent">AI Engineer</span> based
-						out of <strong>Denver, Colorado</strong>.
-					</Fragment>
-					<div class="roles">
-						<Pill><Icon icon="code" size="1.33em" /> Engineer</Pill>
-						<Pill
-							><Icon icon="rocket-launch" size="1.33em" /> Builder</Pill
-						>
-						<Pill
-							><Icon icon="pencil-line" size="1.33em" /> Writer</Pill
-						>
-					</div>
-				</Hero>
 			</header>
 
 			<ContactCTA />
@@ -136,18 +138,42 @@ const projects = (await getCollection("work"))
 		flex-direction: column;
 		align-items: center;
 		gap: 2rem;
+		text-align: center;
 	}
 
-	.roles {
-		display: none;
+	.hero-copy {
+		align-items: center;
 	}
 
 	.orange-accent {
 		color: #ca7879;
 	}
 
-	.thin-font {
-		font-weight: 200;
+	.kicker {
+		font-size: var(--text-sm);
+		text-transform: uppercase;
+		letter-spacing: 0.1em;
+		color: var(--gray-300);
+	}
+
+	.headline {
+		font-size: var(--text-3xl);
+		color: var(--gray-0);
+		max-width: 20ch;
+	}
+
+	.subline {
+		font-size: var(--text-md);
+		color: var(--gray-300);
+		max-width: 42ch;
+	}
+
+	.cta-row {
+		display: flex;
+		flex-wrap: wrap;
+		align-items: center;
+		gap: 1rem;
+		margin-top: 0.5rem;
 	}
 
 	.hero img {
@@ -164,12 +190,19 @@ const projects = (await getCollection("work"))
 			grid-template-columns: 6fr 4fr;
 			padding-inline: 2.5rem;
 			gap: 3.75rem;
+			text-align: start;
 		}
 
-		.roles {
-			margin-top: 0.5rem;
-			display: flex;
-			gap: 0.5rem;
+		.hero-copy {
+			align-items: flex-start;
+		}
+
+		.headline {
+			font-size: var(--text-5xl);
+		}
+
+		.subline {
+			font-size: var(--text-lg);
 		}
 
 		.hero img {
