@@ -2,11 +2,11 @@
 title: Qualified Technology
 publishDate: 2019-12-01
 img: /assets/qt.png
-img_alt: A mac book computer show casing one of clients coaching portfolios.
+img_alt: A MacBook displaying one of a client's coaching portfolios.
 description: |
   Developed responsive, customizable WordPress websites using JavaScript, PHP, and the Genesis Framework.
 tags:
-  - Wordpress
+  - WordPress
   - E-commerce
   - SEO
   - API Integrations

@@ -4,22 +4,22 @@ publishDate: 2025-01-22
 img: /assets/vercel_ai_sdk.jpg
 img_alt: 
 description: |
-    Building cools things in the AI space.
+    Building cool things in the AI space.
 tags:
   - Vercel SDK
   - AI
   - Hono
   - Zod
-  - Typescript
+  - TypeScript
 ---
-# Key Takeways
+# Key Takeaways
 Recently, I've been tinkering on a project leveraging the Vercel SDK to test out this cool new hype term called *AI Agents*. 
-Matt Pocock over at Total Typescript has an amazing course that walks you through examples of using the SDK effectively.
+Matt Pocock over at Total TypeScript has an amazing course that walks you through examples of using the SDK effectively.
 He also walks you through effective Prompt Engineering right from the command line and not using a UI directly seems to
-be a fast experience using the OpenAI and Anthropic models. Let's walk though some of my highlights.
+be a fast experience using the OpenAI and Anthropic models. Let's walk through some of my highlights.
 
 ## Structured Outputs
-What you're seeing is a basic structure input/output to create a recipe (which I myself as a health fanatnic *hate* making
+What you're seeing is a basic structured input/output to create a recipe (which I myself as a health fanatic *hate* making
 my own meal prep). 
 ```typescript
 import { generateObject } from "ai";
@@ -62,6 +62,6 @@ console.log(recipe);
 
 ### Use Cases
 I can see a use case where I want to develop my own recipes daily or weekly and AI could help me make a simple menu for 
-the week. Might try to setup a timer in ChatGPT and see if it makes a difference vs. building out my own.
+the week. Might try to set up a timer in ChatGPT and see if it makes a difference vs. building out my own.
 
 Check out the GitHub with the code for examples: https://github.com/rymanacevedo/vercel_ai_sdk

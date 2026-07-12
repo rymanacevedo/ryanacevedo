@@ -1,8 +1,8 @@
 ---
-title: Lexis Nexis
+title: LexisNexis
 publishDate: 2018-11-01
 img: /assets/lexisnexis.png
-img_alt: Showcasing Lexis Nexis legal research tools interface.
+img_alt: Showcasing LexisNexis legal research tools interface.
 description: |
   Accelerated machine learning model training, optimized data processing with AWS, and developed secure REST APIs, while collaborating on Python and Java projects to enhance document analysis and system performance.
 tags:
@@ -12,7 +12,7 @@ tags:
   - AWS
 ---
 
-At Lexis Nexis, I collaborated on projects that advanced machine learning capabilities, enhanced data processing, and improved system performance. My contributions drove efficiency, scalability, and innovation, generating substantial cost savings and operational improvements.
+At LexisNexis, I collaborated on projects that advanced machine learning capabilities, enhanced data processing, and improved system performance. My contributions drove efficiency, scalability, and innovation, generating substantial cost savings and operational improvements.
 
 ## Key Projects and Contributions
 
@@ -36,4 +36,4 @@ At Lexis Nexis, I collaborated on projects that advanced machine learning capabi
     - Streamlined continuous integration and deployment pipelines using Jenkins, reducing build times by 30% and doubling deployment frequency.
     - Automated workflows to enhance productivity and minimize downtime.
 
-My time at Lexis Nexis showcased my ability to integrate cutting-edge technology, optimize processes, and deliver impactful solutions that drove business value and operational excellence.
+My time at LexisNexis showcased my ability to integrate cutting-edge technology, optimize processes, and deliver impactful solutions that drove business value and operational excellence.

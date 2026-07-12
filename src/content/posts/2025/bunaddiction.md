@@ -16,7 +16,7 @@ tags:
 
 I’ll admit it: I have a serious addiction to speed. No, not the illegal kind. I'm talking about blazing-fast build times, runtime performance, and bundling. And my enabler? **Bun**.
 
-Bun has become my go-to for everything: build runtime, bundler, package manager-you name it. It’s like the Swiss Army knife of JavaScript tooling, and I’ve been using it as a drop-in replacement for Node.js in all my projects. Sorry, Deno. I gave on you awhile ago.
+Bun has become my go-to for everything: build runtime, bundler, package manager—you name it. It’s like the Swiss Army knife of JavaScript tooling, and I’ve been using it as a drop-in replacement for Node.js in all my projects. Sorry, Deno. I gave up on you a while ago.
 
 Today, I’m going to show you how to configure **Cloudflare Workers** to use Bun. Why? I couldn't find any docs on this so I'll make my own.
 
@@ -68,7 +68,5 @@ Rerun your build and watch the magic happen.
 ![Screenshot of build details showing a successful build for the 'main' branch. The build duration is highlighted as 37 seconds, and there is an option to retry the build](/assets/after-bun.png)
 
 A 78% increase!
-
-
 
 
