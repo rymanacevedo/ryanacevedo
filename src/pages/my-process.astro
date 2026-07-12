@@ -288,9 +288,11 @@ import { BOOKING_URL, FORM_NAME } from "../lib/intakeFunnel";
 	const stageCards = document.querySelectorAll<HTMLDetailsElement>(
 		".steps details[data-stage]",
 	);
-	const answerButtons = document.querySelectorAll<HTMLButtonElement>(
-		'button[name="timeframe"], button[name="start"]',
+	const timeframeButtons = document.querySelectorAll<HTMLButtonElement>(
+		'button[name="timeframe"]',
 	);
+	const startButtons = document.querySelectorAll<HTMLButtonElement>('button[name="start"]');
+	const answerButtons = [...timeframeButtons, ...startButtons];
 	const brief = document.querySelector<HTMLElement>("[data-brief]");
 	const briefText = brief?.querySelector<HTMLElement>("[data-brief-text]");
 	const funnelState: IntakeFunnelState = { email: "" };
@@ -301,15 +303,23 @@ import { BOOKING_URL, FORM_NAME } from "../lib/intakeFunnel";
 	};
 
 	if (stageCards.length !== 4) console.warn("Expected four company stage cards");
-	if (answerButtons.length !== 8) console.warn("Expected eight funnel answer buttons");
-	if (!(stageInput instanceof HTMLInputElement)) {
-		console.warn("Company stage capture field is missing");
-	}
-	if (!(timeframeInput instanceof HTMLInputElement)) {
-		console.warn("Timeframe capture field is missing");
-	}
-	if (!(startInput instanceof HTMLInputElement)) {
-		console.warn("Start-date capture field is missing");
+	if (timeframeButtons.length !== 5) console.warn("Expected five timeframe buttons");
+	if (startButtons.length !== 3) console.warn("Expected three start-date buttons");
+	if (!bookingForm) {
+		console.warn("Project intake booking form is missing");
+	} else {
+		if (!(emailInput instanceof HTMLInputElement)) {
+			console.warn("Project intake email field is missing");
+		}
+		if (!(stageInput instanceof HTMLInputElement)) {
+			console.warn("Company stage capture field is missing");
+		}
+		if (!(timeframeInput instanceof HTMLInputElement)) {
+			console.warn("Timeframe capture field is missing");
+		}
+		if (!(startInput instanceof HTMLInputElement)) {
+			console.warn("Start-date capture field is missing");
+		}
 	}
 	if (!brief) console.warn("Company stage brief container is missing");
 	if (!briefText) console.warn("Company stage brief text target is missing");

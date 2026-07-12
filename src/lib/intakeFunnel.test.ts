@@ -27,9 +27,11 @@ describe("buildBrief", () => {
 		).toBe("Stage: Enterprise · Start: 1–2 weeks");
 	});
 
-	test("returns no brief when no stage is selected", () => {
+	test("returns no brief when no answers are selected", () => {
 		expect(buildBrief({ email: "" })).toBe("");
-		expect(buildBrief({ email: "", stage: "" })).toBe("");
+		expect(buildBrief({ email: "", stage: "", timeframe: "", start: "" })).toBe(
+			"",
+		);
 	});
 });
 
@@ -77,6 +79,14 @@ describe("buildBookingUrl", () => {
 		expect(bookingUrl.searchParams.get("notes")).toBe(
 			"Stage: Scaling · Timeframe: 1–3 months · Start: ASAP",
 		);
+	});
+
+	test("adds timeframe-only answers to booking notes", () => {
+		const bookingUrl = new URL(
+			buildBookingUrl({ email: "ryan@example.com", timeframe: "3–6 months" }),
+		);
+
+		expect(bookingUrl.searchParams.get("notes")).toBe("Timeframe: 3–6 months");
 	});
 });
 
