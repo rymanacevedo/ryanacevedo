@@ -126,6 +126,13 @@ describe("built-site content conformance", () => {
 		assertPhrasePresentOnBuiltPage("/", "Organizations I've supported");
 	});
 
+	test("publishes the owner-mindset draft on About", () => {
+		assertPhrasePresentOnBuiltPage(
+			"/about",
+			"I've founded and run my own products, so I work like an owner",
+		);
+	});
+
 	test("publishes the Clyde estimate only in its case study", () => {
 		assertPhrasePresentOnlyOnBuiltPage("/work/clyde", "5–10x");
 	});
