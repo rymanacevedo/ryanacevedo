@@ -11,6 +11,7 @@ type ExpectedLink = {
 };
 
 type ParsedLink = ExpectedLink & {
+	ariaCurrent?: string;
 	classes: string[];
 };
 
@@ -129,14 +130,48 @@ function getNavigableBuiltPages(): Map<string, string> {
 	);
 }
 
+function getRequiredPrimaryNav(
+	pageFile: string,
+	renderedHtml: string,
+): { markup: string; lists: string[] } {
+	const navMarkup = getElementMarkup(renderedHtml, "nav");
+	expect(navMarkup, `No primary nav found in ${pageFile}`).toBeDefined();
+	if (!navMarkup) throw new Error(`No primary nav found in ${pageFile}`);
+
+	const navLists = getElementMarkups(navMarkup, "ul", "nav-items");
+	expect(navLists, `Missing nav variants in ${pageFile}`).toHaveLength(2);
+	return { markup: navMarkup, lists: navLists };
+}
+
 function getLinks(markup: string): ParsedLink[] {
 	return [...markup.matchAll(/<a\b([^>]*)>([\s\S]*?)<\/a>/g)].map(
 		([, attributes = "", contents = ""]) => ({
+			ariaCurrent: getAttribute(attributes, "aria-current"),
 			classes: getClassNames(attributes),
 			href: getAttribute(attributes, "href") ?? "",
 			label: getTextContent(contents),
 		}),
 	);
+}
+
+export function assertPrimaryNavCurrentPageState(
+	pageRoute: string,
+	currentLinkLabel: string,
+): void {
+	const pageFile = getPageFileForRoute(pageRoute);
+	const renderedHtml = getBuiltPages().get(pageFile);
+	expect(renderedHtml, `No rendered page found for ${pageRoute}`).toBeDefined();
+	if (!renderedHtml) throw new Error(`No rendered page found for ${pageRoute}`);
+
+	const { lists: navLists } = getRequiredPrimaryNav(pageFile, renderedHtml);
+	for (const navListMarkup of navLists) {
+		expect(
+			getLinks(navListMarkup).filter(
+				({ ariaCurrent }) => ariaCurrent === "page",
+			),
+			`Unexpected current-page nav link in ${pageFile}`,
+		).toMatchObject([{ label: currentLinkLabel }]);
+	}
 }
 
 function toExpectedLinks(links: ParsedLink[]): ExpectedLink[] {
@@ -254,12 +289,10 @@ export function assertPrimaryNavConformsOnBuiltPages(
 	githubHref: string,
 ): void {
 	for (const [pageFile, renderedHtml] of getNavigableBuiltPages()) {
-		const navMarkup = getElementMarkup(renderedHtml, "nav");
-		expect(navMarkup, `No primary nav found in ${pageFile}`).toBeDefined();
-		if (!navMarkup) throw new Error(`No primary nav found in ${pageFile}`);
-
-		const navLists = getElementMarkups(navMarkup, "ul", "nav-items");
-		expect(navLists, `Missing nav variants in ${pageFile}`).toHaveLength(2);
+		const { lists: navLists, markup: navMarkup } = getRequiredPrimaryNav(
+			pageFile,
+			renderedHtml,
+		);
 		for (const navListMarkup of navLists) {
 			const navLinks = getLinks(navListMarkup);
 			expect(

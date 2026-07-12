@@ -16,6 +16,10 @@ const textLinks: { label: string; href: string; cta?: boolean }[] = [
 	{ label: "Book a call", href: BOOKING_URL, cta: true },
 ];
 
+const isActiveLink = (href: string) =>
+	Astro.url.pathname === href ||
+	(href.startsWith("/") && href !== "/" && Astro.url.pathname.startsWith(href));
+
 /** Icon links to social media — edit these with links to your profiles! */
 const iconLinks: {
 	label: string;
@@ -55,14 +59,12 @@ const iconLinks: {
 				textLinks.map(({ label, href, cta }) => (
 					<li>
 						<a
-							aria-current={Astro.url.pathname === href}
+							aria-current={isActiveLink(href) ? "page" : undefined}
 							class:list={[
 								'link',
 								{
 									'book-cta': cta,
-									active:
-										Astro.url.pathname === href ||
-										(href !== '/' && Astro.url.pathname.startsWith(href)),
+									active: isActiveLink(href),
 								},
 							]}
 							href={href}
@@ -94,14 +96,12 @@ const iconLinks: {
 				textLinks.map(({ label, href, cta }) => (
 					<li>
 						<a
-							aria-current={Astro.url.pathname === href}
+							aria-current={isActiveLink(href) ? "page" : undefined}
 							class:list={[
 								'link',
 								{
 									'book-cta': cta,
-									active:
-										Astro.url.pathname === href ||
-										(href !== '/' && Astro.url.pathname.startsWith(href)),
+									active: isActiveLink(href),
 								},
 							]}
 							href={href}

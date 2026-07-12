@@ -10,6 +10,7 @@ import {
 	assertPhrasePresentOnBuiltPage,
 	assertPhrasePresentOnlyOnBuiltPage,
 	assertPrimaryNavConformsOnBuiltPages,
+	assertPrimaryNavCurrentPageState,
 	assertStaticRedirect,
 	assertTagCountInBuiltPageElement,
 } from "./contentConformance";
@@ -209,6 +210,10 @@ describe("built-site content conformance", () => {
 			"Book a call",
 			"https://github.com/rymanacevedo",
 		);
+	});
+
+	test("exposes the current section on nested pages", () => {
+		assertPrimaryNavCurrentPageState("/work/clyde", "Case Studies");
 	});
 
 	test.each(bannedPhrases)("publishes no %p phrase", (phrase) => {
