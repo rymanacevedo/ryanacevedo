@@ -69,4 +69,3 @@ Rerun your build and watch the magic happen.
 
 A 78% increase!
 
-
