@@ -29,6 +29,15 @@ function getBuiltPages(): Map<string, string> {
 	return builtPages;
 }
 
+function normalizeRoute(route: string): string {
+	return route.replace(/^\/+|\/+$/g, "");
+}
+
+function getPageFileForRoute(route: string): string {
+	const normalizedRoute = normalizeRoute(route);
+	return normalizedRoute ? `${normalizedRoute}/index.html` : "index.html";
+}
+
 export function assertPhraseAbsentFromBuiltPages(phrase: string): void {
 	const matchingPages = [...getBuiltPages().entries()]
 		.filter(([, renderedHtml]) => renderedHtml.includes(phrase))
@@ -49,8 +58,7 @@ export function assertPhrasePresentOnBuiltPage(
 	pageRoute: string,
 	phrase: string,
 ): void {
-	const route = pageRoute.replace(/^\/+|\/+$/g, "");
-	const pageFile = route ? `${route}/index.html` : "index.html";
+	const pageFile = getPageFileForRoute(pageRoute);
 	const renderedHtml = getBuiltPages().get(pageFile);
 
 	expect(renderedHtml, `No rendered page found for ${pageRoute}`).toContain(
@@ -59,8 +67,7 @@ export function assertPhrasePresentOnBuiltPage(
 }
 
 export function assertStaticRedirect(fromRoute: string, toRoute: string): void {
-	const route = fromRoute.replace(/^\/+|\/+$/g, "");
-	const pageFile = route ? `${route}/index.html` : "index.html";
+	const pageFile = getPageFileForRoute(fromRoute);
 	const renderedHtml = getBuiltPages().get(pageFile);
 
 	expect(renderedHtml, `No redirect artifact found for ${fromRoute}`).toContain(
@@ -73,8 +80,8 @@ export function assertNoInternalLinksToRoute(
 	pageRoute: string,
 	siteOrigin = "https://ryanacevedo.com",
 ): void {
-	const route = pageRoute.replace(/^\/+|\/+$/g, "");
-	const redirectPageFile = route ? `${route}/index.html` : "index.html";
+	const normalizedPageRoute = normalizeRoute(pageRoute);
+	const redirectPageFile = getPageFileForRoute(pageRoute);
 	const matchingPages = [...getBuiltPages().entries()]
 		.filter(([pageFile]) => pageFile !== redirectPageFile)
 		.filter(([pageFile, renderedHtml]) => {
@@ -87,7 +94,7 @@ export function assertNoInternalLinksToRoute(
 			return linkedUrls.some(
 				(linkedUrl) =>
 					linkedUrl.origin === siteOrigin &&
-					linkedUrl.pathname.replace(/^\/+|\/+$/g, "") === route,
+					normalizeRoute(linkedUrl.pathname) === normalizedPageRoute,
 			);
 		})
 		.map(([pageFile]) => pageFile);
