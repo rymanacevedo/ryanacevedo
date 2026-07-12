@@ -268,7 +268,11 @@ import { BOOKING_URL, FORM_NAME } from "../lib/intakeFunnel";
 				</section>
 			</div>
 		</main>
-		<aside class="contact-section" aria-labelledby="contact-heading">
+		<aside
+			class="contact-section"
+			aria-labelledby="contact-heading"
+			data-contact-section
+		>
 			<div>
 				<h2 id="contact-heading">Want to work together?</h2>
 				<p>
@@ -368,6 +372,9 @@ import { BOOKING_URL, FORM_NAME } from "../lib/intakeFunnel";
 	const answerButtons = [...timeframeButtons, ...startButtons];
 	const brief = document.querySelector<HTMLElement>("[data-brief]");
 	const briefText = brief?.querySelector<HTMLElement>("[data-brief-text]");
+	const contactSection = document.querySelector<HTMLElement>(
+		"[data-contact-section]",
+	);
 	const testimonialStack = document.querySelector<HTMLElement>(
 		"[data-testimonials]",
 	);
@@ -385,6 +392,7 @@ import { BOOKING_URL, FORM_NAME } from "../lib/intakeFunnel";
 		"(prefers-reduced-motion: reduce)",
 	);
 	const funnelState: IntakeFunnelState = { email: "" };
+	let emailPulseTimer: ReturnType<typeof setTimeout> | undefined;
 	let revealedQuestions: QuestionId[] = [];
 	const renderBrief = () => {
 		const text = buildBrief(funnelState);
@@ -442,6 +450,21 @@ import { BOOKING_URL, FORM_NAME } from "../lib/intakeFunnel";
 				console.warn("Testimonial swap failed", error),
 			);
 	};
+	const promptForEmail = () => {
+		if (!contactSection || !(emailInput instanceof HTMLInputElement)) return;
+
+		contactSection.scrollIntoView({
+			behavior: prefersReducedMotion.matches ? "auto" : "smooth",
+			block: "start",
+		});
+		emailInput.classList.remove("attention-pulse");
+		void emailInput.offsetWidth;
+		emailInput.classList.add("attention-pulse");
+		if (emailPulseTimer) clearTimeout(emailPulseTimer);
+		emailPulseTimer = setTimeout(() => {
+			emailInput.classList.remove("attention-pulse");
+		}, 3600);
+	};
 
 	if (stageCards.length !== 4)
 		console.warn("Expected four company stage cards");
@@ -470,6 +493,7 @@ import { BOOKING_URL, FORM_NAME } from "../lib/intakeFunnel";
 	}
 	if (!brief) console.warn("Company stage brief container is missing");
 	if (!briefText) console.warn("Company stage brief text target is missing");
+	if (!contactSection) console.warn("Contact section is missing");
 	if (!testimonialStack) console.warn("Testimonial stack is missing");
 	if (testimonials.length !== 4) console.warn("Expected four testimonials");
 	for (const stageCard of stageCards) {
@@ -548,6 +572,7 @@ import { BOOKING_URL, FORM_NAME } from "../lib/intakeFunnel";
 
 			renderBrief();
 			renderQuestions();
+			if (answerName === "start" && nextAnswer) promptForEmail();
 		});
 	}
 
@@ -847,6 +872,21 @@ import { BOOKING_URL, FORM_NAME } from "../lib/intakeFunnel";
 		border-color: var(--accent-regular);
 	}
 
+	.contact-fields input.attention-pulse {
+		animation: email-attention 1.1s ease-in-out 3;
+	}
+
+	@keyframes email-attention {
+		0%,
+		100% {
+			box-shadow: 0 0 0 0 var(--accent-overlay);
+		}
+		50% {
+			border-color: var(--accent-regular);
+			box-shadow: 0 0 0 0.5rem var(--accent-overlay);
+		}
+	}
+
 	.disclosure {
 		font-size: var(--text-sm);
 		color: var(--gray-400);
@@ -898,6 +938,14 @@ import { BOOKING_URL, FORM_NAME } from "../lib/intakeFunnel";
 
 		.contact-fields {
 			grid-template-columns: minmax(0, 1fr) auto;
+		}
+	}
+
+	@media (prefers-reduced-motion: reduce) {
+		.contact-fields input.attention-pulse {
+			animation: none;
+			outline: 3px solid var(--accent-regular);
+			outline-offset: 3px;
 		}
 	}
 </style>
