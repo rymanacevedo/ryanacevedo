@@ -67,5 +67,4 @@ Rerun your build and watch the magic happen.
 ### After Bun
 ![Screenshot of build details showing a successful build for the 'main' branch. The build duration is highlighted as 37 seconds, and there is an option to retry the build](/assets/after-bun.png)
 
-A 78% increase!
-
+A 78% reduction — about 4.5× faster!

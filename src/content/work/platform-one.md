@@ -18,7 +18,7 @@ At Platform One, I played a critical role in developing scalable and secure soft
 - **Real-time Data Handling**: Utilized RxJS for reactive data streams, significantly improving the efficiency of real-time user interactions and form submissions.
 - **Security and Compliance**: Collaborated with DevOps teams to deploy applications on Platform One, adhering to strict security requirements, including automated scans and Certification to Operate (CtO) processes.
 - **Mentorship and Best Practices**: Conducted training sessions for team members on Angular, RxJS, and Test-Driven Development (TDD), accelerating onboarding and improving code quality across the team.
-- **Testing and Quality Assurance**: Implemented TDD practices using Jest, increasing test coverage and reducing frontend bugs by 50%, ensuring high-quality and reliable application delivery.
+- **Testing and Quality Assurance**: Implemented TDD practices using Jest to expand test coverage, prevent frontend regressions, and support reliable application delivery.
 
 ## Project Battle Drill
 

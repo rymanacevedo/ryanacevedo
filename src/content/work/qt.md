@@ -21,14 +21,14 @@ At Qualified Technology, I focused on developing responsive, high-performing Wor
 
 - **Advanced Features**:
     - Developed a JavaScript-based product configurator for a cabinet door shop, enabling over 10,000 possible configurations and significantly improving user experience.
-    - Built e-commerce platforms with enhanced frontend interactivity, boosting online sales by 35% through intuitive design and improved JavaScript functionality.
+    - Built e-commerce platforms with intuitive frontend interactions that supported online sales.
 
 - **Frontend Performance Optimization**:
-    - Optimized JavaScript and UI design to increase site speed by 90%, enhancing user satisfaction and reducing load times.
-    - Spearheaded the redesign of an e-commerce website, leveraging WordPress and WooCommerce to streamline user experience, resulting in a 25% increase in conversion rates within three months.
+    - Optimized JavaScript and UI design to deliver faster load times and a smoother user experience.
+    - Redesigned an e-commerce website with WordPress and WooCommerce to streamline the customer journey.
 
 - **SEO and Traffic Growth**:
-    - Implemented SEO strategies using tools like Yoast SEO and custom schema markup, driving a 40% increase in organic traffic within six months.
+    - Implemented SEO strategies using tools like Yoast SEO and custom schema markup to strengthen organic visibility.
     - Improved search engine visibility and rankings for client websites through comprehensive SEO optimization.
 
 - **Third-Party Integrations and Features**:

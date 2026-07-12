@@ -20,13 +20,13 @@ At National Park College, I transformed the institution's web presence by develo
     - Collaborated with faculty and HR departments to design intuitive, responsive interfaces, streamlining internal and student-facing workflows.
 
 - **Frontend Performance Optimization**:
-    - Spearheaded a complete frontend overhaul using Webpack and Grunt, reducing client-side load times by 1400%, significantly improving the user experience.
-    - Refactored CSS architecture using BEM methodologies and optimized with Tachyons CSS, reducing CSS size from 1MB to 30KB, achieving a 97% improvement.
+    - Spearheaded a complete frontend overhaul using Webpack and Grunt, delivering dramatically faster page loads and a smoother user experience.
+    - Refactored the CSS architecture using BEM methodologies and Tachyons CSS, cutting the CSS bundle from 1MB to 30KB.
 
 - **Accessibility and SEO Enhancements**:
     - Conducted a comprehensive Lighthouse audit, improving the site’s performance from a D rating to an A rating.
     - Resolved over 4,200 accessibility issues, ensuring compliance with modern web standards.
-    - Optimized search functionality with Funnelback, increasing search speeds by 90% and making critical resources more accessible for students.
+    - Optimized search functionality with Funnelback, making critical resources easier for students to find.
 
 - **Automation and Tokenization**:
     - Designed and standardized all web assets using Style Dictionary, implementing tokenization that allowed website updates in seconds rather than days.
