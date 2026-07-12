@@ -4,12 +4,31 @@ interface Props {
 	name?: string;
 	value?: string;
 	pressed?: boolean;
+	calLink?: string;
+	calNamespace?: string;
+	calConfig?: string;
 }
 
-const { type = "button", name, value, pressed } = Astro.props;
+const {
+	type = "button",
+	name,
+	value,
+	pressed,
+	calLink,
+	calNamespace,
+	calConfig,
+} = Astro.props;
 ---
 
-<button type={type} name={name} value={value} aria-pressed={pressed}><slot /></button>
+<button
+	type={type}
+	name={name}
+	value={value}
+	aria-pressed={pressed}
+	data-cal-link={calLink}
+	data-cal-namespace={calNamespace}
+	data-cal-config={calConfig}
+><slot /></button>
 
 <style>
     button {

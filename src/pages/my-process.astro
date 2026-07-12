@@ -314,7 +314,14 @@ import { BOOKING_URL, FORM_NAME } from "../lib/intakeFunnel";
 						placeholder="you@example.com"
 						required
 					/>
-					<Button type="submit">Let's talk</Button>
+					<Button
+						type="submit"
+						calLink="avocadotechgroup/discovery-call"
+						calNamespace="discovery-call"
+						calConfig='{"layout":"month_view","useSlotsViewOnSmallScreen":"true"}'
+					>
+						Let's talk
+					</Button>
 				</div>
 				<p class="disclosure">
 					I'll only use this to follow up about your project
@@ -329,9 +336,7 @@ import { BOOKING_URL, FORM_NAME } from "../lib/intakeFunnel";
 
 <script>
 	import {
-		BOOKING_URL,
 		STAGES,
-		buildBookingUrl,
 		buildBrief,
 		buildFormPayload,
 		getPromotedTestimonial,
@@ -345,6 +350,9 @@ import { BOOKING_URL, FORM_NAME } from "../lib/intakeFunnel";
 		"[data-booking-form]",
 	);
 	const emailInput = bookingForm?.elements.namedItem("email");
+	const bookingTrigger = bookingForm?.querySelector<HTMLButtonElement>(
+		"button[data-cal-link]",
+	);
 	const stageInput = bookingForm?.elements.namedItem("stage");
 	const timeframeInput = bookingForm?.elements.namedItem("timeframe");
 	const startInput = bookingForm?.elements.namedItem("start");
@@ -449,6 +457,7 @@ import { BOOKING_URL, FORM_NAME } from "../lib/intakeFunnel";
 		if (!(emailInput instanceof HTMLInputElement)) {
 			console.warn("Project intake email field is missing");
 		}
+		if (!bookingTrigger) console.warn("Cal.com booking trigger is missing");
 		if (!(stageInput instanceof HTMLInputElement)) {
 			console.warn("Company stage capture field is missing");
 		}
@@ -543,13 +552,29 @@ import { BOOKING_URL, FORM_NAME } from "../lib/intakeFunnel";
 	}
 
 	if (bookingForm && emailInput instanceof HTMLInputElement) {
+		bookingTrigger?.addEventListener("click", (event) => {
+			if (!bookingForm.checkValidity()) {
+				event.preventDefault();
+				event.stopPropagation();
+				bookingForm.reportValidity();
+				return;
+			}
+
+			funnelState.email = emailInput.value;
+			const notes = buildBrief(funnelState);
+			bookingTrigger.dataset.calConfig = JSON.stringify({
+				layout: "month_view",
+				useSlotsViewOnSmallScreen: "true",
+				email: funnelState.email,
+				...(notes ? { notes } : {}),
+			});
+		});
+
 		bookingForm.addEventListener("submit", (event) => {
 			event.preventDefault();
-			let redirectUrl = BOOKING_URL;
 
 			try {
 				funnelState.email = emailInput.value;
-				redirectUrl = buildBookingUrl(funnelState);
 				const botField = bookingForm.elements.namedItem("bot-field");
 
 				void fetch(bookingForm.action, {
@@ -568,13 +593,21 @@ import { BOOKING_URL, FORM_NAME } from "../lib/intakeFunnel";
 			} catch (error) {
 				console.warn("Lead capture failed", error);
 			}
-
-			window.location.assign(redirectUrl);
 		});
 	}
 
 	document.documentElement.dataset.processReady = "true";
 </script>
+
+<!-- Cal element-click embed code begins -->
+<script is:inline type="text/javascript">
+	(function (C, A, L) { let p = function (a, ar) { a.q.push(ar); }; let d = C.document; C.Cal = C.Cal || function () { let cal = C.Cal; let ar = arguments; if (!cal.loaded) { cal.ns = {}; cal.q = cal.q || []; d.head.appendChild(d.createElement("script")).src = A; cal.loaded = true; } if (ar[0] === L) { const api = function () { p(api, arguments); }; const namespace = ar[1]; api.q = api.q || []; if(typeof namespace === "string"){cal.ns[namespace] = cal.ns[namespace] || api;p(cal.ns[namespace], ar);p(cal, ["initNamespace", namespace]);} else p(cal, ar); return;} p(cal, ar); }; })(window, "https://app.cal.com/embed/embed.js", "init");
+	Cal("init", "discovery-call", {origin:"https://app.cal.com"});
+	Cal.config = Cal.config || {};
+	Cal.config.forwardQueryParams = true;
+	Cal.ns["discovery-call"]("ui", {"hideEventTypeDetails":false,"layout":"month_view"});
+</script>
+<!-- Cal element-click embed code ends -->
 
 <style>
 	.orange-accent {
