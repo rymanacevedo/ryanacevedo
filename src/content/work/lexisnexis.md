@@ -10,7 +10,6 @@ tags:
   - Python
   - Java
   - AWS
-  - REST APIs
 ---
 
 At Lexis Nexis, I collaborated on projects that advanced machine learning capabilities, enhanced data processing, and improved system performance. My contributions drove efficiency, scalability, and innovation, generating substantial cost savings and operational improvements.
