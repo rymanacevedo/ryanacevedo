@@ -1,0 +1,353 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import ContactCTA from "../components/ContactCTA.astro";
+import Button from "../components/Button.astro";
+---
+
+<BaseLayout
+	title="My Process | Ryan Acevedo"
+	description="How Ryan Acevedo works as a forward deployed engineer to turn business problems into useful software."
+>
+	<div class="stack gap-20">
+		<main class="wrapper process-page">
+			<header class="process-hero">
+				<h1>
+					From unclear to <em class="orange-accent">solution</em>
+				</h1>
+				<p class="lede">
+					As a software engineer for over 10 years, I've seen
+					companies stumble on the same problems over and over again.
+					From seed (prototype) to scale SaaS enterprise: I've
+					journeyed with solo founders just launching their first baby
+					- to Fortune 500 apps.
+				</p>
+			</header>
+
+			<section class="intro">
+				<p class="lede">Typically onboarding questions I ask are:</p>
+			</section>
+
+			<section class="process-section">
+				<div class="section-heading">
+					<p class="eyebrow">Q1</p>
+					<h2>What stage of your company are you in?</h2>
+				</div>
+
+				<ol class="steps">
+					<li>
+						<span>01</span>
+						<div>
+							<h3>I am just starting</h3>
+							<!-- TODO: Accordion here -->
+							<!-- Customer Profile, solo founder with a business idea just trying to figure out how to navigate -->
+							<p>
+								<strong>Problem:</strong> Have idea, need a plan with
+								options.
+							</p>
+							<p>
+								<strong>Answer:</strong> We hop on a call, review
+								the feasibility, create a roadmap.
+							</p>
+						</div>
+					</li>
+					<li>
+						<span>02</span>
+						<div>
+							<h3>I am scaling</h3>
+							<!-- TODO: Accordion here -->
+							<!-- Customer profile, growing startup with an MVP and initial users, but hitting scalability issues or product-market fit. -->
+							<p>
+								<strong>Problem:</strong> You have an existing MVP
+								or prototype, but I'm not sure how to deploy or scale
+								it.
+							</p>
+							<p>
+								<strong>Answer:</strong> I assess the current state
+								of the product, identify gaps, and work IN your team
+								to deploy it to your users.
+							</p>
+						</div>
+					</li>
+					<li>
+						<span>03</span>
+						<div>
+							<h3>I am an established business</h3>
+							<!-- TODO: Accordion here -->
+							<!-- Customer Profile, established business with real customers, but want have problems in the business (slow process, lack of automation) that could be improved. Or even an idea to integration features into existing products. -->
+							<p>
+								<strong>Problem:</strong> Your customers knocking
+								down your door for features, customers complain about
+								bugs or you've wanted to automate a process for your
+								clients.. 6 months ago.
+							</p>
+							<p>
+								<strong>Answer:</strong> I work IN your team and your
+								codebase to solve your client's problem. I speak with
+								your customers, clear the backlog, and help the dev
+								team clear the path to bring REAL value for your customers
+								in weeks.
+							</p>
+						</div>
+					</li>
+					<li>
+						<span>04</span>
+						<!-- TODO: Accordion here -->
+						<!-- Customer Profile, enterprise with an legacy product and customers, but need engineering support to accelerate product development or to integrate with other systems. -->
+						<div>
+							<h3>I am an enterprise</h3>
+							<p>
+								<strong>Problem:</strong> You have a mega monolith,
+								but the engineers are scrambling. The engineer that
+								knew the codebase inside and out just retired after
+								20 years. The backlog is a mile long. Higher ups are
+								asking: "Have we move to a microservice architecture
+								and React 17 yet?",
+							</p>
+							<p>
+								<strong>Answer:</strong> I help manage the team's
+								backlog to get the product back under control. I identify
+								the bottlenecks and build tools to help the teams
+								get unstuck and increase velocity by 10x, and become
+								the voice to management to get everyone on the same
+								page.
+							</p>
+						</div>
+					</li>
+				</ol>
+			</section>
+
+			<section class="impact-section">
+				<div class="section-heading">
+					<p class="eyebrow">Q2</p>
+					<h2>What's the timeframe?</h2>
+					<h3 class="subtitle">How long do you need my help?</h3>
+				</div>
+				<form class="impact-grid">
+					<!-- TODO: Grid with engagement length -->
+					<Button> 1 - 2 weeks </Button>
+					<Button> 1 month - 3 months </Button>
+					<Button> 3 - 6 months </Button>
+					<Button> 6 - 12 months </Button>
+					<Button> 1 year - beyond </Button>
+				</form>
+			</section>
+
+			<section class="impact-section">
+				<div class="section-heading">
+					<p class="eyebrow">Q3</p>
+					<h2>When do you want me to start?</h2>
+				</div>
+				<form class="impact-grid">
+					<!-- TODO: Grid with start date options -->
+					<Button> ASAP </Button>
+					<Button> 1 week - 2 weeks </Button>
+					<Button> 1 month - 3 months </Button>
+				</form>
+			</section>
+
+			<!-- Testimonial -->
+			<section class="fit-section">
+				<!-- Testimonial: Clyde AI CTO (Scaling Quote) -->
+				<blockquote>
+					We would not be anywhere near where we needed to be without
+					Ryan on our team. He <b>fixed our dev workflow</b> and deployed
+					what would take an team of engineers 1 year <strong
+						>in 6 weeks!</strong
+					>
+				</blockquote>
+				<p>- CTO at Clyde AI</p>
+			</section>
+
+			<!-- Testimonial -->
+			<section class="fit-section">
+				<!-- Testimonial: Kyle Fowler Director of Employeer Engagement as SCC (Seed Quote) -->
+				<blockquote>
+					Ryan came, stat down, and got to work. He asked questions to
+					our client partners and watch how we work as an
+					orgnaization. From there, he built what we use as our resume
+					app and integrate AI within the product to help us be more
+					efficient in how we get our work done. All this in a matter
+					of 2 weeks!
+				</blockquote>
+				<p>- Kyle Fowler, Director of Employee Engagement at SCC</p>
+			</section>
+
+			<!-- Testimonial -->
+			<section class="fit-section">
+				<!-- Testimonial: Blake Ingram, Director of Engineering at LLM (establish business quote)-->
+				<blockquote>
+					Ryan is a strong developer and is easy to work with. He made
+					an impactful contribution to our team.
+				</blockquote>
+				<p>- Blake Ingram, Director of Engineering at LLM</p>
+			</section>
+
+			<!-- Testimonial -->
+			<section class="fit-section">
+				<!-- Testimonial: Tiding Health (Enterprise quote)-->
+				<blockquote>
+					Ryan connected all the dots for our B2B implemenetation of
+					Tiding Health. He's so talented and shaped the platform that
+					our patients use to this day.
+				</blockquote>
+				<p>- CEO of Tiding Health</p>
+			</section>
+		</main>
+		<ContactCTA />
+	</div>
+</BaseLayout>
+
+<style>
+	.orange-accent {
+		color: #ca7879;
+	}
+	.process-page {
+		display: flex;
+		flex-direction: column;
+		gap: 6rem;
+		max-width: 68rem;
+		margin-inline: auto;
+	}
+
+	.process-hero {
+		display: flex;
+		flex-direction: column;
+		align-items: flex-start;
+		gap: 1.5rem;
+		max-width: 58rem;
+		padding-block: 2rem;
+	}
+
+	.process-hero h1 {
+		font-size: clamp(2.75rem, 8vw, var(--text-5xl));
+		max-width: 16ch;
+	}
+
+	.lede,
+	.intro {
+		font-size: var(--text-lg);
+	}
+
+	.lede {
+		max-width: 60ch;
+	}
+
+	.intro {
+		border-left: 3px solid #ca7879;
+		background-color: var(--gray-999_40);
+	}
+
+	.eyebrow {
+		color: #ca7879;
+		font-family: var(--font-brand);
+		font-size: var(--text-sm);
+		font-weight: 600;
+		letter-spacing: 0.08em;
+		text-transform: uppercase;
+	}
+
+	.process-section,
+	.impact-section {
+		display: flex;
+		flex-direction: column;
+		gap: 2.5rem;
+	}
+
+	.section-heading {
+		display: flex;
+		flex-direction: column;
+		gap: 0.75rem;
+		max-width: 42rem;
+	}
+
+	.section-heading h2,
+	.fit-section h2 {
+		font-size: var(--text-3xl);
+	}
+
+	.steps {
+		display: grid;
+		gap: 1rem;
+		padding: 0;
+	}
+
+	.steps li {
+		display: grid;
+		grid-template-columns: auto 1fr;
+		gap: 1rem;
+		padding: 1rem;
+		border: 1px solid var(--gray-800);
+		border-radius: 1rem;
+		background: var(--gradient-subtle);
+		box-shadow: var(--shadow-sm);
+		text-align: left;
+	}
+
+	.steps li button {
+		cursor: pointer;
+	}
+
+	.steps span {
+		color: #ca7879;
+		font-family: var(--font-brand);
+		font-weight: 600;
+	}
+
+	.steps h3,
+	.impact-grid h3 {
+		margin-bottom: 0.5rem;
+		font-size: var(--text-lg);
+	}
+
+	.steps p,
+	.impact-grid p,
+	.fit-section > p:last-child {
+		line-height: 1.7;
+	}
+
+	.impact-grid {
+		display: grid;
+		gap: 1rem;
+	}
+
+	.impact-grid article {
+		padding: 1.5rem;
+		border-top: 3px solid var(--accent-regular);
+		border-radius: 0.75rem;
+		background-color: var(--gray-999_40);
+		box-shadow: var(--shadow-sm);
+	}
+
+	.fit-section {
+		display: flex;
+		flex-direction: column;
+		gap: 1rem;
+		padding: 2rem;
+		border-radius: 1.5rem;
+		background: rgba(118, 17, 166, 0.08);
+	}
+
+	@media (min-width: 50em) {
+		.process-page {
+			gap: 4rem;
+		}
+
+		.intro,
+		.fit-section {
+			padding: 3rem;
+		}
+
+		.steps {
+			grid-template-columns: 1fr 1fr;
+		}
+
+		.steps li,
+		.impact-grid article {
+			padding: 2rem;
+		}
+
+		.impact-grid {
+			grid-template-columns: 1fr 1fr;
+		}
+	}
+</style>
