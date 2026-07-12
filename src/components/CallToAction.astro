@@ -2,12 +2,14 @@
 interface Props {
 	href: string;
 	variant?: "primary" | "secondary";
+	target?: "_blank" | "_parent" | "_self" | "_top";
+	rel?: string;
 }
 
-const { href, variant = "primary" } = Astro.props;
+const { href, variant = "primary", target, rel } = Astro.props;
 ---
 
-<a class={variant} href={href}><slot /></a>
+<a class={variant} href={href} target={target} rel={rel}><slot /></a>
 
 <style>
 	a {
