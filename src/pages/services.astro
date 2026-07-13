@@ -1,70 +1,7 @@
 ---
 import CallToAction from "../components/CallToAction.astro";
 import BaseLayout from "../layouts/BaseLayout.astro";
-import { BOOKING_URL } from "../lib/intakeFunnel";
-
-const serviceOffers = [
-	{
-		name: "AI Product Sprint",
-		tagline: "I build it, you ship it",
-		duration: "2 weeks · fixed scope",
-		need: "One AI feature, live in production",
-		needDetail:
-			"You can name the feature in a sentence. It needs to be real, fast.",
-		problem:
-			"You need a production AI feature — or a validated working prototype — without spending a quarter hiring.",
-		deliverables:
-			"A shipped, working feature in your repo and your infrastructure. Deployed, tested, with a handoff walkthrough.",
-		goodFit: [
-			"You have one scoped AI feature that needs to be real",
-			"You can describe it in a sentence",
-			"Two weeks of focused work beats three months of hiring",
-		],
-		proof:
-			"Proof: a production AI app scoped, built, and shipped in two weeks.",
-		pricing: "Fixed price, scoped on the intake call.",
-	},
-	{
-		name: "Workflow Automation",
-		tagline: "Your team, unblocked",
-		duration: "2–4 weeks",
-		need: "Hours of manual work, automated",
-		needDetail:
-			"Triage, data entry, documents, reporting — work AI could be doing.",
-		problem:
-			"Your team burns hours on repetitive internal work, and nobody in-house has the time or AI depth to automate it.",
-		deliverables:
-			"Working automations wired into the tools you already use, and your team trained to run them.",
-		goodFit: [
-			"A repetitive process is eating real team hours every week",
-			"The process lives in tools you already use",
-			"You want your team trained on it, not dependent on me",
-		],
-		proof:
-			"Proof: SCC's AI integration — built, adopted, and in daily use after two weeks.",
-		pricing: "Scoped on the intake call.",
-	},
-	{
-		name: "Embedded AI Engineer",
-		tagline: "I build with you",
-		duration: "Ongoing · 6+ week initial block",
-		need: "AI shipping every week",
-		needDetail:
-			"A stream of AI product work, not one feature — without months of hiring.",
-		problem:
-			"Your AI ambitions outpace the team's bandwidth or AI depth. You need AI product work shipping continuously.",
-		deliverables:
-			"I join the team — repo, standups, roadmap — and ship production AI features, with knowledge transfer built into the working style.",
-		goodFit: [
-			"Your AI roadmap is bigger than your team's bandwidth",
-			"You want features shipping while you hire, or instead of hiring",
-			"You value knowledge transfer, not a black box",
-		],
-		proof:
-			"Proof: Clyde AI — a year of estimated work deployed in six weeks, embedded in the team.",
-		pricing: "Scoped on the intake call.",
-	},
-] as const;
+import { BOOKING_URL, SERVICE_OFFERS } from "../lib/servicesFitFinder";
 
 const faqItems = [
 	{
@@ -108,58 +45,79 @@ const faqItems = [
 		<main class="wrapper services-page stack gap-20">
 			<header class="services-hero stack gap-4">
 				<p class="eyebrow">Services</p>
-				<h1>Three ways to <em>ship</em></h1>
+				<h1>What do you need <em>shipped</em>?</h1>
 				<p class="lede">
-					Every engagement starts with the same 30-minute scoping call.
-					These are the three shapes the work takes after it.
+					Pick the shape of your problem — I'll show you how I'd attack it.
+					Your pick rides along to the booking so the call starts scoped.
 				</p>
 			</header>
 
-			<section class="offers stack gap-8" aria-labelledby="offers-title">
+			<section class="fit-finder stack gap-8" aria-labelledby="fit-finder-title">
 				<header class="section-heading stack gap-2">
 					<p class="eyebrow">Find your fit</p>
-					<h2 id="offers-title">What do you need shipped?</h2>
+					<h2 id="fit-finder-title">What do you need shipped?</h2>
 				</header>
-				<ol class="offer-list">
+				<div
+					class="service-choices"
+					role="group"
+					aria-label="What do you need shipped?"
+				>
 					{
-						serviceOffers.map((offer, index) => (
-							<li>
-								<article class="offer">
-									<header class="offer-heading stack gap-2">
-										<p class="eyebrow">
-											0{index + 1} · {offer.duration}
-										</p>
-										<h3>{offer.name}</h3>
-										<p class="tagline">{offer.tagline}</p>
-									</header>
-									<div class="offer-body stack gap-4">
-										<p class="need">
-											<strong>What you need:</strong> {offer.need}
-										</p>
-										<p>{offer.needDetail}</p>
-										<p>
-											<strong>The problem:</strong> {offer.problem}
-										</p>
-										<p>
-											<strong>What you get:</strong> {offer.deliverables}
-										</p>
-										<div class="good-fit">
-											<h4>Good fit if…</h4>
-											<ul>
-												{offer.goodFit.map((line) => <li>{line}</li>)}
-											</ul>
-										</div>
-										<p>{offer.proof}</p>
-										<p class="pricing">{offer.pricing}</p>
-										<CallToAction href={BOOKING_URL}>
-											Book a discovery call
-										</CallToAction>
-									</div>
-								</article>
-							</li>
+						SERVICE_OFFERS.map((offer) => (
+							<button
+								class="service-choice"
+								type="button"
+								data-service-choice={offer.id}
+								aria-pressed="false"
+							>
+								<strong>{offer.need}</strong>
+								<span>{offer.needDetail}</span>
+								<span class="choice-action" data-choice-action>See how →</span>
+							</button>
 						))
 					}
-				</ol>
+				</div>
+				<div class="service-panels">
+					{
+						SERVICE_OFFERS.map((offer) => (
+							<article class="offer" data-service-panel={offer.id}>
+								<header class="offer-heading stack gap-2">
+									<p class="eyebrow">{offer.duration}</p>
+									<h3>{offer.name}</h3>
+									<p class="tagline">{offer.tagline}</p>
+								</header>
+								<div class="offer-body stack gap-4">
+									<p>
+										<strong>The problem:</strong> {offer.problem}
+									</p>
+									<p>
+										<strong>What you get:</strong> {offer.deliverables}
+									</p>
+									<p>{offer.proof}</p>
+									<div class="good-fit">
+										<h4>Good fit if…</h4>
+										<ul>
+											{offer.goodFit.map((line) => <li>{line}</li>)}
+										</ul>
+									</div>
+									<p class="pricing">{offer.pricing}</p>
+									<a
+										class="booking-link"
+										data-service-booking
+										href={BOOKING_URL}
+									>
+										Book a discovery call
+									</a>
+								</div>
+							</article>
+						))
+					}
+					<p class="unscoped-booking">
+						Not sure which? That's exactly what the call is for.{" "}
+						<a href={BOOKING_URL}>Book it unscoped</a>{" "}— we'll figure it out
+						together.
+					</p>
+				</div>
 			</section>
 
 			<section class="faq stack gap-8" aria-labelledby="faq-title">
@@ -182,10 +140,10 @@ const faqItems = [
 			<section class="closing-cta stack gap-4" aria-labelledby="scope-title">
 				<h2 id="scope-title">Let's scope your project</h2>
 				<p>
-					A 30-minute call: what you need shipped, whether I'm the right
-					fit, and what a first engagement looks like. If it's a fit,
-					you'll have a written proposal — scope, timeline, and price —
-					within two business days. If I'm not, I'll tell you on the call.
+					A 30-minute call: what you need shipped, whether I'm the right fit,
+					and what a first engagement looks like. If it's a fit, you'll have a
+					written proposal — scope, timeline, and price — within two business
+					days. If I'm not, I'll tell you on the call.
 				</p>
 				<CallToAction href={BOOKING_URL}>Book a discovery call</CallToAction>
 				<p class="floor">Engagements start at two weeks, fixed scope.</p>
@@ -193,6 +151,56 @@ const faqItems = [
 		</main>
 	</div>
 </BaseLayout>
+
+<script>
+	import {
+		buildServiceBookingUrl,
+		getOfferChoiceState,
+		selectOffer,
+		type FitFinderState,
+		type ServiceOfferId,
+	} from "../lib/servicesFitFinder";
+
+	const choices = document.querySelectorAll<HTMLButtonElement>(
+		"[data-service-choice]",
+	);
+	const panels = document.querySelectorAll<HTMLElement>("[data-service-panel]");
+	let state: FitFinderState = {};
+
+	function render() {
+		for (const choice of choices) {
+			const offerId = choice.dataset.serviceChoice as ServiceOfferId;
+			const choiceState = getOfferChoiceState(state, offerId);
+			choice.setAttribute("aria-pressed", String(choiceState.pressed));
+			choice.dataset.selected = String(choiceState.pressed);
+			choice.querySelector("[data-choice-action]")!.textContent =
+				choiceState.actionText;
+		}
+
+		for (const panel of panels) {
+			const offerId = panel.dataset.servicePanel as ServiceOfferId;
+			const choiceState = getOfferChoiceState(state, offerId);
+			panel.dataset.selected = String(choiceState.panelRevealed);
+			panel.querySelector<HTMLAnchorElement>("[data-service-booking]")!.href =
+				buildServiceBookingUrl(
+					choiceState.panelRevealed ? offerId : undefined,
+				);
+		}
+	}
+
+	document.documentElement.dataset.js = "true";
+	render();
+
+	for (const choice of choices) {
+		choice.addEventListener("click", () => {
+			state = selectOffer(
+				state,
+				choice.dataset.serviceChoice as ServiceOfferId,
+			);
+			render();
+		});
+	}
+</script>
 
 <style>
 	.services-page {
@@ -233,12 +241,54 @@ const faqItems = [
 		font-size: var(--text-3xl);
 	}
 
-	.offer-list {
+	.service-choices,
+	.service-panels {
+		display: grid;
+		gap: 1rem;
+	}
+
+	.service-choice {
 		display: flex;
 		flex-direction: column;
-		gap: 2rem;
-		padding: 0;
-		list-style: none;
+		align-items: flex-start;
+		gap: 0.75rem;
+		width: 100%;
+		padding: 1.5rem;
+		color: var(--link-color);
+		border: 2px solid var(--link-color);
+		border-radius: 1rem;
+		background: transparent;
+		box-shadow: var(--shadow-sm);
+		font: inherit;
+		text-align: left;
+		cursor: pointer;
+	}
+
+	.service-choice strong {
+		font-family: var(--font-brand);
+		font-size: var(--text-xl);
+		line-height: 1.1;
+	}
+
+	.choice-action {
+		color: var(--accent-regular);
+		font-family: var(--font-brand);
+		font-weight: 700;
+	}
+
+	.service-choice:hover,
+	.service-choice:focus-visible,
+	.service-choice[data-selected="true"] {
+		background-color: var(--accent-subtle-overlay);
+	}
+
+	.service-choice:focus-visible {
+		outline: 3px solid var(--accent-regular);
+		outline-offset: 3px;
+	}
+
+	.service-choice[data-selected="true"] {
+		box-shadow: var(--shadow-md);
 	}
 
 	.offer {
@@ -270,10 +320,6 @@ const faqItems = [
 		line-height: 1.7;
 	}
 
-	.need {
-		font-size: var(--text-lg);
-	}
-
 	.good-fit {
 		padding: 1.25rem;
 		border-left: 3px solid #ca7879;
@@ -291,9 +337,20 @@ const faqItems = [
 		line-height: 1.7;
 	}
 
-	.offer :global(.primary),
-	.closing-cta :global(.primary) {
+	.booking-link {
 		align-self: flex-start;
+		padding: 0.56em 2em;
+		color: var(--accent-text-over);
+		border-radius: 999rem;
+		background: var(--gradient-accent-orange);
+		box-shadow: var(--shadow-md);
+		font-size: var(--text-lg);
+		line-height: 1.1;
+		text-decoration: none;
+	}
+
+	.unscoped-booking {
+		line-height: 1.7;
 	}
 
 	.faq-list {
@@ -339,13 +396,37 @@ const faqItems = [
 		font-size: var(--text-sm);
 	}
 
+	@media (prefers-reduced-motion: no-preference) {
+		.service-choice {
+			transition:
+				background-color var(--theme-transition),
+				box-shadow var(--theme-transition),
+				transform var(--theme-transition);
+		}
+
+		.service-choice:hover {
+			transform: translateY(-0.25rem);
+		}
+	}
+
 	@media (min-width: 50em) {
 		.services-page {
 			padding-block: 5rem;
 		}
 
+		.service-choices {
+			grid-template-columns: repeat(3, 1fr);
+		}
+
 		.offer {
 			grid-template-columns: minmax(14rem, 1fr) 2fr;
 		}
+	}
+</style>
+
+<style is:global>
+	/* Keep every panel available without JavaScript; reveal only the chosen panel once it loads. */
+	html[data-js] [data-service-panel]:not([data-selected="true"]) {
+		display: none;
 	}
 </style>

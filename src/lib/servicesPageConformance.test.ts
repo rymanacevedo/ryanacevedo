@@ -15,6 +15,7 @@ const requiredPhrases = [
 	"Let's scope your project",
 	"A 30-minute call: what you need shipped, whether I'm the right fit, and what a first engagement looks like. If it's a fit, you'll have a written proposal — scope, timeline, and price — within two business days. If I'm not, I'll tell you on the call.",
 	"Engagements start at two weeks, fixed scope.",
+	"Not sure which? That's exactly what the call is for. Book it unscoped — we'll figure it out together.",
 ];
 const serviceOffers = [
 	{
@@ -33,6 +34,7 @@ const serviceOffers = [
 
 let servicesPage = "";
 let decodedServicesPage = "";
+let renderedServicesText = "";
 
 function decodeCommonEntities(html: string): string {
 	return html
@@ -55,12 +57,13 @@ beforeAll(() => {
 
 	servicesPage = readFileSync(servicesPagePath, "utf8");
 	decodedServicesPage = decodeCommonEntities(servicesPage);
+	renderedServicesText = decodedServicesPage.replaceAll(/<[^>]+>/g, "");
 });
 
 describe("built /services page", () => {
-	test("publishes the complete static services offer", () => {
+	test("publishes every offer for visitors without JavaScript", () => {
 		for (const phrase of requiredPhrases) {
-			expect(decodedServicesPage).toContain(phrase);
+			expect(renderedServicesText).toContain(phrase);
 		}
 		const offerPanels = [
 			...servicesPage.matchAll(/<article\b[\s\S]*?<\/article>/g),
@@ -82,11 +85,11 @@ describe("built /services page", () => {
 	test("sends every services-page booking action straight to Cal.com", () => {
 		const bookingHrefs = [
 			...servicesPage.matchAll(
-				/<a\b[^>]*href="([^"]*)"[^>]*>\s*Book (?:a|the) discovery call/gi,
+				/<a\b[^>]*href="([^"]*)"[^>]*>\s*(?:Book (?:a|the) discovery call|Book it unscoped)/gi,
 			),
 		].map(([, href]) => href);
 
-		expect(bookingHrefs).toHaveLength(4);
+		expect(bookingHrefs).toHaveLength(5);
 		expect(bookingHrefs.every((href) => href === expectedBookingUrl)).toBe(
 			true,
 		);
