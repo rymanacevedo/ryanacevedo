@@ -3,9 +3,8 @@ import CallToAction from "../components/CallToAction.astro";
 import BaseLayout from "../layouts/BaseLayout.astro";
 import { BOOKING_URL } from "../lib/intakeFunnel";
 
-const offers = [
+const serviceOffers = [
 	{
-		id: "sprint",
 		name: "AI Product Sprint",
 		tagline: "I build it, you ship it",
 		duration: "2 weeks · fixed scope",
@@ -26,7 +25,6 @@ const offers = [
 		pricing: "Fixed price, scoped on the intake call.",
 	},
 	{
-		id: "automation",
 		name: "Workflow Automation",
 		tagline: "Your team, unblocked",
 		duration: "2–4 weeks",
@@ -47,7 +45,6 @@ const offers = [
 		pricing: "Scoped on the intake call.",
 	},
 	{
-		id: "embedded",
 		name: "Embedded AI Engineer",
 		tagline: "I build with you",
 		duration: "Ongoing · 6+ week initial block",
@@ -69,7 +66,7 @@ const offers = [
 	},
 ] as const;
 
-const faq = [
+const faqItems = [
 	{
 		question: "Who owns the work?",
 		answer:
@@ -125,9 +122,9 @@ const faq = [
 				</header>
 				<ol class="offer-list">
 					{
-						offers.map((offer, index) => (
+						serviceOffers.map((offer, index) => (
 							<li>
-								<article class="offer" data-service-offer={offer.id}>
+								<article class="offer">
 									<header class="offer-heading stack gap-2">
 										<p class="eyebrow">
 											0{index + 1} · {offer.duration}
@@ -172,7 +169,7 @@ const faq = [
 				</header>
 				<div class="faq-list">
 					{
-						faq.map((item) => (
+						faqItems.map((item) => (
 							<details class="faq-item">
 								<summary>{item.question}</summary>
 								<p>{item.answer}</p>

@@ -2,13 +2,10 @@ import { beforeAll, describe, expect, test } from "bun:test";
 import { readFileSync } from "node:fs";
 import { resolve } from "node:path";
 
-const bookingUrl = "https://cal.com/avocadotechgroup/discovery-call";
+const expectedBookingUrl = "https://cal.com/avocadotechgroup/discovery-call";
 const builtSiteDirectory = resolve(import.meta.dir, "../../dist");
 const servicesPagePath = resolve(builtSiteDirectory, "services/index.html");
 const requiredPhrases = [
-	"AI Product Sprint",
-	"Workflow Automation",
-	"Embedded AI Engineer",
 	"Who owns the work?",
 	"Will you sign an NDA?",
 	"How do we work together day-to-day?",
@@ -19,25 +16,23 @@ const requiredPhrases = [
 	"A 30-minute call: what you need shipped, whether I'm the right fit, and what a first engagement looks like. If it's a fit, you'll have a written proposal — scope, timeline, and price — within two business days. If I'm not, I'll tell you on the call.",
 	"Engagements start at two weeks, fixed scope.",
 ];
-const offerPricing = [
+const serviceOffers = [
 	{
-		id: "sprint",
 		name: "AI Product Sprint",
 		pricing: "Fixed price, scoped on the intake call.",
 	},
 	{
-		id: "automation",
 		name: "Workflow Automation",
 		pricing: "Scoped on the intake call.",
 	},
 	{
-		id: "embedded",
 		name: "Embedded AI Engineer",
 		pricing: "Scoped on the intake call.",
 	},
 ] as const;
 
 let servicesPage = "";
+let decodedServicesPage = "";
 
 function decodeCommonEntities(html: string): string {
 	return html
@@ -59,25 +54,28 @@ beforeAll(() => {
 	}
 
 	servicesPage = readFileSync(servicesPagePath, "utf8");
+	decodedServicesPage = decodeCommonEntities(servicesPage);
 });
 
 describe("built /services page", () => {
 	test("publishes the complete static services offer", () => {
 		for (const phrase of requiredPhrases) {
-			expect(decodeCommonEntities(servicesPage)).toContain(phrase);
+			expect(decodedServicesPage).toContain(phrase);
 		}
-		for (const offer of offerPricing) {
-			const offerPanel = servicesPage.match(
-				new RegExp(
-					`<article\\b[^>]*data-service-offer="${offer.id}"[\\s\\S]*?</article>`,
+		const offerPanels = [
+			...servicesPage.matchAll(/<article\b[\s\S]*?<\/article>/g),
+		].map(([panel]) => decodeCommonEntities(panel));
+
+		expect(offerPanels).toHaveLength(3);
+		for (const offer of serviceOffers) {
+			expect(
+				offerPanels.some(
+					(panel) =>
+						panel.includes(offer.name) && panel.includes(offer.pricing),
 				),
-			)?.[0];
-
-			expect(decodeCommonEntities(offerPanel ?? "")).toContain(offer.name);
-			expect(decodeCommonEntities(offerPanel ?? "")).toContain(offer.pricing);
+			).toBe(true);
 		}
 
-		expect(servicesPage.match(/data-service-offer=/g)).toHaveLength(3);
 		expect(servicesPage).not.toMatch(/\$\s*\d/);
 	});
 
@@ -89,7 +87,9 @@ describe("built /services page", () => {
 		].map(([, href]) => href);
 
 		expect(bookingHrefs).toHaveLength(4);
-		expect(bookingHrefs.every((href) => href === bookingUrl)).toBe(true);
+		expect(bookingHrefs.every((href) => href === expectedBookingUrl)).toBe(
+			true,
+		);
 	});
 
 	test("publishes Services in the primary navigation site-wide", () => {
