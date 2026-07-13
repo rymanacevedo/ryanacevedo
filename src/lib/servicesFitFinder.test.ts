@@ -7,7 +7,7 @@ import {
 } from "./servicesFitFinder";
 
 describe("services fit-finder", () => {
-	test("selects an offer and switches the revealed offer", () => {
+	test("selects an offer and updates choice state when switching offers", () => {
 		const sprintSelected = selectOffer({}, "sprint");
 
 		expect(getOfferChoiceState(sprintSelected, "sprint")).toEqual({
@@ -22,18 +22,36 @@ describe("services fit-finder", () => {
 		});
 
 		const automationSelected = selectOffer(sprintSelected, "automation");
-		expect(
-			getOfferChoiceState(automationSelected, "sprint").panelRevealed,
-		).toBe(false);
-		expect(
-			getOfferChoiceState(automationSelected, "automation").panelRevealed,
-		).toBe(true);
+		expect(getOfferChoiceState(automationSelected, "sprint")).toEqual({
+			pressed: false,
+			actionText: "See how →",
+			panelRevealed: false,
+		});
+		expect(getOfferChoiceState(automationSelected, "automation")).toEqual({
+			pressed: true,
+			actionText: "Selected ✓",
+			panelRevealed: true,
+		});
 	});
 
-	test("builds bare and offer-scoped Cal.com booking URLs", () => {
+	test("builds the bare Cal.com booking URL without a selected offer", () => {
 		expect(buildServiceBookingUrl()).toBe(BOOKING_URL);
-		expect(buildServiceBookingUrl("sprint")).toBe(
+	});
+
+	test.each([
+		[
+			"sprint",
 			"https://cal.com/avocadotechgroup/discovery-call?notes=Interested+in%3A+AI+Product+Sprint",
-		);
+		],
+		[
+			"automation",
+			"https://cal.com/avocadotechgroup/discovery-call?notes=Interested+in%3A+Workflow+Automation",
+		],
+		[
+			"embedded",
+			"https://cal.com/avocadotechgroup/discovery-call?notes=Interested+in%3A+Embedded+AI+Engineer",
+		],
+	] as const)("scopes Cal.com booking URL to %s", (offerId, expectedUrl) => {
+		expect(buildServiceBookingUrl(offerId)).toBe(expectedUrl);
 	});
 });
