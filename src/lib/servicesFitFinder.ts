@@ -92,11 +92,11 @@ export function getOfferChoiceState(
 	state: FitFinderState,
 	offerId: ServiceOfferId,
 ): OfferChoiceState {
-	const pressed = state.selectedOfferId === offerId;
+	const isSelected = state.selectedOfferId === offerId;
 	return {
-		pressed,
-		actionText: pressed ? "Selected ✓" : "See how →",
-		panelRevealed: pressed,
+		pressed: isSelected,
+		actionText: isSelected ? "Selected ✓" : "See how →",
+		panelRevealed: isSelected,
 	};
 }
 

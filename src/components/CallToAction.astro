@@ -1,15 +1,15 @@
 ---
-interface Props {
+import type { HTMLAttributes } from "astro/types";
+
+interface Props extends Omit<HTMLAttributes<"a">, "class" | "href"> {
 	href: string;
 	variant?: "primary" | "secondary";
-	target?: "_blank" | "_parent" | "_self" | "_top";
-	rel?: string;
 }
 
-const { href, variant = "primary", target, rel } = Astro.props;
+const { href, variant = "primary", ...attributes } = Astro.props;
 ---
 
-<a class={variant} href={href} target={target} rel={rel}><slot /></a>
+<a class={variant} href={href} {...attributes}><slot /></a>
 
 <style>
 	a {

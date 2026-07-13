@@ -101,13 +101,9 @@ const faqItems = [
 										</ul>
 									</div>
 									<p class="pricing">{offer.pricing}</p>
-									<a
-										class="booking-link"
-										data-service-booking
-										href={BOOKING_URL}
-									>
+									<CallToAction data-service-booking href={BOOKING_URL}>
 										Book a discovery call
-									</a>
+									</CallToAction>
 								</div>
 							</article>
 						))
@@ -337,16 +333,9 @@ const faqItems = [
 		line-height: 1.7;
 	}
 
-	.booking-link {
+	.offer :global(.primary),
+	.closing-cta :global(.primary) {
 		align-self: flex-start;
-		padding: 0.56em 2em;
-		color: var(--accent-text-over);
-		border-radius: 999rem;
-		background: var(--gradient-accent-orange);
-		box-shadow: var(--shadow-md);
-		font-size: var(--text-lg);
-		line-height: 1.1;
-		text-decoration: none;
 	}
 
 	.unscoped-booking {
@@ -405,6 +394,7 @@ const faqItems = [
 		}
 
 		.service-choice:hover {
+			box-shadow: var(--shadow-md);
 			transform: translateY(-0.25rem);
 		}
 	}
