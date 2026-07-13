@@ -1,19 +1,14 @@
 ---
 import { Image } from "astro:assets";
-import { getCollection } from "astro:content";
 // Page section components
 import CallToAction from "../components/CallToAction.astro";
 import ContactCTA from "../components/ContactCTA.astro";
 // Component Imports
 import Grid from "../components/Grid.astro";
 import Icon from "../components/Icon.astro";
-import PortfolioPreview from "../components/PortfolioPreview.astro";
 import Skills from "../components/Skills.astro";
 // Layout import — provides basic page elements: <head>, <nav>, <footer> etc.
 import BaseLayout from "../layouts/BaseLayout.astro";
-import { selectFeaturedWork } from "../lib/featuredWork";
-
-const featuredWork = selectFeaturedWork(await getCollection("work"));
 
 // Full Astro Component Syntax:
 // https://docs.astro.build/core-concepts/astro-components/
@@ -58,35 +53,6 @@ const featuredWork = selectFeaturedWork(await getCollection("work"));
 		</div>
 
 		<main class="wrapper stack gap-20 lg:gap-48">
-			<section class="section with-background">
-				<header class="section-header stack gap-2 lg:gap-4">
-					<h3>Featured case studies</h3>
-					<p>
-						Five production LangGraph agents shipped for Clyde AI in nine
-						weeks. Iteration accelerated an estimated 5–10×.
-					</p>
-				</header>
-
-				<div class="gallery">
-					<Grid variant="offset">
-						{
-							featuredWork.map((project) => (
-								<li>
-									<PortfolioPreview project={project} />
-								</li>
-							))
-						}
-					</Grid>
-				</div>
-
-				<div class="cta">
-					<CallToAction href="/work/">
-						View All
-						<Icon icon="arrow-right" size="1.2em" />
-					</CallToAction>
-				</div>
-			</section>
-
 			<section class="section with-background bg-variant">
 				<header class="section-header stack gap-2 lg:gap-4">
 					<h3>Organizations I've supported</h3>
@@ -100,10 +66,6 @@ const featuredWork = selectFeaturedWork(await getCollection("work"));
 								{ name: "LexisNexis", logo: "lexisnexis.png" },
 								{ name: "Amplifire", logo: "amplifire.png" },
 								{ name: "Clyde AI", logo: "clyde.png" },
-								{
-									name: "Second Chance Center",
-									logo: "second-chance-center.png",
-								},
 								{
 									name: "Tiding Health",
 									logo: "tiding-health.png",
