@@ -13,7 +13,7 @@ const requiredPhrases = [
 	"How does payment work?",
 	"What if we're not a fit?",
 	"Let's scope your project",
-	"A 30-minute call: what you need shipped, whether I'm the right fit, and what a first engagement looks like. If it's a fit, you'll have a written proposal — scope, timeline, and price — within two business days. If I'm not, I'll tell you on the call.",
+	"A 30-minute call: what you need shipped, whether I'm the right fit, and what a first engagement looks like. If it's a fit, you'll have a written proposal — scope, timeline, and price — within two business days.",
 	"Engagements start at two weeks, fixed scope.",
 	"Not sure which? That's exactly what the call is for. Book it unscoped — we'll figure it out together.",
 ];
@@ -89,7 +89,7 @@ describe("built /services page", () => {
 			),
 		].map(([, href]) => href);
 
-		expect(bookingHrefs).toHaveLength(5);
+		expect(bookingHrefs).toHaveLength(4);
 		expect(bookingHrefs.every((href) => href === expectedBookingUrl)).toBe(
 			true,
 		);
