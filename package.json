@@ -15,7 +15,6 @@
 		"lint": "biome lint src .sandcastle astro.config.mjs --no-errors-on-unmatched --files-ignore-unknown=true",
 		"typecheck": "tsc --noEmit",
 		"test": "bun test",
-		"test:built-site": "bun test src/lib/contentConformance.test.ts",
 		"prepare": "husky"
 	},
 	"dependencies": {

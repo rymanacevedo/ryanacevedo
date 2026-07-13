@@ -1,5 +1,5 @@
 [build]
-command = "bun run test:built-site"
+command = "bun run build"
 publish = "dist"
 
 [build.environment]
