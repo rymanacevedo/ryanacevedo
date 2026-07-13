@@ -7,7 +7,7 @@ import {
 } from "./servicesFitFinder";
 
 describe("services fit-finder", () => {
-	test("selects an offer and switches the revealed offer", () => {
+	test("selects an offer and updates choice state when switching offers", () => {
 		const sprintSelected = selectOffer({}, "sprint");
 
 		expect(getOfferChoiceState(sprintSelected, "sprint")).toEqual({
@@ -22,12 +22,16 @@ describe("services fit-finder", () => {
 		});
 
 		const automationSelected = selectOffer(sprintSelected, "automation");
-		expect(
-			getOfferChoiceState(automationSelected, "sprint").panelRevealed,
-		).toBe(false);
-		expect(
-			getOfferChoiceState(automationSelected, "automation").panelRevealed,
-		).toBe(true);
+		expect(getOfferChoiceState(automationSelected, "sprint")).toEqual({
+			pressed: false,
+			actionText: "See how →",
+			panelRevealed: false,
+		});
+		expect(getOfferChoiceState(automationSelected, "automation")).toEqual({
+			pressed: true,
+			actionText: "Selected ✓",
+			panelRevealed: true,
+		});
 	});
 
 	test("builds the bare Cal.com booking URL without a selected offer", () => {
