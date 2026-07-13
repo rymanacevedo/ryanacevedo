@@ -1,239 +1,449 @@
 ---
 import { Image } from "astro:assets";
 
+import CallToAction from "../components/CallToAction.astro";
 import ContactCTA from "../components/ContactCTA.astro";
 import Hero from "../components/Hero.astro";
+import Icon from "../components/Icon.astro";
 import BaseLayout from "../layouts/BaseLayout.astro";
+
+const principles = [
+	{
+		number: "01",
+		title: "Start with a real problem",
+		description: "Look for friction people already feel.",
+	},
+	{
+		number: "02",
+		title: "Ship the smallest proof",
+		description: "Turn theories into something customers can use.",
+	},
+	{
+		number: "03",
+		title: "Iterate",
+		description:
+			"Listen to what customers say and build what they actually need.",
+	},
+];
 ---
 
-<BaseLayout title="About | Ryan Acevedo" description="About Ryan Acevedo">
+<BaseLayout
+	title="About | Ryan Acevedo"
+	description="Ryan Acevedo is an engineer and first-time founder who brings an owner's perspective to software costs, tradeoffs, and outcomes."
+>
 	<div class="stack gap-20">
-		<main class="wrapper about">
-			<Hero
-				title="About"
-				tagline="I'm an engineer by training and a problem-solver by nature."
+		<main class="wrapper stack gap-20">
+			<header class="founder-hero">
+				<div class="hero-copy">
+					<p class="eyebrow">About · Entrepreneurship</p>
+					<Hero align="start">
+						<Fragment slot="title">
+							Build the thing. <em>Learn from the market.</em>
+						</Fragment>
+						<Fragment slot="tagline">
+							I'm an engineer by training and a problem-solver by
+							nature. Building businesses taught me how to build
+							systems that work in the real world.
+						</Fragment>
+						<div class="hero-cta">
+							<CallToAction
+								variant="secondary"
+								href="#featured-venture"
+								>See the work</CallToAction
+							>
+						</div>
+					</Hero>
+				</div>
+				<div class="hero-mark" aria-hidden="true">
+					<span>IDEA</span>
+					<Icon icon="rocket-launch" size="5rem" gradient />
+					<span>IMPACT</span>
+				</div>
+			</header>
+
+			<section class="origin" aria-labelledby="origin-title">
+				<div class="origin-image">
+					<Image
+						width="1553"
+						height="873"
+						src="/assets/ryan-acevedo-beanie.jpeg"
+						alt="Ryan Acevedo smiling in a beanie during a hot-air balloon ride"
+					/>
+				</div>
+				<div class="origin-story stack gap-6">
+					<div class="story-intro stack gap-4">
+						<p class="eyebrow">Why I build</p>
+						<h2 id="origin-title">
+							The problem behind the product
+						</h2>
+						<p>
+							I spent my career building software systems,
+							debugging complex architectures, and figuring out
+							how things work from the inside out. But the biggest
+							problem I've ever tackled isn't technical - it's
+							building a business from scratch that proves
+							convenience and compassion aren't mutually
+							exclusive.
+						</p>
+					</div>
+					<div class="story-callout stack gap-4">
+						<p>
+							I grew up watching people in my community getting
+							chewed up by the system. As someone who was formerly
+							incarcerated, I experienced firsthand the barriers
+							that most people never think about: can't get hired,
+							can't get housing, can't get a fresh start no matter
+							how hard they work.
+						</p>
+						<p class="punch">That never sat right with me.</p>
+					</div>
+				</div>
+			</section>
+
+			<section class="method stack gap-8" aria-labelledby="method-title">
+				<header class="section-heading stack gap-4">
+					<p class="eyebrow">How I build</p>
+					<h2 id="method-title">A founder's operating loop</h2>
+					<p class="method-intro">
+						I'm a first-time founder, and I won't pretend otherwise
+						— I'm figuring it out the way an engineer does: break it
+						down, solve one piece at a time, don't stop until it
+						works. Running Mobile Oil Hero taught me what code costs
+						and what it's worth, and I make tradeoffs like it's my
+						money on the line — because at my own company, it is.
+					</p>
+				</header>
+				<ol class="principle-grid">
+					{
+						principles.map((principle) => (
+							<li class="principle">
+								<span class="principle-number">
+									{principle.number}
+								</span>
+								<h3>{principle.title}</h3>
+								<p>{principle.description}</p>
+							</li>
+						))
+					}
+				</ol>
+			</section>
+
+			<section
+				id="featured-venture"
+				class="venture"
+				aria-labelledby="venture-title"
 			>
-				<Image
-					width="1553"
-					height="873"
-					src="/assets/ryan-acevedo-beanie.jpeg"
-					alt="Ryan Acevedo on an air balloon smile with a beanie on"
-				/>
-			</Hero>
-
-			<!-- Story sections -->
-			<section class="story-block">
-				<div class="story-accent"></div>
-				<div class="story-content">
-					<p>
-						I spent my career building software systems, debugging
-						complex architectures, and figuring out how things work
-						from the inside out. But the biggest problem I've ever
-						tackled isn't technical&nbsp;&mdash; it's building a
-						business from scratch that proves convenience and
-						compassion aren't mutually exclusive.
-					</p>
+				<div class="venture-label">
+					<p>Featured venture</p>
+					<span>01</span>
 				</div>
-			</section>
-
-			<section class="story-block highlight">
-				<h2 class="callout-title">The Problem</h2>
-				<div class="story-content">
-					<p>
-						I grew up watching people in my community getting chewed
-						up by the system. As someone who was formerly
-						incarcerated, I experienced firsthand the barriers that
-						most people never think about: can't get hired, can't
-						get housing, can't get a fresh start no matter how hard
-						they work.
+				<div class="venture-story stack gap-4">
+					<p class="eyebrow">Service business · Social mission</p>
+					<h2 id="venture-title">Mobile Oil Hero</h2>
+					<p class="venture-lede">
+						A mobile mechanic designed around convenience and a
+						larger mission: creating real employment opportunities
+						for people rebuilding their lives after incarceration.
 					</p>
-					<p class="punch">That never sat right with me.</p>
-				</div>
-			</section>
-
-			<section class="story-block">
-				<h2 class="callout-title">The Mission</h2>
-				<div class="story-content">
 					<p>
-						So when I started my first business <a
-							href="https://mobileoilhero.com">Mobile Oil Hero</a
-						>, I didn't just want to build another service business.
-						I wanted to build a company where the mission is baked
+						I didn't just want to build another service business. I
+						wanted to build a company where the mission is baked
 						into the operating model. Every oil change we perform
 						funds real jobs for people who've earned a shot. Every
 						customer who books with us is choosing to put their
 						money where their values are.
 					</p>
+					<div class="venture-links">
+						<CallToAction
+							variant="secondary"
+							href="https://mobileoilhero.com"
+							target="_blank"
+							rel="noopener noreferrer"
+							>Visit Mobile Oil Hero</CallToAction
+						>
+						<CallToAction
+							variant="secondary"
+							href="https://mobileoilhero.com/about-us"
+							target="_blank"
+							rel="noopener noreferrer"
+							>Read the founder story</CallToAction
+						>
+					</div>
+				</div>
+
+				<div class="belief stack gap-4" aria-labelledby="belief-title">
+					<Icon icon="strategy" size="2.75rem" gradient />
+					<h2 id="belief-title">
+						Software is leverage. The business was the outcome.
+					</h2>
+					<p>
+						The automotive industry is ripe for change. It is
+						fragmented, filled with independent mechanics who lack
+						the technology to compete with dealerships, and
+						underserved when it comes to convenience and
+						transparency. Mobile Oil Hero was built to address these
+						issues head-on, offering a modern, tech-enabled solution
+						that benefits both customers and mechanics.
+					</p>
 				</div>
 			</section>
 
-			<section class="story-block">
-				<div class="story-content">
-					<p>
-						I'm a first-time founder, and I won't pretend otherwise —
-						I'm figuring it out the way an engineer does: break it
-						down, solve one piece at a time, don't stop until it works.
-						Running Mobile Oil Hero taught me what code costs and what
-						it's worth, and I make tradeoffs like it's my money on the
-						line — because at my own company, it is.
-					</p>
-				</div>
-			</section>
-
-			<section class="story-block highlight closing">
-				<div class="story-content">
-					<p>
-						This time, I'm doing it for a different reason. This time
-						it's.. it's to change the system.
-					</p>
-					<p class="punch">
-						That's my story. Now it's time for change.
-					</p>
-				</div>
+			<section
+				class="closing stack gap-4"
+				aria-labelledby="closing-title"
+			>
+				<p>This time, I'm doing it for a different reason.</p>
+				<h2 id="closing-title">
+					This time, it's to change the system.
+				</h2>
+				<p class="punch">That's my story. Now it's time for change.</p>
 			</section>
 		</main>
+
 		<ContactCTA />
 	</div>
 </BaseLayout>
 
 <style>
-	.about {
-		display: flex;
-		flex-direction: column;
+	.founder-hero {
+		position: relative;
+		display: grid;
 		gap: 2rem;
-		max-width: 52rem;
-		margin-inline: auto;
+		padding-block: 2rem;
 	}
 
-	img {
-		margin-top: 1.5rem;
+	.hero-copy {
+		position: relative;
+		z-index: 1;
+		max-width: 54rem;
+	}
+
+	.founder-hero em {
+		color: #ca7879;
+		font-weight: 300;
+	}
+
+	.eyebrow {
+		color: var(--accent-regular);
+		font-family: var(--font-brand);
+		font-size: var(--text-sm);
+		font-weight: 700;
+		letter-spacing: 0.14em;
+		text-transform: uppercase;
+	}
+
+	.hero-cta {
+		align-self: flex-start;
+		margin-top: 0.5rem;
+	}
+
+	.hero-mark {
+		display: flex;
+		align-items: center;
+		justify-content: space-between;
+		padding: 1.5rem;
+		border: 1px solid var(--gray-800);
+		border-radius: 1.5rem;
+		background:
+			linear-gradient(
+				135deg,
+				var(--accent-subtle-overlay),
+				transparent 65%
+			),
+			var(--gray-999_40);
+		box-shadow: var(--shadow-sm);
+		color: var(--gray-400);
+		font-family: var(--font-brand);
+		font-size: var(--text-sm);
+		font-weight: 700;
+		letter-spacing: 0.12em;
+	}
+
+	.origin {
+		display: grid;
+		gap: 2rem;
+		align-items: start;
+	}
+
+	.origin-image img {
+		display: block;
+		width: 100%;
 		border-radius: 1.5rem;
 		box-shadow: var(--shadow-md);
 	}
 
-	/* Story blocks */
-	.story-block {
-		position: relative;
-		padding: 1.5rem 1.5rem 1.5rem 2rem;
-		border-radius: 0.75rem;
-		color: var(--gray-200);
-		font-size: var(--text-base);
-		line-height: 1.75;
-		border-left: 3px solid transparent;
+	.origin-story h2,
+	.section-heading h2,
+	.venture h2,
+	.belief h2,
+	.closing h2 {
+		font-size: var(--text-3xl);
 	}
 
-	.story-block .story-accent {
-		position: absolute;
-		left: -3px;
-		top: 0;
-		bottom: 0;
-		width: 3px;
-		background: var(--gradient-accent);
-		border-radius: 2px;
+	.origin-story p,
+	.method-intro,
+	.principle p,
+	.venture-story > p,
+	.belief p,
+	.closing > p:first-child {
+		color: var(--gray-400);
 	}
 
-	.story-block .story-content {
-		display: flex;
-		flex-direction: column;
-		gap: 1rem;
+	.origin-story p,
+	.method-intro,
+	.venture-story > p,
+	.belief p {
+		line-height: 1.7;
 	}
 
-	/* Highlighted story blocks */
-	.story-block.highlight {
-		background: rgba(118, 17, 166, 0.08);
+	.story-callout {
+		padding: 1.5rem;
 		border-left: 3px solid var(--accent-regular);
-		padding: 2rem;
+		border-radius: 0 1rem 1rem 0;
+		background: var(--accent-subtle-overlay);
 	}
 
-	.callout-title {
-		font-family: var(--font-brand);
-		font-size: var(--text-xl);
-		color: var(--gray-0);
-		margin-bottom: 0.75rem;
-	}
-
-	.callout-title::after {
-		content: "";
-		display: block;
-		width: 2rem;
-		height: 3px;
-		background: var(--gradient-accent);
-		border-radius: 2px;
-		margin-top: 0.4rem;
-	}
-
-	/* Punch lines */
 	.punch {
 		font-family: var(--font-brand);
-		font-size: var(--text-lg);
+		font-size: var(--text-xl);
 		font-weight: 600;
-		color: var(--gray-0);
-		margin-top: 0.25rem;
+	}
+
+	.section-heading {
+		max-width: 52rem;
+	}
+
+	.principle-grid {
+		display: grid;
+		gap: 1rem;
+		padding: 0;
+		list-style: none;
+	}
+
+	.principle {
+		position: relative;
+		padding: 1.5rem;
+		border-top: 3px solid #ca7879;
+		border-radius: 0 0 0.75rem 0.75rem;
+		background: var(--gray-999_40);
+		box-shadow: var(--shadow-sm);
+	}
+
+	.principle-number {
+		display: block;
+		margin-bottom: 2.5rem;
+		color: var(--gray-500);
+		font-family: var(--font-brand);
+		font-size: var(--text-sm);
+		font-weight: 700;
+	}
+
+	.principle h3 {
+		margin-bottom: 0.75rem;
+		font-size: var(--text-xl);
+	}
+
+	.venture {
+		display: grid;
+		gap: 2rem;
+		scroll-margin-top: 2rem;
+		padding: 1.5rem;
+		border: 1px solid var(--gray-800);
+		border-radius: 1.5rem;
+		background:
+			linear-gradient(145deg, var(--gray-999_40), transparent),
+			var(--gradient-subtle);
+		box-shadow: var(--shadow-md);
+	}
+
+	.venture-label {
+		display: flex;
+		justify-content: space-between;
+		color: var(--gray-400);
+		font-family: var(--font-brand);
+		font-size: var(--text-sm);
+		font-weight: 700;
+		letter-spacing: 0.1em;
+		text-transform: uppercase;
+	}
+
+	.venture-lede {
+		font-size: var(--text-lg);
+	}
+
+	.venture-links {
+		display: flex;
+		flex-wrap: wrap;
+		gap: 1rem 1.5rem;
+		margin-top: 0.75rem;
+	}
+
+	.venture-links a {
+		font-weight: 700;
+		text-underline-offset: 0.25em;
+	}
+
+	.belief {
+		grid-column: 1 / -1;
+		max-width: 52rem;
+		padding-left: 1.5rem;
+		border-left: 3px solid var(--accent-regular);
+	}
+
+	.closing {
+		max-width: 52rem;
+		padding: 2rem;
+		border-left: 3px solid var(--accent-regular);
+		border-radius: 0 1rem 1rem 0;
+		background: var(--accent-subtle-overlay);
 	}
 
 	.closing .punch {
-		font-size: var(--text-xl);
 		background: var(--gradient-accent);
 		-webkit-background-clip: text;
 		-webkit-text-fill-color: transparent;
 		background-clip: text;
 	}
 
-	/* Skills */
-	.skills-section {
-		padding: 1.5rem 0;
-	}
-
-	.skills {
-		display: flex;
-		flex-wrap: wrap;
-		gap: 0.75rem;
-		list-style: none;
-		padding: 0;
-		margin: 0.75rem 0 0 0;
-	}
-
-	.skills li {
-		padding: 0.5rem 1.25rem;
-		border-radius: 999px;
-		background: var(--accent-regular);
-		color: var(--accent-text-over);
-		font-family: var(--font-brand);
-		font-size: var(--text-sm);
-		font-weight: 600;
-		letter-spacing: 0.05em;
-		text-transform: uppercase;
-	}
-
 	@media (min-width: 50em) {
-		.about {
-			gap: 2.5rem;
+		.founder-hero {
+			grid-template-columns: minmax(0, 3fr) minmax(15rem, 1fr);
+			align-items: end;
+			padding-block: 5rem;
 		}
 
-		.story-block {
-			padding: 2rem 2.5rem 2rem 2.5rem;
-			font-size: var(--text-md);
+		.hero-mark {
+			min-height: 24rem;
+			flex-direction: column;
 		}
 
-		.story-block.highlight {
+		.origin {
+			grid-template-columns: minmax(18rem, 0.8fr) minmax(0, 1.2fr);
+			gap: 3rem;
+		}
+
+		.story-callout {
+			padding: 2rem;
+		}
+
+		.principle-grid {
+			grid-template-columns: repeat(3, minmax(0, 1fr));
+			gap: 1.5rem;
+		}
+
+		.principle {
+			padding: 2rem;
+			border-radius: 0 0 1.5rem 1.5rem;
+		}
+
+		.venture {
+			grid-template-columns: minmax(8rem, 0.35fr) minmax(0, 1.25fr);
 			padding: 2.5rem;
 		}
 
-		.callout-title {
-			font-size: var(--text-2xl);
-		}
-
-		.punch {
-			font-size: var(--text-xl);
-		}
-
-		.closing .punch {
-			font-size: var(--text-2xl);
-		}
-
-		.skills li {
-			font-size: var(--text-sm);
-			padding: 0.625rem 1.5rem;
+		.venture-label {
+			flex-direction: column;
+			justify-content: space-between;
 		}
 	}
 </style>
