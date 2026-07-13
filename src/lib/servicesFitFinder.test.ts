@@ -30,10 +30,24 @@ describe("services fit-finder", () => {
 		).toBe(true);
 	});
 
-	test("builds bare and offer-scoped Cal.com booking URLs", () => {
+	test("builds the bare Cal.com booking URL without a selected offer", () => {
 		expect(buildServiceBookingUrl()).toBe(BOOKING_URL);
-		expect(buildServiceBookingUrl("sprint")).toBe(
+	});
+
+	test.each([
+		[
+			"sprint",
 			"https://cal.com/avocadotechgroup/discovery-call?notes=Interested+in%3A+AI+Product+Sprint",
-		);
+		],
+		[
+			"automation",
+			"https://cal.com/avocadotechgroup/discovery-call?notes=Interested+in%3A+Workflow+Automation",
+		],
+		[
+			"embedded",
+			"https://cal.com/avocadotechgroup/discovery-call?notes=Interested+in%3A+Embedded+AI+Engineer",
+		],
+	] as const)("scopes Cal.com booking URL to %s", (offerId, expectedUrl) => {
+		expect(buildServiceBookingUrl(offerId)).toBe(expectedUrl);
 	});
 });
