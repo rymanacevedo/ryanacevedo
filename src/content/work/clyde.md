@@ -56,4 +56,4 @@ I embedded with Clyde's team as their AI engineer from January through June 2026
 ## Evidence
 
 - [meetclyde.com](https://meetclyde.com) — the live platform.
-- The 5–10× acceleration figure is published with Clyde's sign-off; the prompt-compression figure comes from before/after token counts.
+- The 5–10× acceleration; the prompt-compression figure comes from before/after token counts.
