@@ -1,5 +1,6 @@
 ---
 import CallToAction from "../components/CallToAction.astro";
+import ContactCTA from "../components/ContactCTA.astro";
 import BaseLayout from "../layouts/BaseLayout.astro";
 import { BOOKING_URL, SERVICE_OFFERS } from "../lib/servicesFitFinder";
 
@@ -45,14 +46,18 @@ const faqItems = [
 		<main class="wrapper services-page stack gap-20">
 			<header class="services-hero stack gap-4">
 				<p class="eyebrow">Services</p>
-				<h1>What do you need <em>shipped</em>?</h1>
+				<h1>What do you need <em>shipped?</em></h1>
 				<p class="lede">
-					Pick the shape of your problem — I'll show you how I'd attack it.
-					Your pick rides along to the booking so the call starts scoped.
+					Pick the shape of your problem — I'll show you how I'd
+					attack it. Your pick rides along to the booking so the call
+					starts scoped.
 				</p>
 			</header>
 
-			<section class="fit-finder stack gap-8" aria-labelledby="fit-finder-title">
+			<section
+				class="fit-finder stack gap-8"
+				aria-labelledby="fit-finder-title"
+			>
 				<header class="section-heading stack gap-2">
 					<p class="eyebrow">Find your fit</p>
 					<h2 id="fit-finder-title">What do you need shipped?</h2>
@@ -72,7 +77,9 @@ const faqItems = [
 							>
 								<strong>{offer.need}</strong>
 								<span>{offer.needDetail}</span>
-								<span class="choice-action" data-choice-action>See how →</span>
+								<span class="choice-action" data-choice-action>
+									See how →
+								</span>
 							</button>
 						))
 					}
@@ -80,7 +87,10 @@ const faqItems = [
 				<div class="service-panels">
 					{
 						SERVICE_OFFERS.map((offer) => (
-							<article class="offer" data-service-panel={offer.id}>
+							<article
+								class="offer"
+								data-service-panel={offer.id}
+							>
 								<header class="offer-heading stack gap-2">
 									<p class="eyebrow">{offer.duration}</p>
 									<h3>{offer.name}</h3>
@@ -88,20 +98,27 @@ const faqItems = [
 								</header>
 								<div class="offer-body stack gap-4">
 									<p>
-										<strong>The problem:</strong> {offer.problem}
+										<strong>The problem:</strong>{" "}
+										{offer.problem}
 									</p>
 									<p>
-										<strong>What you get:</strong> {offer.deliverables}
+										<strong>What you get:</strong>{" "}
+										{offer.deliverables}
 									</p>
 									<p>{offer.proof}</p>
 									<div class="good-fit">
 										<h4>Good fit if…</h4>
 										<ul>
-											{offer.goodFit.map((line) => <li>{line}</li>)}
+											{offer.goodFit.map((line) => (
+												<li>{line}</li>
+											))}
 										</ul>
 									</div>
 									<p class="pricing">{offer.pricing}</p>
-									<CallToAction data-service-booking href={BOOKING_URL}>
+									<CallToAction
+										data-service-booking
+										href={BOOKING_URL}
+									>
 										Book a discovery call
 									</CallToAction>
 								</div>
@@ -109,9 +126,11 @@ const faqItems = [
 						))
 					}
 					<p class="unscoped-booking">
-						Not sure which? That's exactly what the call is for.{" "}
-						<a href={BOOKING_URL}>Book it unscoped</a>{" "}— we'll figure it out
-						together.
+						Not sure which? That's exactly what the call is for.{
+							" "
+						}
+						<a href={BOOKING_URL}>Book it unscoped</a>{" "}— we'll
+						figure it out together.
 					</p>
 				</div>
 			</section>
@@ -132,19 +151,10 @@ const faqItems = [
 					}
 				</div>
 			</section>
-
-			<section class="closing-cta stack gap-4" aria-labelledby="scope-title">
-				<h2 id="scope-title">Let's scope your project</h2>
-				<p>
-					A 30-minute call: what you need shipped, whether I'm the right fit,
-					and what a first engagement looks like. If it's a fit, you'll have a
-					written proposal — scope, timeline, and price — within two business
-					days. If I'm not, I'll tell you on the call.
-				</p>
-				<CallToAction href={BOOKING_URL}>Book a discovery call</CallToAction>
-				<p class="floor">Engagements start at two weeks, fixed scope.</p>
-			</section>
 		</main>
+		<ContactCTA>
+			<span slot="header">Let's scope your project</span>
+		</ContactCTA>
 	</div>
 </BaseLayout>
 
@@ -160,7 +170,9 @@ const faqItems = [
 	const choices = document.querySelectorAll<HTMLButtonElement>(
 		"[data-service-choice]",
 	);
-	const panels = document.querySelectorAll<HTMLElement>("[data-service-panel]");
+	const panels = document.querySelectorAll<HTMLElement>(
+		"[data-service-panel]",
+	);
 	let state: FitFinderState = {};
 
 	function render() {
@@ -177,10 +189,11 @@ const faqItems = [
 			const offerId = panel.dataset.servicePanel as ServiceOfferId;
 			const choiceState = getOfferChoiceState(state, offerId);
 			panel.dataset.selected = String(choiceState.panelRevealed);
-			panel.querySelector<HTMLAnchorElement>("[data-service-booking]")!.href =
-				buildServiceBookingUrl(
-					choiceState.panelRevealed ? offerId : undefined,
-				);
+			panel.querySelector<HTMLAnchorElement>(
+				"[data-service-booking]",
+			)!.href = buildServiceBookingUrl(
+				choiceState.panelRevealed ? offerId : undefined,
+			);
 		}
 	}
 

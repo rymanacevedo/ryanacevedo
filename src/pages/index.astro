@@ -167,6 +167,8 @@ const projects = (await getCollection("work"))
 		display: flex;
 		flex-wrap: wrap;
 		align-items: center;
+		justify-content: center;
+		width: 100%;
 		gap: 1rem;
 		margin-top: 0.5rem;
 	}
@@ -190,6 +192,11 @@ const projects = (await getCollection("work"))
 
 		.hero-copy {
 			align-items: flex-start;
+		}
+
+		.cta-row {
+			justify-content: flex-start;
+			width: auto;
 		}
 
 		.headline {
