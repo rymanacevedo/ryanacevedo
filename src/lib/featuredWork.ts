@@ -11,7 +11,7 @@ type RankedFeaturedWorkEntry<T extends FeaturedWorkEntry> = T & {
 function hasFeaturedRank<T extends FeaturedWorkEntry>(
 	entry: T,
 ): entry is RankedFeaturedWorkEntry<T> {
-	return typeof entry.data.featured === "number";
+	return Number.isFinite(entry.data.featured);
 }
 
 export function selectFeaturedWork<T extends FeaturedWorkEntry>(
