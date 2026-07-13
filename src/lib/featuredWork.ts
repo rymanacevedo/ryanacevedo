@@ -4,16 +4,20 @@ export interface FeaturedWorkEntry {
 	};
 }
 
-function isFeaturedWork<T extends FeaturedWorkEntry>(
+type RankedFeaturedWorkEntry<T extends FeaturedWorkEntry> = T & {
+	data: T["data"] & { featured: number };
+};
+
+function hasFeaturedRank<T extends FeaturedWorkEntry>(
 	entry: T,
-): entry is T & { data: T["data"] & { featured: number } } {
+): entry is RankedFeaturedWorkEntry<T> {
 	return typeof entry.data.featured === "number";
 }
 
 export function selectFeaturedWork<T extends FeaturedWorkEntry>(
 	entries: readonly T[],
 ): T[] {
-	return entries.filter(isFeaturedWork).sort((a, b) => {
+	return entries.filter(hasFeaturedRank).sort((a, b) => {
 		return a.data.featured - b.data.featured;
 	});
 }
