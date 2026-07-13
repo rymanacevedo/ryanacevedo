@@ -65,6 +65,9 @@ describe("built /about page", () => {
 
 	test("keeps the founder story credible and its routes connected", () => {
 		expect(aboutPage).toContain(
+			"Building businesses taught me how to build systems that work in the real world.",
+		);
+		expect(aboutPage).toContain(
 			"I'm a first-time founder, and I won't pretend otherwise",
 		);
 		expect(aboutPage).toContain(
@@ -84,5 +87,8 @@ describe("built /about page", () => {
 		);
 		expect(entrepreneurshipRedirect).toContain('<a href="/about">');
 		expect(homePage).toMatch(/href="\/about"[^>]*>View examples<\/a>/);
+		expect(aboutPage).toMatch(/href="\/about\/"[^>]*>About<\/a>/);
+		expect(homePage).not.toContain('href="/entrepreneurship"');
+		expect(aboutPage).not.toContain('href="/entrepreneurship"');
 	});
 });
