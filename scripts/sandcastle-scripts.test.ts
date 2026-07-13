@@ -10,6 +10,26 @@ const shellScripts = [
 ];
 
 describe("Sandcastle runner scripts", () => {
+	it("activates Caveman full mode only for implementers", () => {
+		const skill = readFileSync(".agents/skills/caveman/SKILL.md", "utf8");
+		expect(skill).toContain("name: caveman");
+
+		const implementPrompt = readFileSync(
+			".sandcastle/implement-prompt.md",
+			"utf8",
+		);
+		expect(implementPrompt).toContain("$caveman full");
+		expect(implementPrompt).not.toContain("$caveman lite");
+
+		for (const promptPath of [
+			".sandcastle/plan-prompt.md",
+			".sandcastle/review-prompt.md",
+			".sandcastle/merge-prompt.md",
+		]) {
+			expect(readFileSync(promptPath, "utf8")).not.toContain("$caveman");
+		}
+	});
+
 	it("keeps every shell entrypoint syntactically valid", () => {
 		expect(() => execFileSync("bash", ["-n", ...shellScripts])).not.toThrow();
 	});

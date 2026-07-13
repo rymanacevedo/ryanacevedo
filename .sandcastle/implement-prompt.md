@@ -1,5 +1,8 @@
 # TASK
 
+Use `$caveman full` for every response during this run. Keep code, commands,
+commit messages, issue comments, and error text in their normal technical form.
+
 Fix issue {{TASK_ID}}: {{ISSUE_TITLE}}
 
 Pull in the issue, including its comments and labels:
