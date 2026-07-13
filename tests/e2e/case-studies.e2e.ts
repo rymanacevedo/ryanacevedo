@@ -23,6 +23,13 @@ test.describe("case-study mobile readability", () => {
 			expect(response?.ok()).toBe(true);
 			await expect(page.locator(".case-study__body")).toBeVisible();
 			await expect(page.locator(".case-study__image")).toBeVisible();
+			await expect(
+				page
+					.locator(
+						".case-study__body :is(p, h1, h2, h3, h4, h5, ul, ol, blockquote)",
+					)
+					.first(),
+			).toContainText(/\S/);
 
 			await page.evaluate(async () => {
 				await document.fonts.ready;
@@ -39,6 +46,14 @@ test.describe("case-study mobile readability", () => {
 					}),
 				);
 			});
+			expect(
+				await page.locator(".case-study__image").evaluate((image) => {
+					if (!(image instanceof HTMLImageElement)) return false;
+					return (
+						image.complete && image.naturalWidth > 0 && image.naturalHeight > 0
+					);
+				}),
+			).toBe(true);
 
 			const metrics = await page
 				.locator(".case-study__body")

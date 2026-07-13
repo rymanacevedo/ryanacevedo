@@ -1,5 +1,13 @@
 import { defineConfig } from "@playwright/test";
 
+const baseURL = process.env.PLAYWRIGHT_BASE_URL;
+
+if (!baseURL) {
+	throw new Error(
+		"Set PLAYWRIGHT_BASE_URL to the URL reported by `bun run astro dev status`.",
+	);
+}
+
 export default defineConfig({
 	testDir: "./tests/e2e",
 	testMatch: "**/*.e2e.ts",
@@ -7,7 +15,7 @@ export default defineConfig({
 	outputDir: "test-results",
 	reporter: [["list"], ["html", { open: "never" }]],
 	use: {
-		baseURL: process.env.PLAYWRIGHT_BASE_URL ?? "http://127.0.0.1:4321",
+		baseURL,
 		colorScheme: "light",
 		trace: "retain-on-failure",
 	},

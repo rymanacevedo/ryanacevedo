@@ -34,7 +34,7 @@ const { Content } = await render(entry);
 					<Hero title={entry.data.title} align="start">
 						<div class="case-study__details">
 							<div class="case-study__tags">
-								{entry.data.tags.map((t) => <Pill>{t}</Pill>)}
+								{entry.data.tags.map((tag) => <Pill>{tag}</Pill>)}
 							</div>
 							<p class="case-study__description">{entry.data.description}</p>
 						</div>
@@ -159,7 +159,7 @@ const { Content } = await render(entry);
 		.case-study__body :global(h4),
 		.case-study__body :global(h5) {
 			line-height: 1.25;
-			margin-block: 2.618rem 1rem;
+			margin-block: 2.618rem 1.618rem;
 		}
 
 		.case-study__body :global(h1),
@@ -182,7 +182,7 @@ const { Content } = await render(entry);
 
 		.case-study__body :global(blockquote) {
 			line-height: 1.5;
-			padding-inline-start: 1rem;
+			padding-inline: 1rem;
 		}
 
 		.case-study__body :global(blockquote > p + p) {
@@ -202,6 +202,7 @@ const { Content } = await render(entry);
 		}
 
 		.case-study__tags {
+			flex-wrap: nowrap;
 			justify-content: flex-start;
 		}
 
