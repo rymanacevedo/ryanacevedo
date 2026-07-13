@@ -3,6 +3,7 @@ title: Tiding Health
 publishDate: 2025-12-15
 img: /assets/tiding-health-platform.jpg
 img_alt: The Tiding Health homepage — "Better Health & Wellness Care Starts Here"
+featured: 3
 description: |
   Sole engineer and architect for a funded healthcare startup — an employer wellness platform shipped end to end, working directly with the CEO.
 tags:

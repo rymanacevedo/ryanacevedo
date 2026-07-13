@@ -3,6 +3,7 @@ title: Clyde AI
 publishDate: 2026-06-12
 img: /assets/clyde-platform.png
 img_alt: Clyde AI logo
+featured: 1
 description: |
   Embedded AI engineer on a three-person startup team — five LangGraph agents, eval-driven CI, and an autonomous AI development loop, from onboarding to launched MVP in nine weeks.
 tags:

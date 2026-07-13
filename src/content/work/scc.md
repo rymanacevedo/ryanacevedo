@@ -3,6 +3,7 @@ title: Second Chance Center
 publishDate: 2025-07-25
 img: /assets/scc-resume-app.png
 img_alt: The SCC resume builder landing screen — "Create Your Professional Resume"
+featured: 2
 description: |
   An AI resume application for a reentry nonprofit — concept to production in a fixed-scope two-week sprint, solo.
 tags:
