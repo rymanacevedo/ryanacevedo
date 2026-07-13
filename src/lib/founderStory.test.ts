@@ -4,9 +4,13 @@ import { resolve } from "node:path";
 
 const builtSiteDirectory = resolve(import.meta.dir, "../../dist");
 
+function readBuiltFile(relativePath: string): string {
+	return readFileSync(resolve(builtSiteDirectory, relativePath), "utf8");
+}
+
 function readBuiltPage(route: string): string {
 	const file = route === "/" ? "index.html" : `${route.slice(1)}/index.html`;
-	return readFileSync(resolve(builtSiteDirectory, file), "utf8");
+	return readBuiltFile(file);
 }
 
 function normalizeText(html: string): string {
@@ -44,7 +48,7 @@ describe("approved founder-story copy", () => {
 			...new Bun.Glob("**/*.html").scanSync({
 				cwd: builtSiteDirectory,
 			}),
-		].map((page) => readFileSync(resolve(builtSiteDirectory, page), "utf8"));
+		].map((page) => readBuiltFile(page));
 
 		expect(
 			builtPages.some((page) =>
