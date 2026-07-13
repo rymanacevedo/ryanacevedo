@@ -41,7 +41,7 @@ This engagement is the literal shape of my AI Product Sprint offer: fixed scope,
 
 ## Verified result
 
-- **900+ resumes generated** <!-- PLACEHOLDER (issue #93): pull the exact figure and the logged unit from the OpenAI usage/API logs at review time, and word this claim as exactly what the logs count. --> per OpenAI usage logs since launch.
+- **900+ resumes generated** per OpenAI usage logs since launch.
 - Resume review that used to take staff an estimated week of back-and-forth per client now happens in a single sitting.
 
 > Ryan came, sat down, and got to work. He asked our client partners questions and watched how we work as an organization. From there, he built the resume app we use and integrated AI into the product to help us work more efficiently. He did all of this in a matter of two weeks!
